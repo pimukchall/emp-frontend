@@ -4,17 +4,13 @@
     <p v-if="$fetchState.pending">Fetching Users...</p>
     <p v-else-if="$fetchState.error">An error occurred :(</p>
     <div v-else>
+      <!-- {{ departments }} -->
       <h1>EMP Users</h1>
       <div>
         <v-row>
           <v-col cols="12" md="4">
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="ค้นหา"
-              single-line
-              hide-details
-            ></v-text-field>
+            <v-text-field v-model="search" append-icon="mdi-magnify" label="ค้นหา" single-line
+              hide-details></v-text-field>
           </v-col>
           <v-spacer></v-spacer>
           <v-col class="text-right">
@@ -33,24 +29,23 @@
                 </v-avatar>
               </v-col>
               <v-card-title>{{ user.username }}</v-card-title>
+              <!-- {{ user }} -->
               <v-card-subtitle>
-                แผนก: {{ user.id_department}}
+                แผนก: {{ mapDepartment(user.id_department) }}
               </v-card-subtitle>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn icon @click="toggleUserExpansion(user.id)">
                   <v-icon>{{ isUserExpanded(user.id) ? 'mdi-chevron-up' :
-                    'mdi-chevron-down' }}</v-icon>
+                  'mdi-chevron-down' }}</v-icon>
                 </v-btn>
-                <v-btn class="ma-2" color="success" dark
-                  @click="openEditUserDialog(user)">
+                <v-btn class="ma-2" color="success" dark @click="openEditUserDialog(user)">
                   แก้ไข
                   <v-icon dark right>
                     mdi-pencil
                   </v-icon>
                 </v-btn>
-                <v-btn class="ma-2" color="red" dark
-                  @click="deleteUsersData(user.id)">
+                <v-btn class="ma-2" color="red" dark @click="deleteUsersData(user.id)">
                   ลบ
                   <v-icon dark right>
                     mdi-cancel
@@ -77,19 +72,22 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import moment from 'moment';
 moment.locale('th');
 
 export default {
+  layout: 'navbar-user',
+
   data() {
     return {
       search: '',
       users: [],
+      departments: [],
       currentExpanded: null,
-      editDialog:false,
-      editData:{},
+      editDialog: false,
+      editData: {},
     }
   },
   computed: {
@@ -102,7 +100,8 @@ export default {
 
   async fetch() {
     await this.fetchUserData()
-    
+    await this.getDepartment()
+
   },
   methods: {
     async fetchUserData() {
@@ -112,9 +111,9 @@ export default {
     async deleteUsersData(id) {
       try {
         const req = await this.$store
-          .dispatch('api/user/deleteUsers', {params:{id}})
-          console.log(req);
-          this.$fetch()
+          .dispatch('api/user/deleteUsers', { params: { id } })
+        console.log(req);
+        this.$fetch()
       } catch (error) {
         console.error('Error deleting user:', error);
       }
@@ -139,6 +138,17 @@ export default {
     async getDepartment() {
       this.departments = await this.$store
         .dispatch('api/department/getDepartments')
+    },
+    mapDepartment(id) {
+      for (let i = 0; i < this.departments.length; i++) {
+        console.log(this.departments.length)
+        // console.log(this.departments[i])
+        // console.log(this.departments)
+        if (this.departments[i].id_department === id) {
+          return this.departments[i].name_department
+        }
+        else { return 'ไม่มีแผนก' }
+      }
     },
   },
 }

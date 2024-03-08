@@ -85,6 +85,8 @@
   moment.locale('th');
   
   export default {
+  layout: 'navbar-user',
+
     data() {
       return {
         search: '',

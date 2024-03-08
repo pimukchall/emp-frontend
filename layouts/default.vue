@@ -2,6 +2,18 @@
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <div v-if="!$auth.loggedIn">
+        <v-btn text @click="gotoRegister">Register</v-btn>
+        <v-btn text to="/auth/login">Login</v-btn>
+      </div>
+
+      <div v-else>
+        {{ $auth.user.name }}
+        <v-btn text @click="$auth.logout()">Logout</v-btn>
+      </div>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -27,6 +39,7 @@ export default {
       fixed: false,
       clipped: false,
       title: 'MY STORE',
+      
     }
   },
   methods: {

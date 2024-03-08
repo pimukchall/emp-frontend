@@ -66,6 +66,8 @@
     
 <script>
 export default {
+    layout: 'navbar-user',
+
     data() {
         return {
             equipments: [],

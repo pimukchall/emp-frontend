@@ -1,11 +1,29 @@
 <template>
+    <div>
+    <ModalConfirm
+      :open="modal.confirmLogin.open"
+      :message="modal.confirmLogin.message"
+      :method="login"
+      :confirm.sync="modal.confirmLogin.open"
+    />
+    <ModalComplete
+      :open="modal.completeLogin.open"
+      :message="modal.completeLogin.message"
+      :method="redirectToDashboard"
+      :complete.sync="modal.completeLogin.open"
+    />
+    <ModalError
+      :open="modal.error.open"
+      :message="modal.error.message"
+      :error.sync="modal.error.open"
+    />
     <div class="d-flex justify-center">
       <v-card width="400" height="300">
         <v-card-title> Sign In </v-card-title>
           <v-card-text>
             <v-text-field 
-              v-model = "form.username"
-              label="Username"
+              v-model = "form.email"
+              label="Email"
               outlined>
             </v-text-field>
 
@@ -18,37 +36,65 @@
           <v-card-actions>
             <div>
               <span v-bind:title="message"> 
-                <v-btn @click="gotoDashboard" width="350" class="mr-2" color="success" >Sign In</v-btn>
+                <v-btn @click="login" width="350" class="mr-2" color="success" >Sign In</v-btn>
               </span>
             </div>
           </v-card-actions>
           </v-card-text>
       </v-card>
     </div>
+  </div>
   </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'Login',
   data() {
     return {
       message: 'You login on ' + new Date().toLocaleString(),
       show1: false,
       show2: false,
       form: {
-        username: '',
+        email: '',
         password: '',
+      },
+      modal: {
+        confirmLogin: {
+          open: false,
+          message: '',
+        },
+        completeLogin: {
+          open: false,
+          message: '',
+        },
+        error: {
+          open: false,
+          message: '',
+        },
       },
     }
   },
   methods: {
-    gotoDashboard() {
-      this.$router.push('/user'),
-      console.log('component', this.form.username, this.form.password)
-      this.$emit('login-form-submitted', this.form.username, this.form.password)
+    async login() {
+      try {
+        if (!this.form.email || !this.form.password) {
+          this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
+          this.modal.error.open = true;
+          return;
+        }
+        const req = await this.$axios.post('http://localhost:3001/api/user/login', this.form);
+        // console.log(req);
+        this.modal.completeLogin.message = 'เข้าสู่ระบบสำเร็จ';
+        this.modal.completeLogin.open = true;
+
+      } catch (error) {
+        this.modal.error.message = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+        this.modal.error.open = true;
+      }
     },
-
+    redirectToDashboard() {
+      this.$router.push('/dashboard');
+    },
   },
-
 }
 </script>

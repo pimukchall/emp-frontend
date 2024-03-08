@@ -16,7 +16,7 @@ export const actions = {
   },
     async postUsers({ getters }, data) {
         return await this.$axios
-        .post('api/users/create', data)
+        .post('api/users/register', data)
         .then((res) => res.data)
     },
       async putUsers({ getters }, data) {
