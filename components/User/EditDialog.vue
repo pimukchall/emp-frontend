@@ -1,4 +1,16 @@
 <template>
+  <div>
+    <ModalComplete
+      :open="modal.complete.open"
+      :message="modal.complete.message"
+      :complete.sync="modal.complete.open"
+    />
+    <ModalError
+      :open="modal.error.open"
+      :message="modal.error.message"
+      :error.sync="modal.error.open"
+    />
+
   <v-dialog
     persistent
     :retain-focus="false"
@@ -36,18 +48,11 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="data.username"
-                  :rules="[(v) => !!v || 'กรุณากรอกชื่อผู้ใช้']"
-                  label="ชื่อผู้ใช้"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
                   v-model="data.email"
-                  :rules="[(v) => !!v || 'กรุณากรอกอีเมล']"
+                  :rules="[
+                  (v) => !!v || 'กรุณากรอกอีเมล',
+                  (v) => /.+@.+\..+/.test(v) || 'อีเมลไม่ถูกต้อง'
+                  ]"
                   label="อีเมล"
                   outlined
                   required
@@ -56,19 +61,11 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="data.password"
-                  :rules="[(v) => !!v || 'กรุณากรอกรหัสผ่าน']"
-                  password="input-10-2"
-                  label="รหัสผ่าน"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
                   v-model="data.phone"
-                  :rules="[(v) => !!v || 'กรุณากรอกเบอร์ติดต่อ']"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกเบอร์ติดต่อ',
+                    (v) => (v && v.length === 10) || 'เบอร์ติดต่อต้องมีความยาว 10 ตัวอักษร'
+                    ]"
                   label="เบอร์ติดต่อ"
                   outlined
                   required
@@ -78,9 +75,9 @@
               <v-col cols="12" sm="6">
                 <v-select
                   :items="departMents"
-                  v-model="data.id_department"
-                  item-text= name_department
-                  item-value="id_department"
+                  v-model="data.department_id"
+                  item-text= "name"
+                  item-value="id"
                   :rules="[(v) => !!v || 'กรุณาเลือกแผนก']"
                   label="แผนก"
                   outlined
@@ -93,10 +90,9 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="data.avatar"
+                  v-model="data.image"
                   label="ลิงค์รูปภาพ"
                   outlined
-                  required
                 >
                 </v-text-field>
               </v-col>
@@ -116,6 +112,7 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
+</div>
 </template>
 
 <script>
@@ -123,8 +120,9 @@ import moment from 'moment';
 moment.locale('th');
 
 export default {
+
   props: {
-    method: {type: Function},
+    method: { type: Function },
     open: {
       required: true,
     },
@@ -132,50 +130,59 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
+
       valid: false,
       menu: false,
       departMents: [],
-      id_department: null,
+      department_id: null,
+
       modal: {
-        confirm: { open: false, message: 'ยืนยันการแก้ไขข้อมูลหรือไม่?' },
-        loading: { open: false, message: 'กำลังโหลด' },
-        complete: { open: false, message: 'เสร็จสิ้น' },
-        error: { open: false, message: '' },
+        confirm: {
+          open: false,
+          message: 'ยืนยันการแก้ไขข้อมูลหรือไม่?',
+        },
+        complete: {
+          open: false,
+          message: 'เสร็จสิ้น',
+        },
+        error: {
+          open: false,
+          message: '',
+        },
       },
-    }
+    };
   },
 
   async fetch() {
     const DepartMents = await this.$store.dispatch(
       'api/department/getDepartments'
-    )
-    this.departMents = DepartMents
+    );
+    this.departMents = DepartMents;
   },
 
   methods: {
     async confirm() {
       try {
-        this.$emit('update:edit', false)
-        await this.UpdateUsersData(this.data.id)
+        this.$emit('update:edit', false);
+        await this.UpdateData(this.data.id);
       } catch (error) {
-        console.error('Error Updating user:', error)
+        this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
       }
     },
     cancel() {
-      this.$emit('update:edit', false)
+      this.$emit('update:edit', false);
     },
-    
-    async UpdateUsersData() {
+    async UpdateData() {
       try {
-        const req = await this.$store.dispatch('api/user/putUsers', this.data)
-        console.log(req)
-        this.$fetch()
+        const req = await this.$store.dispatch('api/user/putUsers', this.data);
+        this.modal.complete.open = true;
       } catch (error) {
-        console.error('Error Updating user 2:', error)
+        this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
       }
     },
   },
-}
+};
 </script>

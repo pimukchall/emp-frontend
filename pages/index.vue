@@ -1,21 +1,16 @@
 <template>
-  <div>
-    <login @login-form-submitted="handleLoginFormSubmitted"></login>
-  </div>
+    <div>
+        <login />
+    </div>
   </template>
   
   <script>
-  import login from '~/pages/auth/login.vue'
-  export default {
-    components: {
-      login
-    },
-    methods: {
-      handleLoginFormSubmitted(email, password) {
-        console.log('page', email, password)
-      }
+    import login from '~/pages/auth/login.vue'
+      export default {
+          components: {
+              login
+          },
     }
-  }
   </script>
   
   <style lang="css" scoped></style>

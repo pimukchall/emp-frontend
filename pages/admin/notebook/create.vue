@@ -1,16 +1,16 @@
 <template>
   <div>
     <ModalConfirm
-      :open="modal.confirmRegister.open"
-      :message="modal.confirmRegister.message"
-      :method="register"
-      :confirm.sync="modal.confirmRegister.open"
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
+      :method="create"
+      :confirm.sync="modal.confirm.open"
     />
     <ModalComplete
-      :open="modal.completeRegister.open"
-      :message="modal.completeRegister.message"
-      :method="redirectToNotebook"
-      :complete.sync="modal.completeRegister.open"
+      :open="modal.complete.open"
+      :message="modal.complete.message"
+      :method="goBack"
+      :complete.sync="modal.complete.open"
     />
     <ModalError
       :open="modal.error.open"
@@ -70,8 +70,11 @@
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="form.ram"
-                  :rules="[(v) => !!v || 'กรุณากรอกขนาด RAM']"
-                  label="ขนาด RAM"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกขนาด RAM',
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น']"
+                  
+                  label="หน่วยความจำ"
                   outlined
                   required
                 >
@@ -80,8 +83,11 @@
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="form.storage"
-                  :rules="[(v) => !!v || 'กรุณากรอกขนาด Storage']"
-                  label="ขนาด Storage"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกพื้นที่จัดเก็บข้อมูล',
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                    ]"
+                  label="พื้นที่จัดเก็บข้อมูล"
                   outlined
                   required
                 >
@@ -99,9 +105,9 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="form.asset_number"
-                  :rules="[(v) => !!v || 'กรุณากรอกหมายเลขครุภัณฑ์']"
-                  label="หมายเลขครุภัณฑ์"
+                  v-model="form.license_window"
+                  :rules="[(v) => !!v || 'กรุณากรอกหมายเลขลิขสิทธิ์']"
+                  label="หมายเลขลิขสิทธิ์"
                   outlined
                   required
                 >
@@ -109,9 +115,9 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="form.license_window"
-                  :rules="[(v) => !!v || 'กรุณากรอกหมายเลขลิขสิทธิ์ของ Windows']"
-                  label="หมายเลขลิขสิทธิ์ของ Windows"
+                  v-model="form.asset_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
+                  label="รหัสทรัพย์สิน"
                   outlined
                   required
                 >
@@ -120,8 +126,8 @@
               <v-col cols="12" sm="6">
                 <v-select
                   :items="uSer"
-                  v-model="form.id"
-                  item-text="username"
+                  v-model="form.user_id"
+                  item-text="fname"
                   item-value="id"
                   :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
                   label="ผู้รับผิดชอบ"
@@ -133,9 +139,9 @@
               <v-col cols="12" sm="6">
                 <v-select
                   :items="sTore"
-                  v-model="form.id_store"
-                  item-text="name_store"
-                  item-value="id_store"
+                  v-model="form.store_id"
+                  item-text="name"
+                  item-value="id"
                   :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
                   label="สาขาที่ซื้อ"
                   outlined
@@ -181,21 +187,13 @@
                 <v-divider></v-divider>
               </v-col>
               <v-col cols="12">
-                <v-textarea
-                  v-model="form.note"
-                  label="หมายเหตุ"
-                  outlined
-                  auto-grow
-                ></v-textarea>
-              </v-col>
-              <v-col cols="12">
                 <v-checkbox
                   v-model="agree"
                   label="ยอมรับข้อตกลงและเงื่อนไข"
                 ></v-checkbox>
                 <v-card-actions class="justify-center">
                   <v-btn
-                    @click="register"
+                    @click="create"
                     :disabled="!valid"
                     depressed
                     color="secondary"
@@ -215,6 +213,7 @@ import moment from 'moment';
 moment.locale('th');
 
 export default {
+  layout: 'navbar-blank',
   head() {
     return {
       title: 'ลงทะเบียนอุปกรณ์',
@@ -232,10 +231,9 @@ export default {
         os: '',
         asset_number: '',
         license_window: '',
-        id: null,
-        id_store: null,
+        user_id: null,
+        store_id: null,
         date_in: new Date().toISOString().substr(0, 10),
-        note: '',
       },
       uSer: [],
       sTore: [],
@@ -245,11 +243,11 @@ export default {
         .substr(0, 10),
 
       modal: {
-        confirmRegister: {
+        confirm: {
           open: false,
           message: 'คุณต้องการลงทะเบียนอุปกรณ์หรือไม่?',
         },
-        completeRegister: {
+        complete: {
           open: false,
           message: 'ลงทะเบียนอุปกรณ์สำเร็จแล้ว',
         },
@@ -274,16 +272,12 @@ export default {
   },
 
   async fetch() {
-    try {
-      this.uSer = await this.$store.dispatch('api/user/getUsers');
-      this.sTore = await this.$store.dispatch('api/store/getStores');
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+    await this.fetchUserData()
+    await this.fetchStoreData()
   },
 
   methods: {
-    async register() {
+    async create() {
       try {
         if (!this.$refs.form.validate() || !this.agree) {
           this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
@@ -292,16 +286,27 @@ export default {
         }
         const req = await this.$store.dispatch('api/notebook/postNotebooks', this.form)
 
-        console.log(req)
-        this.modal.confirmRegister.open = false
-        this.modal.completeRegister.open = true
+        this.modal.confirm.open = false
+        this.modal.complete.open = true
       } catch (error) {
-        console.error('เกิดข้อผิดพลาด:', error)
+        this.modal.error.message = 'เกิดข้อผิดพลาด'
       }
     },
-    redirectToNotebook() {
-      this.$router.push('/notebook')
+    goBack() {
+      this.$router.push('/admin/notebook')
     },
+    async fetchUserData() {
+            const USer = await this.$store.dispatch(
+              'api/user/getUsers'
+            )
+            this.uSer = USer
+        },
+        async fetchStoreData() {
+            const STore = await this.$store.dispatch(
+              'api/store/getStores'
+              )
+            this.sTore = STore
+        },
   },
 }
 </script>

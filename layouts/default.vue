@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -7,12 +8,12 @@
 
       <div v-if="!$auth.loggedIn">
         <v-btn text @click="gotoRegister">Register</v-btn>
-        <v-btn text to="/auth/login">Login</v-btn>
+        <v-btn text @click="gotoLogin">Login</v-btn>
       </div>
 
       <div v-else>
-        {{ $auth.user.name }}
-        <v-btn text @click="$auth.logout()">Logout</v-btn>
+        {{ $auth.user.fname }}
+        <v-btn text @click="$auth.openLogoutConfirmationModal()">Logout</v-btn>
       </div>
     </v-app-bar>
     <v-main>
@@ -29,6 +30,7 @@
     </v-col>
   </v-footer>
   </v-app>
+  </div>
 </template>
 
 <script>
@@ -36,18 +38,29 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
-      fixed: false,
-      clipped: false,
       title: 'MY STORE',
-      
-    }
+      clipped: false,
+      modal: {
+        confirmLogout: {
+          open: false,
+          message: 'Are you sure you want to logout?',
+        },
+        completeLogout: {
+          open: false,
+          message: 'You have been logged out',
+        },
+      },
+    };
   },
   methods: {
     gotoRegister() {
-      this.$router.push('/auth/register')
+      this.$router.push('/auth/register');
+    },
+    gotoLogin() {
+      this.$router.push('/auth/login');
     },
   },
-}
+};
 </script>
 <style scoped>
 </style>

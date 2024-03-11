@@ -10,7 +10,7 @@
     <v-card>
       <v-card-title class="text-h5"
         ><v-icon justify="left" class="mr-3" size="50">mdi-help-circle</v-icon>
-        Confirm ?
+        ยืนยัน ?
       </v-card-title>
       <v-divider class="mb-3"></v-divider>
       <v-card-text>
@@ -31,7 +31,7 @@
           @click="cancel"
           class="rounded-xl font-weight-medium mt-3"
         >
-          Cancel
+          ยกเลิก
         </v-btn>
       </v-card-actions>
     </v-card>

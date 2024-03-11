@@ -3,7 +3,7 @@
     <ModalConfirm
       :open="modal.confirm.open"
       :message="modal.confirm.message"
-      :method="register"
+      :method="create"
       :confirm.sync="modal.confirm.open"
     />
     <ModalComplete
@@ -17,97 +17,21 @@
       :message="modal.error.message"
       :error.sync="modal.error.open"
     />
-    <ModalLoading
-      :open="modal.loading.open"
-      :message="modal.loading.message"
-      :loading.sync="modal.loading.open"
-    />
     <v-container>
       <v-card
         class="mx-auto text-center mt-12 pa-2 pt-10 justify-center rounded-xl"
         max-width="800"
-        max-height="1000"
+        max-height="auto"
       >
-        <v-card-title class="headline">สมัครสมาชิก</v-card-title>
+        <v-card-title class="headline">ลงทะเบียนอุปกรณ์</v-card-title>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-row>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="form.fname"
-                  :rules="[(v) => !!v || 'กรุณากรอกชื่อจริง']"
-                  label="ชื่อจริง"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="form.lname"
-                  :rules="[(v) => !!v || 'กรุณากรอกนามสกุล']"
-                  label="นามสกุล"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="form.email"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกอีเมล',
-                    (v) => /.+@.+\..+/.test(v) || 'อีเมลไม่ถูกต้อง',
-                ]"
-                  label="อีเมล"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="form.phone"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกเบอร์ติดต่อ',
-                    (v) => (v && v.length === 10) || 'เบอร์ติดต่อต้องมีความยาว 10 ตัวอักษร',
-                  ]"
-                  label="เบอร์ติดต่อ"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="show1 ? 'text' : 'password'"
-                  v-model="form.password"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกรหัสผ่าน',
-                    (v) => (v && v.length >= 8) || 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร',
-                  ]"
-                  password="input-10-2"
-                  label="รหัสผ่าน"
-                  @click:append="show1 = !show1"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="show2 ? 'text' : 'password'"
-                  v-model="form.confirmPassword"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกยืนยันรหัสผ่าน',
-                    (v) => v === form.password || 'รหัสผ่านไม่ตรงกัน',
-                    (v) => (v && v.length >= 8) || 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร',
-                  ]"
-                  password="input-10-2"
-                  label="ยืนยันรหัสผ่าน"
-                  @click:append="show2 = !show2"
+                  v-model="form.name"
+                  :rules="[(v) => !!v || 'กรุณากรอกชื่อรายการ']"
+                  label="ชื่อ"
                   outlined
                   required
                 >
@@ -115,16 +39,95 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="departMents"
-                  v-model="form.department_id"
+                  :items="lOcation"
+                  v-model="form.location_id"
                   item-text="name"
                   item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกแผนก']"
-                  label="แผนก"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสถานที่']"
+                  label="สถานที่"
                   outlined
                   required
                 >
                 </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="uSer"
+                  v-model="form.user_id"
+                  item-text="fname"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
+                  label="ผู้รับผิดชอบ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="sTore"
+                  v-model="form.store_id"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
+                  label="สาขาที่ซื้อ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.asset_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
+                  label="รหัสทรัพย์สิน"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.document_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกหมายเลขเอกสาร']"
+                  label="หมายเลขเอกสาร"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.price"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกราคา',
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                  ]"
+                  label="ราคา"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.quantity"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกจำนวน',
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                  ]"
+                  label="จำนวน"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.image"
+                  label="รูปภาพ"
+                  outlined
+                ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-menu
@@ -139,12 +142,12 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-model="formattedDate"
-                      label="วันที่สมัคร"
+                      label="วันที่ลงทะเบียน"
                       prepend-icon="mdi-calendar"
                       readonly
                       v-bind="attrs"
                       v-on="on"
-                      :rules="[(v) => !!v || 'กรุณากรอกวันที่สมัคร']"
+                      :rules="[(v) => !!v || 'กรุณากรอกวันที่ลงทะเบียน']"
                       outlined
                       required
                     ></v-text-field>
@@ -164,25 +167,17 @@
                 <v-divider></v-divider>
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  v-model="form.image"
-                  label="ลิงค์รูปภาพ"
-                  outlined
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12">
                 <v-checkbox
                   v-model="agree"
                   label="ยอมรับข้อตกลงและเงื่อนไข"
                 ></v-checkbox>
                 <v-card-actions class="justify-center">
                   <v-btn
-                    @click="register"
+                    @click="create"
                     :disabled="!valid"
                     depressed
                     color="secondary"
-                    >สมัคร</v-btn
+                    >เพิ่มรายการ</v-btn
                   >
                 </v-card-actions>
               </v-col>
@@ -201,26 +196,26 @@ export default {
   layout: 'navbar-blank',
   head() {
     return {
-      title: 'สมัครสมาชิก',
+      title: 'ลงทะเบียนอุปกรณ์',
     }
   },
   data() {
     return {
       form: {
-        fname: null,
-        lname: null,
-        username: null,
-        password: null,
-        email: null,
-        phone: null,
-        department_id: null,
+        name: '',
+        location_id: null,
+        user_id: null,
+        store_id: null,
+        asset_number: '',
+        document_number: '',
+        price: '',
+        quantity: '',
+        image: '',
         date_in: new Date().toISOString().substr(0, 10),
-        image: null,
       },
-      confirmPassword: '',
-      show1: false,
-      show2: false,
-      departMents: [],
+      uSer: [],
+      sTore: [],
+      lOcation: [],
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -229,11 +224,11 @@ export default {
       modal: {
         confirm: {
           open: false,
-          message: 'คุณต้องการสมัครสมาชิกใช่หรือไม่',
+          message: 'คุณต้องการเพิ่มรายการหรือไม่?',
         },
         complete: {
           open: false,
-          message: 'สมัครสมาชิกสำเร็จ',
+          message: 'เพิ่มรายการสำเร็จ',
         },
         error: {
           open: false,
@@ -256,28 +251,49 @@ export default {
   },
 
   async fetch() {
-    const DepartMents = await this.$store.dispatch('api/department/getDepartments')
-    this.departMents = DepartMents
+    await this.fetchUserData()
+    await this.fetchStoreData()
+    await this.fetchLocationData()
+
   },
 
   methods: {
-    async register() {
+    async create() {
       try {
         if (!this.$refs.form.validate() || !this.agree) {
           this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
           this.modal.error.open = true
           return
         }
-        const req = await this.$store.dispatch('api/user/postUsers', this.form)
-        this.modal.confirmRegister.open = true
-        this.modal.completeRegister.open = true
+        const req = await this.$store.dispatch('api/equipment/postEquipments', this.form)
+
+        this.modal.confirm.open = false
+        this.modal.complete.open = true
       } catch (error) {
-        this.modal.error.message = 'มีบัญชีนี้อยู่แล้ว กรุณาลองใหม่อีกครั้ง'
+        this.modal.error.message = 'เกิดข้อผิดพลาด'
       }
     },
     goBack() {
-      this.$router.push('/auth/login')
+      this.$router.push('/admin/equipment')
     },
+    async fetchUserData() {
+            const USer = await this.$store.dispatch(
+              'api/user/getUsers'
+            )
+            this.uSer = USer
+        },
+    async fetchStoreData() {
+            const STore = await this.$store.dispatch(
+              'api/store/getStores'
+              )
+            this.sTore = STore
+        },
+    async fetchLocationData() {
+            const LOcation = await this.$store.dispatch(
+              'api/location/getLocations'
+              )
+            this.lOcation = LOcation
+        },
   },
 }
 </script>

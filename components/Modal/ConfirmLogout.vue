@@ -10,7 +10,7 @@
     <v-card>
       <v-card-title class="text-h5"
         ><v-icon justify="left" class="mr-3" size="50">mdi-logout-variant</v-icon>
-        Log out ?
+        ออกจากระบบ ?
       </v-card-title>
       <v-divider class="mb-3"></v-divider>
       <v-card-text>
@@ -20,10 +20,10 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="primary" @click="confirm" class="rounded-xl font-weight-medium mt-3">
-          Confirm
+          ยืนยัน
         </v-btn>
         <v-btn color="error" @click="cancel" class="rounded-xl font-weight-medium mt-3">
-          Cancel
+          ยกเลิก
         </v-btn>
       </v-card-actions>
     </v-card>

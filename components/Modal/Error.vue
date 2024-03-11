@@ -20,7 +20,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="primary" @click="confirm" class="rounded-xl font-weight-medium mt-3">
-          Confirm
+          ตกลง
         </v-btn>
       </v-card-actions>
     </v-card>

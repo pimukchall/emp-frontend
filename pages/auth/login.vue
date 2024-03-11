@@ -1,16 +1,16 @@
 <template>
     <div>
     <ModalConfirm
-      :open="modal.confirmLogin.open"
-      :message="modal.confirmLogin.message"
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
       :method="login"
-      :confirm.sync="modal.confirmLogin.open"
+      :confirm.sync="modal.confirm.open"
     />
     <ModalComplete
-      :open="modal.completeLogin.open"
-      :message="modal.completeLogin.message"
-      :method="redirectToDashboard"
-      :complete.sync="modal.completeLogin.open"
+      :open="modal.complete.open"
+      :message="modal.complete.message"
+      :method="goBack"
+      :complete.sync="modal.complete.open"
     />
     <ModalError
       :open="modal.error.open"
@@ -48,6 +48,7 @@
 
 <script>
 export default {
+  layout: 'navbar-blank',
   name: 'Login',
   data() {
     return {
@@ -58,12 +59,14 @@ export default {
         email: '',
         password: '',
       },
+    
+
       modal: {
-        confirmLogin: {
+        confirm: {
           open: false,
           message: '',
         },
-        completeLogin: {
+        complete: {
           open: false,
           message: '',
         },
@@ -82,18 +85,20 @@ export default {
           this.modal.error.open = true;
           return;
         }
-        const req = await this.$axios.post('http://localhost:3001/api/user/login', this.form);
-        // console.log(req);
-        this.modal.completeLogin.message = 'เข้าสู่ระบบสำเร็จ';
-        this.modal.completeLogin.open = true;
+        const req = await this.$axios.$post('/api/users/login', this.form, {
+          withCredentials: true,
+        });
+
+        this.modal.complete.message = 'เข้าสู่ระบบสำเร็จ';
+        this.modal.complete.open = true;
 
       } catch (error) {
         this.modal.error.message = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
         this.modal.error.open = true;
       }
     },
-    redirectToDashboard() {
-      this.$router.push('/dashboard');
+    goBack() {
+      this.$router.push('/admin/user');
     },
   },
 }

@@ -3,14 +3,18 @@
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <div>
-        <v-btn text @click="user">User</v-btn>
-        <v-btn text @click="notebook">Notebook</v-btn>
-        <v-btn text @click="equipment">Equipment</v-btn>
+        <v-btn text @click="user">ผู้ใช้</v-btn>
+        <v-btn text @click="notebook">โน๊ตบุ๊ค</v-btn>
+        <v-btn text @click="equipment">อุปกรณ์</v-btn>
+        <v-btn text @click="department">แผนก</v-btn>
+        <v-btn text @click="location">ที่ตั้ง</v-btn>
+        <v-btn text @click="store">ร้านค้า</v-btn>
+
       </div>
         <v-spacer />
           <div>
             <span>
-              <v-btn @click="signout" color="dark">Sign out</v-btn>
+              <v-btn @click="signout" color="dark">ลงชื่อออก</v-btn>
             </span>
           </div>
     </v-app-bar>
@@ -37,16 +41,25 @@ export default {
   },
   methods: {
     user() {
-      this.$router.push('/user')
+      this.$router.push('/admin/user')
     },
     notebook() {
-      this.$router.push('/notebook')
+      this.$router.push('/admin/notebook')
     },
     equipment() {
-      this.$router.push('/equipment')
+      this.$router.push('/admin/equipment')
     },
     signout() {
       this.$router.push('/auth/login')
+    },
+    department() {
+      this.$router.push('/admin/department')
+    },
+    location() {
+      this.$router.push('/admin/location')
+    },
+    store() {
+      this.$router.push('/admin/store')
     },
   },
 }
