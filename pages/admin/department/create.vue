@@ -65,6 +65,7 @@
   <script>
   export default {
     layout: 'navbar-blank',
+    middleware: 'auth',
     head() {
       return {
         title: 'เพิ่มแผนก',

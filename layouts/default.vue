@@ -3,13 +3,9 @@
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
-
       <v-spacer></v-spacer>
-
-      <div v-if="!$auth.loggedIn">
-        <v-btn text @click="gotoRegister">Sign up</v-btn>
+        <!-- <v-btn text @click="gotoRegister">Sign up</v-btn> -->
         <v-btn text @click="gotoLogin">Sign in</v-btn>
-      </div>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -43,6 +39,9 @@ export default {
     },
     gotoLogin() {
       this.$router.push('/auth/login');
+    },
+    gotoUser() {
+      this.$router.push('/admin/user');
     },
   },
 };

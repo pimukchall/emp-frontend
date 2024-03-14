@@ -83,7 +83,7 @@
   
   export default {
     layout: 'navbar-admin',
-  
+    middleware: 'auth',
     data() {
       return {
         search: '',

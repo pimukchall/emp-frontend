@@ -91,7 +91,7 @@ export default {
             password: this.form.password,
           },
         });
-
+        this.$router.push('/admin/user');
         this.modal.complete.message = 'เข้าสู่ระบบสำเร็จ';
         this.modal.complete.open = true;
 
