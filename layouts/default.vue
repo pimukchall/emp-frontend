@@ -7,12 +7,8 @@
       <v-spacer></v-spacer>
 
       <div v-if="!$auth.loggedIn">
-        <v-btn text @click="gotoRegister">Register</v-btn>
-      </div>
-
-      <div v-else>
-        {{ $auth.user.fname }}
-        <v-btn text @click="$auth.openLogoutConfirmationModal()">Logout</v-btn>
+        <v-btn text @click="gotoRegister">Sign up</v-btn>
+        <v-btn text @click="gotoLogin">Sign in</v-btn>
       </div>
     </v-app-bar>
     <v-main>
@@ -39,21 +35,14 @@ export default {
     return {
       title: 'EMP WAREHOUSES',
       clipped: false,
-      modal: {
-        confirmLogout: {
-          open: false,
-          message: 'Are you sure you want to logout?',
-        },
-        completeLogout: {
-          open: false,
-          message: 'You have been logged out',
-        },
-      },
     };
   },
   methods: {
     gotoRegister() {
       this.$router.push('/auth/register');
+    },
+    gotoLogin() {
+      this.$router.push('/auth/login');
     },
   },
 };

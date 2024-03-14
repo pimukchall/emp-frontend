@@ -97,6 +97,7 @@ moment.locale('th');
 
 export default {
   layout: 'navbar-admin',
+  middleware: 'auth',
 
   data() {
     return {

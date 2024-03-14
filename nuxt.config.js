@@ -45,20 +45,34 @@ export default {
     baseURL: 'http://localhost:3001',
     credentials: true
   },
-
   auth: {
+    redirect: {
+      login: '/auth/login',
+      logout: '/',
+      callback: '/auth/login',
+      home: '/',
+    },
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'payload', method: 'get', propertyName: 'data' },
-          logout: { url: 'logout', method: 'post' },
-        }
+          login: { 
+            url: 'http://localhost:3001/api/users/login', 
+            method: 'post',
+            propertyName: 'user.password'
+          },
+          logout: { 
+            url: 'http://localhost:3001/api/users/logout', 
+            method: 'delete' 
+          },
+          user: { 
+            url: 'http://localhost:3001/api/users/me',
+            method: 'get',
+            propertyName: 'user'
+          }
+        },
+        tokenName: 'authorization',
       }
     },
-    redirect: {
-      login: '/login'
-    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

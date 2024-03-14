@@ -85,8 +85,11 @@ export default {
           this.modal.error.open = true;
           return;
         }
-        const req = await this.$axios.$post('/api/users/login', this.form, {
-          withCredentials: true,
+        const req = await this.$auth.loginWith('local', {
+          data: {
+            email: this.form.email,
+            password: this.form.password,
+          },
         });
 
         this.modal.complete.message = 'เข้าสู่ระบบสำเร็จ';

@@ -19,9 +19,8 @@
       </div>
         <v-spacer />
           <div>
-            <span>
+              {{ $auth.user.fname }}
               <v-btn @click="signout" color="dark">ลงชื่อออก</v-btn>
-            </span>
           </div>
     </v-app-bar>
     <v-main>
@@ -56,7 +55,7 @@ export default {
       this.$router.push('/admin/equipment')
     },
     signout() {
-      this.$router.push('/auth/login')
+      this.$auth.logout()
     },
     department() {
       this.$router.push('/admin/department')

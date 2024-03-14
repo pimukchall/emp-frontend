@@ -1,14 +1,14 @@
 <template>
     <div>
-        <login />
+        <home />
     </div>
   </template>
   
   <script>
-    import login from '~/pages/auth/login.vue'
+    import home from '~/pages/home/index.vue'
       export default {
           components: {
-              login
+              home
           },
     }
   </script>

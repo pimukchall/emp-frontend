@@ -9,6 +9,11 @@ export const actions = {
       .get('api/users:id', data)
       .then((res) => res.data)
     },
+    async getUsersMe({ getters }, data) {
+        return await this.$axios
+        .get('api/users/me', data)
+        .then((res) => res.data)
+    },
     async postUsers({ getters }, data) {
         return await this.$axios
         .post('api/users/register', data)
@@ -32,6 +37,11 @@ export const actions = {
     async login({ getters }, data) {
         return await this.$axios
         .post('api/users/login', data)
+        .then((res) => res.data)
+    },
+    async logout({ getters }, data) {
+        return await this.$axios
+        .post('api/users/logout', data)
         .then((res) => res.data)
     }
 }
