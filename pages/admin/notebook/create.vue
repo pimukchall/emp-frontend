@@ -245,11 +245,11 @@ export default {
       modal: {
         confirm: {
           open: false,
-          message: 'คุณต้องการลงทะเบียนอุปกรณ์หรือไม่?',
+          message: 'คุณต้องการเพิ่มรายการหรือไม่?',
         },
         complete: {
           open: false,
-          message: 'ลงทะเบียนอุปกรณ์สำเร็จแล้ว',
+          message: 'เพิ่มรายการสำเร็จ',
         },
         error: {
           open: false,

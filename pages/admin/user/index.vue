@@ -32,7 +32,6 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col class="text-right">
-            <v-btn elevation="2" rounded @click="$fetch">รีเฟรช</v-btn>
             <v-btn elevation="2" rounded @click="gotoCreate">เพิ่มผู้ใช้</v-btn>
           </v-col>
         </v-row>
@@ -47,7 +46,6 @@
                 </v-avatar>
               </v-col>
               <v-card-title>{{ user.fname }}</v-card-title>
-              <!-- {{ user }} -->
               <v-card-subtitle>
                 แผนก: {{ mapData(user.department_id) }}
               </v-card-subtitle>

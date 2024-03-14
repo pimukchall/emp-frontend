@@ -39,38 +39,12 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="lOcation"
-                  v-model="form.location_id"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกสถานที่']"
-                  label="สถานที่"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
                   :items="uSer"
                   v-model="form.user_id"
                   item-text="fname"
                   item-value="id"
                   :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
                   label="ผู้รับผิดชอบ"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="sTore"
-                  v-model="form.store_id"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
-                  label="สาขาที่ซื้อ"
                   outlined
                   required
                 >
@@ -87,10 +61,49 @@
                 </v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
+                <v-select
+                  :items="lOcation"
+                  v-model="form.location_id"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสถานที่']"
+                  label="สถานที่"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="form.document_number"
                   :rules="[(v) => !!v || 'กรุณากรอกหมายเลขเอกสาร']"
                   label="หมายเลขเอกสาร"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="sTore"
+                  v-model="form.store_id"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
+                  label="สาขาที่ซื้อ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.quantity"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกจำนวน',
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                  ]"
+                  label="จำนวน"
                   outlined
                   required
                 >
@@ -104,19 +117,6 @@
                     (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
                   ]"
                   label="ราคา"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="form.quantity"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกจำนวน',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
-                  ]"
-                  label="จำนวน"
                   outlined
                   required
                 >

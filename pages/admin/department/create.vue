@@ -23,15 +23,15 @@
           max-width="800"
           max-height="auto"
         >
-          <v-card-title class="headline">เพิ่มร้านค้า</v-card-title>
+          <v-card-title class="headline">เพิ่มแผนก</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
                 <v-col cols="12" sm="6">
                   <v-text-field
                     v-model="form.name"
-                    :rules="[(v) => !!v || 'กรุณากรอกชื่อร้านค้า']"
-                    label="ชื่อร้านค้า"
+                    :rules="[(v) => !!v || 'กรุณากรอกชื่อแผนก']"
+                    label="ชื่อแผนก"
                     outlined
                     required
                   >
@@ -39,16 +39,6 @@
                 </v-col>
                 <v-col cols="12">
                   <v-divider></v-divider>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="form.address"
-                    :rules="[(v) => !!v || 'กรุณากรอกที่อยู่']"
-                    label="ที่อยู่ร้านค้า"
-                    outlined
-                    required
-                  >
-                  </v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-checkbox
@@ -77,14 +67,13 @@
     layout: 'navbar-blank',
     head() {
       return {
-        title: 'เพิ่มร้านค้า',
+        title: 'เพิ่มแผนก',
       }
     },
     data() {
       return {
         form: {
             name: '',
-            address: '',
         },
   
         modal: {
@@ -118,7 +107,7 @@
             this.modal.error.open = true
             return
           }
-          const req = await this.$store.dispatch('api/store/postStores', this.form)
+          const req = await this.$store.dispatch('api/department/postDepartments', this.form)
   
           console.log(req)
           this.modal.confirm.open = false
@@ -129,7 +118,7 @@
         }
       },
       goBack() {
-        this.$router.push('/admin/store')
+        this.$router.push('/admin/department')
       },
     },
   }

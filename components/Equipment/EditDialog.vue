@@ -25,127 +25,110 @@
                   <v-form ref="form" v-model="valid" lazy-validation>
                     <v-row>
                       <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.brand" 
-                          :rules="[(v) => !!v || 'กรุณากรอกยี่ห้อ']" 
-                          label="ยี่ห้อ"
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                        v-model="data.model" 
-                        :rules="[(v) => !!v || 'กรุณากรอกชื่อรุ่น']"
-                        label="รุ่น" 
-                        outlined 
-                        required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.cpu" 
-                          :rules="[(v) => !!v || 'กรุณากรอกชื่อ CPU']"
-                          label="ชื่อ CPU" 
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.gpu" 
-                          :rules="[(v) => !!v || 'กรุณากรอกชื่อ GPU']"
-                          label="ชื่อ GPU" 
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.ram" 
-                          :rules="[
-                            (v) => !!v || 'กรุณากรอกขนาด RAM',
-                            (v) => /^[0-9]*$/.test(v) || 'กรุณากรอกเป็นตัวเลข'
-                          ]"
-                          label="หน่วยความจำ" 
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.storage" 
-                          :rules="[
-                            (v) => !!v || 'กรุณากรอกพื้นที่จัดเก็บข้อมูล',
-                            (v) => /^[0-9]*$/.test(v) || 'กรุณากรอกเป็นตัวเลข'
-                          ]"
-                          label="พื้นที่จัดเก็บข้อมูล" 
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.os" 
-                          :rules="[(v) => !!v || 'กรุณากรอกระบบปฏิบัติการ']"
-                          label="ระบบปฏิบัติการ" 
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.license_window" 
-                          :rules="[(v) => !!v || 'กรุณากรอกหมายเลขลิขสิทธิ์']"
-                          label="หมายเลขลิขสิทธิ์" 
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field 
-                          v-model="data.asset_number" 
-                          :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
-                          label="รหัสทรัพย์สิน" 
-                          outlined 
-                          required
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-select
-                          :items="uSer"
-                          v-model="data.user_id"
-                          item-text="fname"
-                          item-value="id"
-                          :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
-                          label="ผู้รับผิดชอบ"
-                          outlined
-                          required
-                        >
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-select
-                          :items="sTore"
-                          v-model="data.store_id"
-                          item-text="name"
-                          item-value="id"
-                          :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
-                          label="สาขาที่ซื้อ"
-                          outlined
-                          required
-                        >
-                        </v-select>
-                      </v-col>
+                <v-text-field
+                  v-model="data.name"
+                  :rules="[(v) => !!v || 'กรุณากรอกชื่อรายการ']"
+                  label="ชื่อ"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="uSer"
+                  v-model="data.user_id"
+                  item-text="fname"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
+                  label="ผู้รับผิดชอบ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="data.asset_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
+                  label="รหัสทรัพย์สิน"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="lOcation"
+                  v-model="data.location_id"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสถานที่']"
+                  label="สถานที่"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="data.document_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกหมายเลขเอกสาร']"
+                  label="หมายเลขเอกสาร"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="sTore"
+                  v-model="data.store_id"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
+                  label="สาขาที่ซื้อ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="data.quantity"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกจำนวน',
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                  ]"
+                  label="จำนวน"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="data.price"
+                  :rules="[
+                    (v) => !!v || 'กรุณากรอกราคา',
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                  ]"
+                  label="ราคา"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-divider></v-divider>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="data.image"
+                  label="รูปภาพ"
+                  outlined
+                ></v-text-field>
+              </v-col>
                 </v-row>
               </v-form>
             </v-card-text>
@@ -164,8 +147,6 @@
     </div>
 </template>
 <script>
-import moment from 'moment';
-moment.locale('th');
 
 export default {
     props: {
@@ -182,11 +163,12 @@ export default {
         return {
 
           valid:false,
-          menu: false,
           uSer: [],
+          user_id: null,
           sTore: [],
           store_id: null,
-          user_id: null,
+          lOcation: [],
+          location_id: null,
 
           modal: {
             complete: {
@@ -204,6 +186,7 @@ export default {
     async fetch() {
         await this.fetchUserData()
         await this.fetchStoreData()
+        await this.fetchLocationData()
     },
 
     methods: {
@@ -237,6 +220,12 @@ export default {
               'api/store/getStores'
               )
             this.sTore = STore
+        },
+        async fetchLocationData() {
+            const LOcation = await this.$store.dispatch(
+              'api/location/getLocations'
+              )
+            this.lOcation = LOcation
         },
     },
 }

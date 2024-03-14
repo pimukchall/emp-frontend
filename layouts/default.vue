@@ -8,7 +8,6 @@
 
       <div v-if="!$auth.loggedIn">
         <v-btn text @click="gotoRegister">Register</v-btn>
-        <v-btn text @click="gotoLogin">Login</v-btn>
       </div>
 
       <div v-else>
@@ -55,9 +54,6 @@ export default {
   methods: {
     gotoRegister() {
       this.$router.push('/auth/register');
-    },
-    gotoLogin() {
-      this.$router.push('/auth/login');
     },
   },
 };

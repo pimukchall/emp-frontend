@@ -23,15 +23,15 @@
           max-width="800"
           max-height="auto"
         >
-          <v-card-title class="headline">เพิ่มร้านค้า</v-card-title>
+          <v-card-title class="headline">เพิ่มไซต์งาน</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
                 <v-col cols="12" sm="6">
                   <v-text-field
                     v-model="form.name"
-                    :rules="[(v) => !!v || 'กรุณากรอกชื่อร้านค้า']"
-                    label="ชื่อร้านค้า"
+                    :rules="[(v) => !!v || 'กรุณากรอกชื่อไซต์งาน']"
+                    label="ชื่อไซต์งาน"
                     outlined
                     required
                   >
@@ -44,7 +44,7 @@
                   <v-text-field
                     v-model="form.address"
                     :rules="[(v) => !!v || 'กรุณากรอกที่อยู่']"
-                    label="ที่อยู่ร้านค้า"
+                    label="ที่อยู่"
                     outlined
                     required
                   >
@@ -77,7 +77,7 @@
     layout: 'navbar-blank',
     head() {
       return {
-        title: 'เพิ่มร้านค้า',
+        title: 'เพิ่มไซต์งาน',
       }
     },
     data() {
@@ -118,7 +118,7 @@
             this.modal.error.open = true
             return
           }
-          const req = await this.$store.dispatch('api/store/postStores', this.form)
+          const req = await this.$store.dispatch('api/location/postLocations', this.form)
   
           console.log(req)
           this.modal.confirm.open = false
@@ -129,7 +129,7 @@
         }
       },
       goBack() {
-        this.$router.push('/admin/store')
+        this.$router.push('/admin/location')
       },
     },
   }
