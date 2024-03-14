@@ -21,7 +21,7 @@
       return {
         fixed: false,
         clipped: false,
-        title: 'MY STORE',
+        title: 'EMP WAREHOUSES',
       }
     },
   }

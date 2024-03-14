@@ -37,7 +37,7 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
-      title: 'MY STORE',
+      title: 'EMP WAREHOUSES',
       clipped: false,
       modal: {
         confirmLogout: {
