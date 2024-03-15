@@ -85,6 +85,19 @@
                 >
                 </v-select>
               </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="roles"
+                  v-model="data.role_id"
+                  item-text= "name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกตำแหน่ง']"
+                  label="ตำแหน่ง"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
               <v-col cols="12">
                 <v-divider></v-divider>
               </v-col>
@@ -138,6 +151,8 @@ export default {
       menu: false,
       departMents: [],
       department_id: null,
+      roles: [],
+      role_id: null,
 
       modal: {
         confirm: {
@@ -157,10 +172,8 @@ export default {
   },
 
   async fetch() {
-    const DepartMents = await this.$store.dispatch(
-      'api/department/getDepartments'
-    );
-    this.departMents = DepartMents;
+    await this.fetchDepartMents();
+    await this.fetchRoles();
   },
 
   methods: {
@@ -182,6 +195,17 @@ export default {
       } catch (error) {
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
       }
+    },
+    async fetchDepartMents() {
+      const DepartMents = await this.$store.dispatch(
+        'api/department/getDepartments'
+      );
+      this.departMents = DepartMents;
+    },
+    async fetchRoles() {
+      const Roles = await this.$store.dispatch(
+        'api/role/getRoles');
+      this.roles = Roles;
     },
   },
 };

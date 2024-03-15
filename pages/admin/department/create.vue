@@ -64,8 +64,7 @@
   </template>
   <script>
   export default {
-    layout: 'navbar-blank',
-    middleware: 'auth',
+    layout: 'admin',
     head() {
       return {
         title: 'เพิ่มแผนก',

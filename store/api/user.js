@@ -28,15 +28,5 @@ export const actions = {
         return await this.$axios
         .delete('api/users/delete', data)
         .then((res) => res.data)
-    },
-    async login({ getters }, data) {
-        return await this.$axios
-        .post('api/users/login', data)
-        .then((res) => res.data)
-    },
-    async logout({ getters }, data) {
-        return await this.$axios
-        .post('api/users/logout', data)
-        .then((res) => res.data)
     }
 }

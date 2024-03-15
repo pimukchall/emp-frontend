@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  layout: 'navbar-blank',
+  layout: 'blank',
   name: 'Login',
   data() {
     return {
@@ -59,8 +59,6 @@ export default {
         email: '',
         password: '',
       },
-    
-
       modal: {
         confirm: {
           open: false,
@@ -78,6 +76,18 @@ export default {
     }
   },
   methods: {
+    async login2() {
+      try {
+        const response = await this.$axios.post('api/users/login', this.form);
+        this.$store.commit('auth/setToken', response.data.token);
+        this.$store.commit('auth/setUser', response.data.user);
+        this.modal.complete.open = true;
+        this.modal.complete.message = 'Login Success';
+      } catch (error) {
+        this.modal.error.open = true;
+        this.modal.error.message = 'Login Failed';
+      }
+    },
     async login() {
       try {
         if (!this.form.email || !this.form.password) {
@@ -102,7 +112,7 @@ export default {
       }
     },
     goBack() {
-      this.$router.push('/admin/user');
+      this.$router.push('/user/user');
     },
   },
 }

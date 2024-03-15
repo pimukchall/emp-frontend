@@ -70,8 +70,7 @@
   <script>
   
   export default {
-    layout: 'navbar-admin',
-    middleware: 'auth',
+    layout: 'admin',
     data() {
       return {
         search: '',

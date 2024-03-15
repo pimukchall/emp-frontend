@@ -6,7 +6,7 @@ export const actions = {
     },
     async getLocationsID({ getters }, data) {
       return await this.$axios
-      .get('api/locations:id_location', data)
+      .get('api/locations:id', data)
       .then((res) => res.data)
     },
     async postLocations({ getters }, data) {

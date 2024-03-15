@@ -41,7 +41,7 @@ export default {
       this.$router.push('/auth/login');
     },
     gotoUser() {
-      this.$router.push('/admin/user');
+      this.$router.push('/user/user');
     },
   },
 };

@@ -74,8 +74,7 @@
   </template>
   <script>
   export default {
-    layout: 'navbar-blank',
-    middleware: 'auth',
+    layout: 'admin',
     head() {
       return {
         title: 'เพิ่มร้านค้า',

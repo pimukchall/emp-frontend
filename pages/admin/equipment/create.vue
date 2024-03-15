@@ -193,8 +193,7 @@ import moment from 'moment';
 moment.locale('th');
 
 export default {
-  layout: 'navbar-blank',
-  middleware: 'auth',
+  layout: 'admin',
   head() {
     return {
       title: 'ลงทะเบียนอุปกรณ์',

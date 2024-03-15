@@ -6,7 +6,7 @@ export const actions = {
     },
     async getDepartmentsID({ getters }, data) {
       return await this.$axios
-      .get('api/departments:id_department', data)
+      .get('api/departments:id', data)
       .then((res) => res.data)
   },
     async postDepartments({ getters }, data) {

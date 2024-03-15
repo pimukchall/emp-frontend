@@ -6,7 +6,7 @@ export const actions = {
     },
     async getStoresID({ getters }, data) {
       return await this.$axios
-      .get('api/stores:id_store', data)
+      .get('api/stores:id', data)
       .then((res) => res.data)
   },
     async postStores({ getters }, data) {

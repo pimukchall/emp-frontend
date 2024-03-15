@@ -127,6 +127,19 @@
                 </v-select>
               </v-col>
               <v-col cols="12" sm="6">
+                <v-select
+                  :items="roles"
+                  v-model="form.role_id"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกตำแหน่ง']"
+                  label="ตำแหน่ง"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
                 <v-menu
                   ref="menu"
                   v-model="menu"
@@ -198,7 +211,8 @@ import moment from 'moment';
 moment.locale('th');
 
 export default {
-  layout: 'navbar-blank',
+  layout: 'admin',
+  middlewares: 'admin',
   head() {
     return {
       title: 'สมัครสมาชิก',
@@ -214,6 +228,7 @@ export default {
         email: null,
         phone: null,
         department_id: null,
+        role_id: null,
         date_in: new Date().toISOString().substr(0, 10),
         image: null,
       },
@@ -221,6 +236,7 @@ export default {
       show1: false,
       show2: false,
       departMents: [],
+      roles: [],
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -256,8 +272,8 @@ export default {
   },
 
   async fetch() {
-    const DepartMents = await this.$store.dispatch('api/department/getDepartments')
-    this.departMents = DepartMents
+    await this.fetchDepartMents();
+    await this.fetchRoles();
   },
 
   methods: {
@@ -277,6 +293,14 @@ export default {
     },
     goBack() {
       this.$router.push('/admin/user')
+    },
+    async fetchDepartMents() {
+      const DepartMents = await this.$store.dispatch('api/department/getDepartments')
+      this.departMents = DepartMents
+    },
+    async fetchRoles() {
+      const Roles = await this.$store.dispatch('api/role/getRoles')
+      this.roles = Roles
     },
   },
 }

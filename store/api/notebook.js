@@ -6,7 +6,7 @@ export const actions = {
     },
     async getNotebooksID({ getters }, data) {
       return await this.$axios
-      .get('api/notebooks:id_notebook', data)
+      .get('api/notebooks:id', data)
       .then((res) => res.data)
   },
     async postNotebooks({ getters }, data) {
