@@ -2,162 +2,162 @@
   {
     "name": "home",
     "path": "/home",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/home/index.vue",
     "chunkName": "pages/home/index",
-    "_name": "_eb867db0"
+    "_name": "_73ab5a62"
   },
   {
     "name": "admin-department",
     "path": "/admin/department",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\department\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/department/index.vue",
     "chunkName": "pages/admin/department/index",
-    "_name": "_340df168"
+    "_name": "_3631867c"
   },
   {
     "name": "admin-equipment",
     "path": "/admin/equipment",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/equipment/index.vue",
     "chunkName": "pages/admin/equipment/index",
-    "_name": "_991d39b0"
+    "_name": "_4e1b33b4"
   },
   {
     "name": "admin-home",
     "path": "/admin/home",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/home/index.vue",
     "chunkName": "pages/admin/home/index",
-    "_name": "_dba3dac2"
+    "_name": "_0a94b462"
   },
   {
     "name": "admin-location",
     "path": "/admin/location",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/location/index.vue",
     "chunkName": "pages/admin/location/index",
-    "_name": "_0f6f4c09"
+    "_name": "_3bbeeaa5"
   },
   {
     "name": "admin-notebook",
     "path": "/admin/notebook",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/notebook/index.vue",
     "chunkName": "pages/admin/notebook/index",
-    "_name": "_6f039623"
+    "_name": "_1dcbf54b"
   },
   {
     "name": "admin-store",
     "path": "/admin/store",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/store/index.vue",
     "chunkName": "pages/admin/store/index",
-    "_name": "_87c39816"
+    "_name": "_6b070e72"
   },
   {
     "name": "admin-user",
     "path": "/admin/user",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\user\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/user/index.vue",
     "chunkName": "pages/admin/user/index",
-    "_name": "_cc925f9a"
+    "_name": "_7f14e5bb"
   },
   {
     "name": "auth-login",
     "path": "/auth/login",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\auth\\\\login.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/auth/login.vue",
     "chunkName": "pages/auth/login",
-    "_name": "_727d5854"
+    "_name": "_23459122"
   },
   {
     "name": "auth-register",
     "path": "/auth/register",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\auth\\\\register.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/auth/register.vue",
     "chunkName": "pages/auth/register",
-    "_name": "_1a0c2d46"
+    "_name": "_7006f70d"
   },
   {
     "name": "user-department",
     "path": "/user/department",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\user\\\\department\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/department/index.vue",
     "chunkName": "pages/user/department/index",
-    "_name": "_64894daa"
+    "_name": "_2498e208"
   },
   {
     "name": "user-equipment",
     "path": "/user/equipment",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\user\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/equipment/index.vue",
     "chunkName": "pages/user/equipment/index",
-    "_name": "_5cafd90a"
+    "_name": "_8c829b8c"
   },
   {
     "name": "user-home",
     "path": "/user/home",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\user\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/home/index.vue",
     "chunkName": "pages/user/home/index",
-    "_name": "_3a91f77d"
+    "_name": "_5ed2ab89"
   },
   {
     "name": "user-location",
     "path": "/user/location",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\user\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/location/index.vue",
     "chunkName": "pages/user/location/index",
-    "_name": "_677991e7"
+    "_name": "_cbe2f942"
   },
   {
     "name": "user-notebook",
     "path": "/user/notebook",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\user\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/notebook/index.vue",
     "chunkName": "pages/user/notebook/index",
-    "_name": "_71e447fe"
+    "_name": "_7c1b8e05"
   },
   {
     "name": "user-store",
     "path": "/user/store",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\user\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/store/index.vue",
     "chunkName": "pages/user/store/index",
-    "_name": "_2036ead7"
+    "_name": "_2bffab66"
   },
   {
     "name": "user-user",
     "path": "/user/user",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\user\\\\user\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/user/index.vue",
     "chunkName": "pages/user/user/index",
-    "_name": "_421ab511"
+    "_name": "_399c2916"
   },
   {
     "name": "admin-department-create",
     "path": "/admin/department/create",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\department\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/department/create.vue",
     "chunkName": "pages/admin/department/create",
-    "_name": "_00dc2cf2"
+    "_name": "_4096b388"
   },
   {
     "name": "admin-equipment-create",
     "path": "/admin/equipment/create",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\equipment\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/equipment/create.vue",
     "chunkName": "pages/admin/equipment/create",
-    "_name": "_3b2166d4"
+    "_name": "_c600e4ec"
   },
   {
     "name": "admin-location-create",
     "path": "/admin/location/create",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\location\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/location/create.vue",
     "chunkName": "pages/admin/location/create",
-    "_name": "_062e7fd5"
+    "_name": "_63d2b4b9"
   },
   {
     "name": "admin-notebook-create",
     "path": "/admin/notebook/create",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\notebook\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/notebook/create.vue",
     "chunkName": "pages/admin/notebook/create",
-    "_name": "_cdb90e0a"
+    "_name": "_7932025a"
   },
   {
     "name": "admin-store-create",
     "path": "/admin/store/create",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\admin\\\\store\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/store/create.vue",
     "chunkName": "pages/admin/store/create",
-    "_name": "_2146d52e"
+    "_name": "_a6722a52"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "D:\\\\Workspaces\\\\Project\\\\Nuxt\\\\emp\\\\client\\\\pages\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_0507a4a7"
+    "_name": "_17abf7b5"
   }
 ]

@@ -8,10 +8,10 @@ You can directly use them in pages and other components without the need to impo
 
 - `<NuxtLogo>` | `<nuxt-logo>` (components/NuxtLogo.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)
+- `<DepartmentEditDialog>` | `<department-edit-dialog>` (components/Department/EditDialog.vue)
+- `<EquipmentEditDialog>` | `<equipment-edit-dialog>` (components/Equipment/EditDialog.vue)
 - `<LocationEditDialog>` | `<location-edit-dialog>` (components/Location/EditDialog.vue)
 - `<LoadingLineLoading>` | `<loading-line-loading>` (components/Loading/LineLoading.vue)
-- `<EquipmentEditDialog>` | `<equipment-edit-dialog>` (components/Equipment/EditDialog.vue)
-- `<DepartmentEditDialog>` | `<department-edit-dialog>` (components/Department/EditDialog.vue)
 - `<ModalComplete>` | `<modal-complete>` (components/Modal/Complete.vue)
 - `<ModalConfirm>` | `<modal-confirm>` (components/Modal/Confirm.vue)
 - `<ModalConfirmLogout>` | `<modal-confirm-logout>` (components/Modal/ConfirmLogout.vue)

@@ -23,7 +23,10 @@
               </v-col>
               <v-card-title>{{ user.fname }}</v-card-title>
               <v-card-subtitle>
-                แผนก: {{ mapData(user.department_id) }}
+                แผนก: {{ mapDataDepartment(user.department_id) }}
+              </v-card-subtitle>
+              <v-card-subtitle>
+                สิทธิ์: {{ mapDataRole(user.role_id) }}
               </v-card-subtitle>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -62,6 +65,7 @@ export default {
       search: '',
       users: [],
       departments: [],
+      roles: [],
       currentExpanded: null,
     };
   },
@@ -77,6 +81,7 @@ export default {
   async fetch() {
     await this.fetchUserData();
     await this.fetchDepartmentData();
+    await this.fetchRoleData();
   },
 
   methods: {
@@ -88,13 +93,24 @@ export default {
     async fetchDepartmentData() {
       this.departments = await this.$store.dispatch('api/department/getDepartments');
     },
-    mapData(id) {
+    mapDataDepartment(id) {
       for (let i = 0; i < this.departments.length; i++) {
         if (this.departments[i].id === id) {
           return this.departments[i].name;
         }
       }
       return 'ไม่มีแผนก';
+    },
+    async fetchRoleData() {
+      this.roles = await this.$store.dispatch('api/role/getRoles');
+    },
+    mapDataRole(id) {
+      for (let i = 0; i < this.roles.length; i++) {
+        if (this.roles[i].id === id) {
+          return this.roles[i].name;
+        }
+      }
+      return 'ไม่มีสิทธิ์';
     },
 
     isExpanded(id) {
