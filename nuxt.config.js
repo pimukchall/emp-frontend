@@ -58,7 +58,7 @@ export default {
           login: { 
             url: 'http://localhost:3001/api/users/login', 
             method: 'post',
-            propertyName: 'user.password'
+            propertyName: 'token'
           },
           logout: { 
             url: 'http://localhost:3001/api/users/logout', 
@@ -70,7 +70,7 @@ export default {
             propertyName: 'user'
           }
         },
-        tokenName: 'authorization',
+        tokenName: 'Authorization',
       }
     },
   },

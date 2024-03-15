@@ -9,11 +9,6 @@ export const actions = {
       .get('api/users:id', data)
       .then((res) => res.data)
     },
-    async getUsersMe({ getters }, data) {
-        return await this.$axios
-        .get('api/users/me', data)
-        .then((res) => res.data)
-    },
     async postUsers({ getters }, data) {
         return await this.$axios
         .post('api/users/register', data)

@@ -269,14 +269,14 @@ export default {
           return
         }
         const req = await this.$store.dispatch('api/user/postUsers', this.form)
-        this.modal.confirmRegister.open = true
-        this.modal.completeRegister.open = true
+        this.modal.confirm.open = true
+        this.modal.complete.open = true
       } catch (error) {
         this.modal.error.message = 'มีบัญชีนี้อยู่แล้ว กรุณาลองใหม่อีกครั้ง'
       }
     },
     goBack() {
-      this.$router.push('/auth/login')
+      this.$router.push('/admin/user')
     },
   },
 }

@@ -89,11 +89,12 @@ export default {
           data: {
             email: this.form.email,
             password: this.form.password,
-          },
+          }
         });
-        this.$router.push('/admin/user');
         this.modal.complete.message = 'เข้าสู่ระบบสำเร็จ';
         this.modal.complete.open = true;
+
+        console.log(req);
 
       } catch (error) {
         this.modal.error.message = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
