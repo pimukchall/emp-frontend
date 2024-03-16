@@ -11,6 +11,9 @@
   "EquipmentEditDialog": {
     "description": "Auto imported from components/Equipment/EditDialog.vue"
   },
+  "NotebookEditDialog": {
+    "description": "Auto imported from components/Notebook/EditDialog.vue"
+  },
   "LocationEditDialog": {
     "description": "Auto imported from components/Location/EditDialog.vue"
   },
@@ -31,9 +34,6 @@
   },
   "ModalLoading": {
     "description": "Auto imported from components/Modal/Loading.vue"
-  },
-  "NotebookEditDialog": {
-    "description": "Auto imported from components/Notebook/EditDialog.vue"
   },
   "StoreEditDialog": {
     "description": "Auto imported from components/Store/EditDialog.vue"
