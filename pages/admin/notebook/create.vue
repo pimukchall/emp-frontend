@@ -214,6 +214,7 @@ moment.locale('th');
 
 export default {
   layout: 'admin',
+  middleware: 'auth',
   head() {
     return {
       title: 'ลงทะเบียนอุปกรณ์',

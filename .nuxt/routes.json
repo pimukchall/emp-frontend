@@ -72,12 +72,6 @@
     "chunkName": "pages/user/equipment/index"
   },
   {
-    "name": "user-home",
-    "path": "/user/home",
-    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/home/index.vue",
-    "chunkName": "pages/user/home/index"
-  },
-  {
     "name": "user-location",
     "path": "/user/location",
     "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/location/index.vue",

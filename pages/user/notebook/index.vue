@@ -60,7 +60,6 @@
   moment.locale('th');
   export default {
   layout: 'user',
-  middleware: 'auth',
     data() {
       return {
         search: '',

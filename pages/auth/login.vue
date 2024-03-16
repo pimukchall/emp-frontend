@@ -48,7 +48,6 @@
 
 <script>
 export default {
-  layout: 'blank',
   name: 'Login',
   data() {
     return {
@@ -112,7 +111,7 @@ export default {
       }
     },
     goBack() {
-      this.$router.push('/user/user');
+      this.$router.push('/admin/user');
     },
   },
 }

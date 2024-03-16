@@ -65,6 +65,7 @@
   <script>
   export default {
     layout: 'admin',
+    middleware: 'auth',
     head() {
       return {
         title: 'เพิ่มแผนก',

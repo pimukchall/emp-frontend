@@ -41,7 +41,6 @@
   <script>
   export default {
     layout: 'user',
-    middleware: 'auth',
     data() {
       return {
         search: '',

@@ -16,7 +16,6 @@ const _23459122 = () => interopDefault(import('../pages/auth/login.vue' /* webpa
 const _7006f70d = () => interopDefault(import('../pages/auth/register.vue' /* webpackChunkName: "pages/auth/register" */))
 const _2498e208 = () => interopDefault(import('../pages/user/department/index.vue' /* webpackChunkName: "pages/user/department/index" */))
 const _8c829b8c = () => interopDefault(import('../pages/user/equipment/index.vue' /* webpackChunkName: "pages/user/equipment/index" */))
-const _5ed2ab89 = () => interopDefault(import('../pages/user/home/index.vue' /* webpackChunkName: "pages/user/home/index" */))
 const _cbe2f942 = () => interopDefault(import('../pages/user/location/index.vue' /* webpackChunkName: "pages/user/location/index" */))
 const _7c1b8e05 = () => interopDefault(import('../pages/user/notebook/index.vue' /* webpackChunkName: "pages/user/notebook/index" */))
 const _2bffab66 = () => interopDefault(import('../pages/user/store/index.vue' /* webpackChunkName: "pages/user/store/index" */))
@@ -87,10 +86,6 @@ export const routerOptions = {
     path: "/user/equipment",
     component: _8c829b8c,
     name: "user-equipment"
-  }, {
-    path: "/user/home",
-    component: _5ed2ab89,
-    name: "user-home"
   }, {
     path: "/user/location",
     component: _cbe2f942,

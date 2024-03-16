@@ -1,7 +1,10 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar-title
+        class="text-uppercase"
+        @click="home" 
+      >{{ title }}</v-toolbar-title>
       <div>
         <v-btn text @click="user">ผู้ใช้</v-btn>
         <v-btn text @click="notebook">โน๊ตบุ๊ค</v-btn>
@@ -65,6 +68,9 @@ export default {
     },
     store() {
       this.$router.push('/admin/store')
+    },
+    home() {
+      this.$router.push('/admin/home')
     },
   },
 }

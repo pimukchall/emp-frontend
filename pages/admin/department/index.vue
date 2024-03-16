@@ -71,6 +71,7 @@
   
   export default {
     layout: 'admin',
+    middleware: 'auth',
     data() {
       return {
         search: '',

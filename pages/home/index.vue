@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  layout: 'default',
+  layout: 'user',
   data () {
     return {
       items: [

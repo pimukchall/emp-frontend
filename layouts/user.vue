@@ -1,7 +1,12 @@
 <template>
     <v-app dark>
       <v-app-bar :clipped-left="clipped" fixed app>
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
+        <v-toolbar-title
+          class="text-uppercase font-weight-bold"
+          @click="home"
+        >
+          {{ title }}
+        </v-toolbar-title>
         <div>
           <v-btn text @click="user">ผู้ใช้</v-btn>
           <v-btn text @click="notebook">โน๊ตบุ๊ค</v-btn>
@@ -17,10 +22,9 @@
             </v-list>
           </v-menu>
         </div>
-          <v-spacer />
+        <v-spacer />
             <div>
-                {{ $auth.user.fname }}
-                <v-btn @click="signout" color="dark">ลงชื่อออก</v-btn>
+                <v-btn @click="login">เข้าสู่ระบบ</v-btn>
             </div>
       </v-app-bar>
       <v-main>
@@ -37,7 +41,6 @@
   <script>
   export default {
     name: 'user',
-    middleware: 'auth',
     data() {
       return {
         fixed: false,
@@ -55,9 +58,6 @@
       equipment() {
         this.$router.push('/user/equipment')
       },
-      signout() {
-        this.$auth.logout()
-      },
       department() {
         this.$router.push('/user/department')
       },
@@ -66,6 +66,12 @@
       },
       store() {
         this.$router.push('/user/store')
+      },
+      login() {
+        this.$router.push('/auth/login')
+      },
+      home() {
+        this.$router.push('/home')
       },
     },
   }
