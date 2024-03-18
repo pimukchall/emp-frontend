@@ -72,7 +72,13 @@ export default {
   computed: {
     filtered() {
       return this.users.filter(user => {
-        return user.fname.toLowerCase().includes(this.search.toLowerCase());
+        return user.fname.toLowerCase().includes(this.search.toLowerCase()) ||
+          user.lname.toLowerCase().includes(this.search.toLowerCase()) ||
+          user.email.toLowerCase().includes(this.search.toLowerCase()) ||
+          user.phone.toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapDataDepartment(user.department_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapDataRole(user.role_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.formatDate(user.date_in).toLowerCase().includes(this.search.toLowerCase());
       });
     },
   },

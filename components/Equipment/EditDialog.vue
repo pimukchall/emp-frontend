@@ -1,5 +1,11 @@
 <template>
     <div>
+    <ModalConfirm
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
+      :confirm.sync="modal.confirm.open"
+      @confirm="confirm"
+    />
     <ModalComplete
       :open="modal.complete.open"
       :message="modal.complete.message"
@@ -171,9 +177,13 @@ export default {
           location_id: null,
 
           modal: {
+            confirm: {
+              open: false,
+              message: 'คุณต้องการแก้ไขรายการหรือไม่?',
+            },
             complete: {
               open: false,
-              message: '',
+              message: 'เสร็จสิ้น',
             },
             error: {
               open: false,
@@ -194,6 +204,7 @@ export default {
             try {
                 this.$emit('update:edit', false)
                 await this.UpdateData(this.data.id)
+                this.modal.complete.open = true
             } catch (error) {
                 this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
             }
@@ -204,7 +215,6 @@ export default {
         async UpdateData() {
             try {
                 const req = await this.$store.dispatch('api/notebook/putNotebooks', this.data)
-                this.modal.complete.open = true
             } catch (error) {
               this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
             }

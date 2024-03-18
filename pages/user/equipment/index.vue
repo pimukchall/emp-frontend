@@ -55,7 +55,6 @@
         </div>
       </div>
   </template>
-    
   <script>
   import moment from 'moment';
   moment.locale('th');
@@ -74,7 +73,17 @@
     computed: {
       filtered() {
         return this.equipments.filter(equipment => {
-          return equipment.asset_number.toLowerCase().includes(this.search.toLowerCase());
+          return equipment.asset_number.toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.name.toLowerCase().includes(this.search.toLowerCase()) ||
+            this.mapUser(equipment.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+            this.mapLocation(equipment.location_id).toLowerCase().includes(this.search.toLowerCase()) ||
+            this.mapStore(equipment.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.asset_number.toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.document_number.toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.price.toString().toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.quantity.toString().toLowerCase().includes(this.search.toLowerCase()) ||
+            this.formatDate(equipment.created_at).toLowerCase().includes(this.search.toLowerCase()) ||
+            this.formatDate(equipment.date_out).toLowerCase().includes(this.search.toLowerCase());
         });
       },
     },

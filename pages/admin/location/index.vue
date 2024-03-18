@@ -22,11 +22,11 @@
         :edit.sync="editDialog"
       />
 
-      <p v-if="$fetchState.pending">Fetching ...</p>
-      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
+      <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
   
       <div v-else>
-        <h1>ไซต์งาน</h1>
+        <h1>สถานที่</h1>
         <div>
           <v-row>
             <v-col cols="12" md="4">

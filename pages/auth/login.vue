@@ -19,24 +19,24 @@
     />
     <div class="d-flex justify-center">
       <v-card width="400" height="300">
-        <v-card-title> Sign In </v-card-title>
+        <v-card-title> เข้าสู่ระบบ </v-card-title>
           <v-card-text>
             <v-text-field 
               v-model = "form.email"
-              label="Email"
+              label="อีเมล"
               outlined>
             </v-text-field>
 
             <v-text-field 
               v-model="form.password"
-              label="Password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'" @click:append="show1 = !show1" 
+              label="รหัสผ่าน" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'" @click:append="show1 = !show1" 
               outlined>
           </v-text-field>
 
           <v-card-actions>
             <div>
               <span v-bind:title="message"> 
-                <v-btn @click="login" width="350" class="mr-2" color="success" >Sign In</v-btn>
+                <v-btn @click="login" width="350" class="mr-2" color="success" >เข้าสู่ระบบ</v-btn>
               </span>
             </div>
           </v-card-actions>
@@ -75,18 +75,6 @@ export default {
     }
   },
   methods: {
-    async login2() {
-      try {
-        const response = await this.$axios.post('api/users/login', this.form);
-        this.$store.commit('auth/setToken', response.data.token);
-        this.$store.commit('auth/setUser', response.data.user);
-        this.modal.complete.open = true;
-        this.modal.complete.message = 'Login Success';
-      } catch (error) {
-        this.modal.error.open = true;
-        this.modal.error.message = 'Login Failed';
-      }
-    },
     async login() {
       try {
         if (!this.form.email || !this.form.password) {
@@ -101,9 +89,6 @@ export default {
           }
         });
         this.modal.complete.message = 'เข้าสู่ระบบสำเร็จ';
-        this.modal.complete.open = true;
-
-        console.log(req);
 
       } catch (error) {
         this.modal.error.message = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';

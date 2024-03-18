@@ -29,8 +29,8 @@
                 <v-col cols="12" sm="6">
                   <v-text-field
                     v-model="data.name"
-                    :rules="[(v) => !!v || 'กรุณากรอกชื่อไซต์งาน']"
-                    label="ชื่อไซต์งาน"
+                    :rules="[(v) => !!v || 'กรุณากรอกชื่อสถานที่']"
+                    label="ชื่อสถานที่"
                     outlined
                     required
                   >

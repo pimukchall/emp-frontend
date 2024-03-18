@@ -18,10 +18,8 @@
     />
     <UserEditDialog :open="editDialog" :edit.sync="editDialog" :data="editData" />
     <UserEditPassword :open="editPasswordDialog" :edit.sync="editPasswordDialog" :data="editPasswordData" />
-
-    <p v-if="$fetchState.pending">Fetching...</p>
-    <p v-else-if="$fetchState.error">An error occurred :(</p>
-
+    <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
+    <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
     <div v-else>
       <h1>รายชื่อผู้ใช้</h1>
       <div>
@@ -33,6 +31,7 @@
           <v-spacer></v-spacer>
           <v-col class="text-right">
             <v-btn elevation="2" rounded @click="gotoCreate">เพิ่มผู้ใช้</v-btn>
+            <v-btn elevation="2" rounded @click="exportToExcel">ออกรายงาน</v-btn>
           </v-col>
         </v-row>
       </div>
@@ -97,7 +96,7 @@
 <script>
 import moment from 'moment';
 moment.locale('th');
-
+import * as XLSX from 'xlsx';
 export default {
   layout: 'admin',
   middleware: 'auth',
@@ -136,7 +135,13 @@ export default {
   computed: {
     filtered() {
       return this.users.filter(user => {
-        return user.fname.toLowerCase().includes(this.search.toLowerCase());
+        return user.fname.toLowerCase().includes(this.search.toLowerCase())||
+          user.lname.toLowerCase().includes(this.search.toLowerCase()) ||
+          user.email.toLowerCase().includes(this.search.toLowerCase()) ||
+          user.phone.toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapDataDepartment(user.department_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapDataRole(user.role_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.formatDate(user.date_in).toLowerCase().includes(this.search.toLowerCase());
       });
     },
   },
@@ -209,7 +214,23 @@ export default {
     formatDate(date) {
       return moment(date).format('Do MMMM YYYY');
     },
-
+    exportToExcel() {
+      const worksheet = XLSX.utils.json_to_sheet(
+          this.users.map(user => {
+            return {
+              'ชื่อ': user.fname,
+              'นามสกุล': user.lname,
+              'อีเมล': user.email,
+              'เบอร์ติดต่อ': user.phone,
+              'แผนก': this.mapDataDepartment(user.department_id),
+              'วันที่สมัคร': this.formatDate(user.date_in),
+            };
+          })
+      )
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
+      XLSX.writeFile(workbook, 'รายการผู้ใช้.xlsx');
+    },
   },
 };
 </script>

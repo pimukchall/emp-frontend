@@ -17,8 +17,8 @@
       :error.sync="modal.error.open"
     />
       <EquipmentEditDialog :open="editDialog" :edit.sync="editDialog" :data="editData" />
-      <p v-if="$fetchState.pending">Fetching...</p>
-      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
+      <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
       <div v-else>
         <h1>รายการอุปกรณ์</h1>
         <div>
@@ -35,6 +35,7 @@
             <v-spacer></v-spacer>
             <v-col class="text-right">
               <v-btn elevation="2" rounded @click="gotoCreate">เพิ่มอุปกรณ์</v-btn>
+              <v-btn elevation="2" rounded @click="exportToExcel">รายงาน</v-btn>
             </v-col>
           </v-row>
         </div>
@@ -91,18 +92,16 @@
       </div>
     </div>
   </template>
-    
   <script>
   import moment from 'moment';
   moment.locale('th');
-  
+  import * as XLSX from 'xlsx';
   export default {
   layout: 'admin',
   middleware: 'auth',
     data() {
       return {
         search: '',
-
         equipments: [],
         location: [],
         users: [],
@@ -132,8 +131,17 @@
     computed: {
       filtered() {
         return this.equipments.filter(equipment => {
-          return equipment.asset_number.toLowerCase().includes(this.search.toLowerCase());
-        });
+          return equipment.asset_number.toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.name.toLowerCase().includes(this.search.toLowerCase()) ||
+            this.mapUser(equipment.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+            this.mapLocation(equipment.location_id).toLowerCase().includes(this.search.toLowerCase()) ||
+            this.mapStore(equipment.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.document_number.toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.price.toString().toLowerCase().includes(this.search.toLowerCase()) ||
+            equipment.quantity.toString().toLowerCase().includes(this.search.toLowerCase()) ||
+            this.formatDate(equipment.created_at).toLowerCase().includes(this.search.toLowerCase()) ||
+            this.formatDate(equipment.date_out).toLowerCase().includes(this.search.toLowerCase())
+        })
       },
     },
   
@@ -141,6 +149,7 @@
       await this.fetchEquipmentData()
       await this.fetchUserData()
       await this.fetchStoreData()
+      await this.fetchLocationData()
       
     },
     methods: {
@@ -188,7 +197,7 @@
             return this.location[i].name
           }
         }
-        return 'ไม่มีข้อมูลสาขา'
+        return 'ไม่มีข้อมูลสถานที่'
       },
 
       async deleteData(id) {
@@ -217,7 +226,27 @@
       formatDate(date) {
         return moment(date).format('Do MMMM YYYY');
       },
-
+      exportToExcel() {
+        const worksheet = XLSX.utils.json_to_sheet(
+          this.equipments.map(equipment => {
+            return {
+              'รหัสทรัทย์สิน': equipment.asset_number,
+              'ชื่อรายการ': equipment.name,
+              'ผู้รับผิดชอบ': this.mapUser(equipment.user_id),
+              'สถานที่': this.mapLocation(equipment.location_id),
+              'ร้านที่ซื้อ': this.mapStore(equipment.store_id),
+              'หมายเลขเอกสาร': equipment.document_number,
+              'ราคา': equipment.price,
+              'จำนวน': equipment.quantity,
+              'วันที่ลงทะเบียน': this.formatDate(equipment.created_at),
+              'วันที่เบิก': this.formatDate(equipment.date_out),
+            };
+        })
+        );
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'รายการอุปกรณ์');
+        XLSX.writeFile(workbook, 'รายการอุปกรณ์.xlsx');
+      },
     },
   }
   </script>

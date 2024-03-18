@@ -101,6 +101,14 @@
               <v-col cols="12">
                 <v-divider></v-divider>
               </v-col>
+            <!-- <v-col cols="12">
+                <v-file-input
+                  v-model="data.image"
+                  label="ลิงค์รูปภาพ"
+                  outlined
+                >
+                </v-file-input>
+              </v-col> -->
               <v-col cols="12">
                 <v-text-field
                   v-model="data.image"
@@ -181,6 +189,7 @@ export default {
       try {
         this.$emit('update:edit', false);
         await this.UpdateData(this.data.id);
+        await this.UploadPicture(this.data.id);
       } catch (error) {
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
       }
@@ -206,7 +215,7 @@ export default {
       const Roles = await this.$store.dispatch(
         'api/role/getRoles');
       this.roles = Roles;
-    },
+    }
   },
 };
 </script>

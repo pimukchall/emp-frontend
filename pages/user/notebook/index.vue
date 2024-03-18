@@ -1,6 +1,6 @@
 <template>
-      <p v-if="$fetchState.pending">Fetching...</p>
-      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
+      <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
       <div v-else>
         <h1>รายการโน๊ตบุ๊ค</h1>
         <div>
@@ -14,7 +14,6 @@
                 hide-details
               ></v-text-field>
             </v-col>
-            <v-spacer></v-spacer>
           </v-row>
         </div>
         <div>
@@ -46,6 +45,7 @@
                         <p>หมายเลขลิขสิทธิ์ : {{ notebook.license_window }}</p>
                         <p>สาขาที่ซื้อ : {{ mapStore(notebook.store_id) }}</p>
                         <p>วันที่ลงทะเบียน : {{ formatDate(notebook.date_in) }}</p>
+                        <p>วันที่ประกันหมด : {{ Expire(notebook.date_in) }}</p>
                     </v-card-text>
                   </div>
                 </v-expand-transition>
@@ -72,7 +72,19 @@
     computed: {
       filtered() {
         return this.notebooks.filter(notebook => {
-          return notebook.asset_number.toLowerCase().includes(this.search.toLowerCase());
+          return  notebook.asset_number.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.brand.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.model.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.cpu.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.ram.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.gpu.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.storage.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.os.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.license_window.toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.mapUser(notebook.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.mapStore(notebook.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.formatDate(notebook.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.Expire(notebook.date_in).toLowerCase().includes(this.search.toLowerCase())
         });
       },
     },
@@ -119,7 +131,9 @@
       formatDate(date) {
         return moment(date).format('Do MMMM YYYY');
       },
-
+      Expire(date_in) {
+        return moment(date_in).add(3, 'years').format('Do MMMM YYYY');
+      }
     },
   }
   </script>

@@ -24,7 +24,7 @@
           @click="confirm"
           class="rounded-xl font-weight-medium mt-3"
         >
-          Confirm
+          ยืนยัน
         </v-btn>
         <v-btn
           color="error"

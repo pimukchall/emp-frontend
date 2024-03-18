@@ -176,6 +176,14 @@
               <v-col cols="12">
                 <v-divider></v-divider>
               </v-col>
+              <!-- <v-col cols="12">
+                <v-file-input
+                  v-model="form.image"
+                  label="ลิงค์รูปภาพ"
+                  outlined
+                >
+                </v-file-input>
+              </v-col> -->
               <v-col cols="12">
                 <v-text-field
                   v-model="form.image"

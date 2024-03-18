@@ -7,6 +7,7 @@
   <script>
     import home from '~/pages/home/index.vue'
       export default {
+        layout: 'user',
           components: {
               home
           },

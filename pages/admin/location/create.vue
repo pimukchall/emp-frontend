@@ -23,15 +23,15 @@
           max-width="800"
           max-height="auto"
         >
-          <v-card-title class="headline">เพิ่มไซต์งาน</v-card-title>
+          <v-card-title class="headline">เพิ่มสถานที่</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
                 <v-col cols="12" sm="6">
                   <v-text-field
                     v-model="form.name"
-                    :rules="[(v) => !!v || 'กรุณากรอกชื่อไซต์งาน']"
-                    label="ชื่อไซต์งาน"
+                    :rules="[(v) => !!v || 'กรุณากรอกชื่อสถานที่']"
+                    label="ชื่อสถานที่"
                     outlined
                     required
                   >
@@ -78,7 +78,7 @@
     middleware: 'auth',
     head() {
       return {
-        title: 'เพิ่มไซต์งาน',
+        title: 'เพิ่มสถานที่',
       }
     },
     data() {

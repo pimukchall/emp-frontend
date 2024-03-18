@@ -126,6 +126,18 @@
     "chunkName": "pages/admin/store/create"
   },
   {
+    "name": "user-equipment-card",
+    "path": "/user/equipment/card",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/equipment/card.vue",
+    "chunkName": "pages/user/equipment/card"
+  },
+  {
+    "name": "user-notebook-card",
+    "path": "/user/notebook/card",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/notebook/card.vue",
+    "chunkName": "pages/user/notebook/card"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/index.vue",

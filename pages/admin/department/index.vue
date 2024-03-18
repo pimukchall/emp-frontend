@@ -22,8 +22,8 @@
         :edit.sync="editDialog"
       />
 
-      <p v-if="$fetchState.pending">Fetching ...</p>
-      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
+      <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
   
       <div v-else>
         <h1>แผนก</h1>
@@ -68,7 +68,6 @@
   </template>
   
   <script>
-  
   export default {
     layout: 'admin',
     middleware: 'auth',

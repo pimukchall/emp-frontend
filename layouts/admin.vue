@@ -1,4 +1,12 @@
 <template>
+    <div>
+      <ModalConfirmLogout
+        :open="modal.confirm.open"
+        :message="modal.confirm.message"
+        @update:confirm="value => modal.confirm.open = value"
+        @update:message="value => modal.confirm.message = value"
+        :method="signout"
+      />
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title
@@ -23,7 +31,7 @@
         <v-spacer />
           <div>
               {{ $auth.user.fname }}
-              <v-btn @click="signout" color="dark">ลงชื่อออก</v-btn>
+              <v-btn @click="buttonSignOut" color="dark">ลงชื่อออก</v-btn>
           </div>
     </v-app-bar>
     <v-main>
@@ -35,6 +43,7 @@
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
+  </div>
 </template>
 
 <script>
@@ -45,35 +54,44 @@ export default {
       fixed: false,
       clipped: false,
       title: 'EMP WAREHOUSES',
-    }
+      modal: {
+        confirm: {
+          open: false,
+          message: 'คุณต้องการออกจากระบบหรือไม่?'
+        },
+      }
+    };
   },
   methods: {
     user() {
-      this.$router.push('/admin/user')
+      this.$router.push('/admin/user');
     },
     notebook() {
-      this.$router.push('/admin/notebook')
+      this.$router.push('/admin/notebook');
     },
     equipment() {
-      this.$router.push('/admin/equipment')
+      this.$router.push('/admin/equipment');
     },
     signout() {
-      this.$auth.logout()
+      this.$auth.logout();
     },
     department() {
-      this.$router.push('/admin/department')
+      this.$router.push('/admin/department');
     },
     location() {
-      this.$router.push('/admin/location')
+      this.$router.push('/admin/location');
     },
     store() {
-      this.$router.push('/admin/store')
+      this.$router.push('/admin/store');
     },
     home() {
-      this.$router.push('/admin/home')
+      this.$router.push('/admin/home');
     },
-  },
-}
+    buttonSignOut() {
+     this.modal.confirm.open = true
+    }
+  }
+};
 </script>
 <style scoped>
 </style>

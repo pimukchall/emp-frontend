@@ -17,8 +17,8 @@
       :error.sync="modal.error.open"
     />
       <NotebookEditDialog :open="editDialog" :edit.sync="editDialog" :data="editData" />
-      <p v-if="$fetchState.pending">Fetching...</p>
-      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
+      <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
       <div v-else>
         <h1>รายการโน๊ตบุ๊ค</h1>
         <div>
@@ -35,6 +35,7 @@
             <v-spacer></v-spacer>
             <v-col class="text-right">
               <v-btn elevation="2" rounded @click="gotoCreate">เพิ่มอุปกรณ์</v-btn>
+              <v-btn elevation="2" rounded @click="exportToExcel">ออกรายงาน</v-btn>
             </v-col>
           </v-row>
         </div>
@@ -81,7 +82,7 @@
                         <p>หมายเลขลิขสิทธิ์ : {{ notebook.license_window }}</p>
                         <p>สาขาที่ซื้อ : {{ mapStore(notebook.store_id) }}</p>
                         <p>วันที่ลงทะเบียน : {{ formatDate(notebook.date_in) }}</p>
-                        
+                        <p>วันที่ประกันหมด : {{ Expire(notebook.date_in) }}</p>
                     </v-card-text>
                   </div>
                 </v-expand-transition>
@@ -92,11 +93,10 @@
       </div>
     </div>
   </template>
-    
   <script>
   import moment from 'moment';
   moment.locale('th');
-  
+  import * as XLSX from 'xlsx';
   export default {
   layout: 'admin',
   middleware: 'auth',
@@ -132,11 +132,22 @@
     computed: {
       filtered() {
         return this.notebooks.filter(notebook => {
-          return notebook.asset_number.toLowerCase().includes(this.search.toLowerCase());
+          return  notebook.asset_number.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.brand.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.model.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.cpu.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.ram.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.gpu.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.storage.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.os.toLowerCase().includes(this.search.toLowerCase()) ||
+                  notebook.license_window.toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.mapUser(notebook.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.mapStore(notebook.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.formatDate(notebook.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
+                  this.Expire(notebook.date_in).toLowerCase().includes(this.search.toLowerCase())
         });
       },
     },
-  
     async fetch() {
       await this.fetchNotebookData()
       await this.fetchUserData()
@@ -203,7 +214,33 @@
       formatDate(date) {
         return moment(date).format('Do MMMM YYYY');
       },
-
+      Expire(date_in) {
+        return moment(date_in).add(3, 'years').format('Do MMMM YYYY');
+      },
+      exportToExcel() {
+        const worksheet = XLSX.utils.json_to_sheet(
+          this.notebooks.map(notebook => {
+            return {
+              'รหัสทรัพย์สิน': notebook.asset_number,
+              'ผู้รับผิดชอบ': this.mapUser(notebook.user_id),
+              'ยี่ห้อ': notebook.brand,
+              'รุ่น': notebook.model,
+              'หน่วยประมวลผล': notebook.cpu,
+              'หน่วยความจำ': notebook.ram,
+              'หน่วยประมวลผลกราฟฟิค': notebook.gpu,
+              'หน่วยจัดเก็บข้อมูล': notebook.storage,
+              'ระบบปฏิบัติการ': notebook.os,
+              'หมายเลขลิขสิทธิ์': notebook.license_window,
+              'สาขาที่ซื้อ': this.mapStore(notebook.store_id),
+              'วันที่ลงทะเบียน': this.formatDate(notebook.date_in),
+              'วันที่ประกันหมด': this.Expire(notebook.date_in),
+            };
+        })
+        );
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Notebooks');
+        XLSX.writeFile(workbook, 'รายการโน๊ตบุ๊ค.xlsx');
+      },
     },
   }
   </script>
