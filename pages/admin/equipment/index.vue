@@ -35,7 +35,7 @@
             <v-spacer></v-spacer>
             <v-col class="text-right">
               <v-btn elevation="2" rounded @click="gotoCreate">เพิ่มอุปกรณ์</v-btn>
-              <v-btn elevation="2" rounded @click="exportToExcel">รายงาน</v-btn>
+              <v-btn elevation="2" rounded @click="exportToExcel">ออกรายงาน</v-btn>
             </v-col>
           </v-row>
         </div>

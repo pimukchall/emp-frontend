@@ -30,7 +30,10 @@
       </div>
         <v-spacer />
           <div>
-              {{ $auth.user.fname }}
+              <v-avatar size="30" color="grey" class="mr-2">
+                <v-img :src="$auth.user.avatar" />
+              </v-avatar>
+              <span class="mr-2">{{ $auth.user.fname }}</span>
               <v-btn @click="buttonSignOut" color="dark">ลงชื่อออก</v-btn>
           </div>
     </v-app-bar>
@@ -89,7 +92,7 @@ export default {
     },
     buttonSignOut() {
      this.modal.confirm.open = true
-    }
+    },
   }
 };
 </script>
