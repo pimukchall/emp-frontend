@@ -26,7 +26,6 @@ const _63d2b4b9 = () => interopDefault(import('../pages/admin/location/create.vu
 const _7932025a = () => interopDefault(import('../pages/admin/notebook/create.vue' /* webpackChunkName: "pages/admin/notebook/create" */))
 const _a6722a52 = () => interopDefault(import('../pages/admin/store/create.vue' /* webpackChunkName: "pages/admin/store/create" */))
 const _a7b34850 = () => interopDefault(import('../pages/user/equipment/card.vue' /* webpackChunkName: "pages/user/equipment/card" */))
-const _abad4aa6 = () => interopDefault(import('../pages/user/notebook/card.vue' /* webpackChunkName: "pages/user/notebook/card" */))
 const _17abf7b5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -128,10 +127,6 @@ export const routerOptions = {
     path: "/user/equipment/card",
     component: _a7b34850,
     name: "user-equipment-card"
-  }, {
-    path: "/user/notebook/card",
-    component: _abad4aa6,
-    name: "user-notebook-card"
   }, {
     path: "/",
     component: _17abf7b5,

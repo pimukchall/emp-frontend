@@ -47,6 +47,13 @@
                         <p>วันที่ลงทะเบียน : {{ formatDate(notebook.date_in) }}</p>
                         <p>วันที่ประกันหมด : {{ Expire(notebook.date_in) }}</p>
                     </v-card-text>
+                    <v-divider></v-divider>
+                    <div class="text-center">
+                    <qr-code 
+                      :text="'https://emp-app-ten.vercel.app/user/notebook'"
+                      :size="200">
+                    </qr-code>
+                    </div>
                   </div>
                 </v-expand-transition>
               </v-card>
@@ -58,6 +65,9 @@
   <script>
   import moment from 'moment';
   moment.locale('th');
+  import Vue from 'vue'
+  import VueQRCodeComponent from 'vue-qrcode-component'
+  Vue.component('qr-code', VueQRCodeComponent)
   export default {
   layout: 'user',
     data() {
@@ -133,7 +143,7 @@
       },
       Expire(date_in) {
         return moment(date_in).add(3, 'years').format('Do MMMM YYYY');
-      }
-    },
+      },
+    }
   }
   </script>

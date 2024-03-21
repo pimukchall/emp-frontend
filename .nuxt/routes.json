@@ -154,13 +154,6 @@
     "_name": "_a7b34850"
   },
   {
-    "name": "user-notebook-card",
-    "path": "/user/notebook/card",
-    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/notebook/card.vue",
-    "chunkName": "pages/user/notebook/card",
-    "_name": "_abad4aa6"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/index.vue",

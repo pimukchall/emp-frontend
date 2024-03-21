@@ -1,5 +1,5 @@
 {
-  "name": "EMPAPP",
+  "name": "@emperor/house-management-system",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "nuxt": "^2.15.8",
     "punycode": "^2.3.1",
     "vue": "^2.7.10",
+    "vue-qrcode-component": "^2.1.1",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
     "vuetify": "^2.6.10",

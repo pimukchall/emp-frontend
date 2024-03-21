@@ -27,7 +27,7 @@
               <v-icon>mdi-wheel-barrow</v-icon>
               อุปกรณ์
             </v-tab>
-            <v-menu offset-y>
+            <v-menu offset-y open-on-hover>
               <template v-slot:activator="{ on }">
                 <v-tab text v-on="on">อื่นๆ</v-tab>
               </template>
@@ -58,11 +58,14 @@
               <v-icon>mdi-white-balance-sunny</v-icon>
             </h4>
           </v-btn>
-          <v-avatar size="30" color="grey" class="mr-2">
-            <v-img :src="$auth.user.avatar" />
-          </v-avatar>
-          <span class="mr-2">{{ $auth.user.fname }}</span>
-          <v-btn @click="buttonSignOut" color="dark">ลงชื่อออก</v-btn>
+          <v-menu offset-y open-on-hover>
+            <template v-slot:activator="{ on }">
+              <v-btn class="mr-2" v-on="on">{{ $auth.user.fname }}</v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="buttonSignOut"> ลงชื่อออก </v-list-item>
+            </v-list>
+          </v-menu>
         </div>
       </v-app-bar>
       <v-main>
@@ -128,4 +131,3 @@ export default {
   },
 }
 </script>
-<style scoped></style>
