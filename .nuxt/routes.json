@@ -147,13 +147,6 @@
     "_name": "_a6722a52"
   },
   {
-    "name": "user-equipment-card",
-    "path": "/user/equipment/card",
-    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/equipment/card.vue",
-    "chunkName": "pages/user/equipment/card",
-    "_name": "_a7b34850"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/index.vue",

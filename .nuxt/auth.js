@@ -44,16 +44,16 @@ export default function (ctx, inject) {
   $auth.registerStrategy('local', new LocalScheme($auth, {
   "endpoints": {
     "login": {
-      "url": "https://ceba-124-120-250-249.ngrok-free.app/api/users/login",
+      "url": "http://localhost:3001/api/users/login",
       "method": "post",
       "propertyName": "token"
     },
     "logout": {
-      "url": "https://ceba-124-120-250-249.ngrok-free.app/api/users/logout",
+      "url": "http://localhost:3001/api/users/logout",
       "method": "delete"
     },
     "user": {
-      "url": "https://ceba-124-120-250-249.ngrok-free.app/api/users/me",
+      "url": "http://localhost:3001/api/users/me",
       "method": "get",
       "propertyName": "user"
     }

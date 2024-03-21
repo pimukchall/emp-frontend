@@ -18,7 +18,7 @@
     />
       <NotebookEditDialog :open="editDialog" :edit.sync="editDialog" :data="editData" />
       <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
-      <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
+      <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
       <div v-else>
         <h1>รายการโน๊ตบุ๊ค</h1>
         <div>

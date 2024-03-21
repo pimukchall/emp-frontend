@@ -19,7 +19,7 @@
     <UserEditDialog :open="editDialog" :edit.sync="editDialog" :data="editData" />
     <UserEditPassword :open="editPasswordDialog" :edit.sync="editPasswordDialog" :data="editPasswordData" />
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
-    <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
+    <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
     <div v-else>
       <h1>รายชื่อผู้ใช้</h1>
       <div>

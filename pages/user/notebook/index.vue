@@ -1,6 +1,6 @@
 <template>
       <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
-      <p v-else-if="$fetchState.error">ไม่สามารถเชื่อมต่อได้ :(</p>
+      <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
       <div v-else>
         <h1>รายการโน๊ตบุ๊ค</h1>
         <div>
@@ -49,10 +49,7 @@
                     </v-card-text>
                     <v-divider></v-divider>
                     <div class="text-center">
-                    <qr-code 
-                      :text="notebook.asset_number"
-                      :size="200">
-                    </qr-code>
+                    <qrcode-vue :value="notebook.asset_number" :size="150" level="H"></qrcode-vue>
                     </div>
                   </div>
                 </v-expand-transition>
@@ -65,9 +62,7 @@
   <script>
   import moment from 'moment';
   moment.locale('th');
-  import Vue from 'vue'
-  import VueQRCodeComponent from 'vue-qrcode-component'
-  Vue.component('qr-code', VueQRCodeComponent)
+  import QrcodeVue from 'qrcode.vue'
   export default {
   layout: 'user',
     data() {
@@ -78,6 +73,9 @@
         store: [],
         currentExpanded: null,
       };
+    },
+    components: {
+      QrcodeVue
     },
     computed: {
       filtered() {

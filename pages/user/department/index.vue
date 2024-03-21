@@ -1,6 +1,6 @@
 <template>
-      <p v-if="$fetchState.pending">Fetching ...</p>
-      <p v-else-if="$fetchState.error">An error occurred :(</p>
+      <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
+      <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
       <div v-else>
         <h1>แผนก</h1>
         <div>
