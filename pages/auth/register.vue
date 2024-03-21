@@ -55,10 +55,7 @@
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="form.email"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกอีเมล',
-                    (v) => /.+@.+\..+/.test(v) || 'อีเมลไม่ถูกต้อง',
-                ]"
+                  :rules="emailRules"
                   label="อีเมล"
                   outlined
                   required
@@ -176,14 +173,6 @@
               <v-col cols="12">
                 <v-divider></v-divider>
               </v-col>
-              <!-- <v-col cols="12">
-                <v-file-input
-                  v-model="form.image"
-                  label="ลิงค์รูปภาพ"
-                  outlined
-                >
-                </v-file-input>
-              </v-col> -->
               <v-col cols="12">
                 <v-text-field
                   v-model="form.image"
@@ -240,6 +229,10 @@ export default {
         date_in: new Date().toISOString().substr(0, 10),
         image: null,
       },
+      emailRules: [
+        (v) => !!v || 'กรุณากรอกอีเมล',
+        (v) => /.+@.+\..+/.test(v) || 'อีเมลไม่ถูกต้อง',
+      ],
       confirmPassword: '',
       show1: false,
       show2: false,

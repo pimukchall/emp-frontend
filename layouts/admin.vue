@@ -1,51 +1,79 @@
 <template>
-    <div>
-      <ModalConfirmLogout
-        :open="modal.confirm.open"
-        :message="modal.confirm.message"
-        @update:confirm="value => modal.confirm.open = value"
-        @update:message="value => modal.confirm.message = value"
-        :method="signout"
-      />
-  <v-app dark>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-toolbar-title
-        class="text-uppercase"
-        @click="home" 
-      >{{ title }}</v-toolbar-title>
-      <div>
-        <v-btn text @click="user">ผู้ใช้</v-btn>
-        <v-btn text @click="notebook">โน๊ตบุ๊ค</v-btn>
-        <v-btn text @click="equipment">อุปกรณ์</v-btn>
-        <v-menu offset-y>
-          <template v-slot:activator="{ on }">
-            <v-btn text v-on="on">อื่นๆ</v-btn>
-          </template>
-          <v-list>
-            <v-list-item @click="department">แผนก</v-list-item>
-            <v-list-item @click="location">ที่ตั้ง</v-list-item>
-            <v-list-item @click="store">ร้านค้า</v-list-item>
-          </v-list>
-        </v-menu>
-      </div>
+  <div>
+    <ModalConfirmLogout
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
+      @update:confirm="(value) => (modal.confirm.open = value)"
+      @update:message="(value) => (modal.confirm.message = value)"
+      :method="signout"
+    />
+    <v-app dark>
+      <v-app-bar :clipped-left="clipped" fixed app>
+        <v-toolbar-title class="text-uppercase" @click="home">{{
+          title
+        }}</v-toolbar-title>
+        <div>
+          <v-tabs v-model="tabs" background-color="transparent">
+            <v-tabs-slider></v-tabs-slider>
+            <v-tab text @click="user">
+              <v-icon>mdi-account</v-icon>
+              ผู้ใช้
+            </v-tab>
+            <v-tab text @click="notebook">
+              <v-icon>mdi-laptop</v-icon>
+              โน๊ตบุ๊ค
+            </v-tab>
+            <v-tab text @click="equipment">
+              <v-icon>mdi-wheel-barrow</v-icon>
+              อุปกรณ์
+            </v-tab>
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-tab text v-on="on">อื่นๆ</v-tab>
+              </template>
+              <v-list>
+                <v-list-item @click="department">
+                  <v-icon>mdi-folder-account</v-icon>
+                  แผนก
+                </v-list-item>
+                <v-list-item @click="location">
+                  <v-icon>mdi-map-marker-radius</v-icon>
+                  ที่ตั้ง
+                </v-list-item>
+                <v-list-item @click="store">
+                  <v-icon>mdi-store-marker</v-icon>
+                  ร้านค้า
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-tabs>
+        </div>
         <v-spacer />
-          <div>
-              <v-avatar size="30" color="grey" class="mr-2">
-                <v-img :src="$auth.user.avatar" />
-              </v-avatar>
-              <span class="mr-2">{{ $auth.user.fname }}</span>
-              <v-btn @click="buttonSignOut" color="dark">ลงชื่อออก</v-btn>
-          </div>
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <Nuxt />
-      </v-container>
-    </v-main>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
-  </v-app>
+        <div>
+          <v-btn @click="theme" elevation="2" rounded>
+            <h4 v-if="$vuetify.theme.dark">
+              <v-icon>mdi-weather-night</v-icon>
+            </h4>
+            <h4 v-else>
+              <v-icon>mdi-white-balance-sunny</v-icon>
+            </h4>
+          </v-btn>
+          <v-avatar size="30" color="grey" class="mr-2">
+            <v-img :src="$auth.user.avatar" />
+          </v-avatar>
+          <span class="mr-2">{{ $auth.user.fname }}</span>
+          <v-btn @click="buttonSignOut" color="dark">ลงชื่อออก</v-btn>
+        </div>
+      </v-app-bar>
+      <v-main>
+        <v-container>
+          <Nuxt />
+        </v-container>
+      </v-main>
+      <v-footer :absolute="!fixed" app>
+        <span>&copy; {{ new Date().getFullYear() }}</span>
+      </v-footer>
+    </v-app>
   </div>
 </template>
 
@@ -57,44 +85,47 @@ export default {
       fixed: false,
       clipped: false,
       title: 'EMP WAREHOUSES',
+      tabs: null,
       modal: {
         confirm: {
           open: false,
-          message: 'คุณต้องการออกจากระบบหรือไม่?'
+          message: 'คุณต้องการออกจากระบบหรือไม่?',
         },
-      }
-    };
+      },
+    }
   },
   methods: {
     user() {
-      this.$router.push('/admin/user');
+      this.$router.push('/admin/user')
     },
     notebook() {
-      this.$router.push('/admin/notebook');
+      this.$router.push('/admin/notebook')
     },
     equipment() {
-      this.$router.push('/admin/equipment');
+      this.$router.push('/admin/equipment')
     },
     signout() {
-      this.$auth.logout();
+      this.$auth.logout()
     },
     department() {
-      this.$router.push('/admin/department');
+      this.$router.push('/admin/department')
     },
     location() {
-      this.$router.push('/admin/location');
+      this.$router.push('/admin/location')
     },
     store() {
-      this.$router.push('/admin/store');
+      this.$router.push('/admin/store')
     },
     home() {
-      this.$router.push('/admin/home');
+      this.$router.push('/admin/home')
     },
     buttonSignOut() {
-     this.modal.confirm.open = true
+      this.modal.confirm.open = true
     },
-  }
-};
+    theme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    },
+  },
+}
 </script>
-<style scoped>
-</style>
+<style scoped></style>
