@@ -42,7 +42,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://localhost:3001',
+    baseURL: ' https://ceba-124-120-250-249.ngrok-free.app', 
+    // localBaseURL: 'http://localhost:3001',
     credentials: true,
   },
   auth: {
@@ -56,16 +57,16 @@ export default {
       local: {
         endpoints: {
           login: { 
-            url: 'http://localhost:3001/api/users/login', 
+            url: 'https://ceba-124-120-250-249.ngrok-free.app/api/users/login', 
             method: 'post',
             propertyName: 'token'
           },
           logout: { 
-            url: 'http://localhost:3001/api/users/logout', 
+            url: 'https://ceba-124-120-250-249.ngrok-free.app/api/users/logout', 
             method: 'delete' 
           },
           user: { 
-            url: 'http://localhost:3001/api/users/me',
+            url: 'https://ceba-124-120-250-249.ngrok-free.app/api/users/me',
             method: 'get',
             propertyName: 'user'
           }

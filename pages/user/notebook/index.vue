@@ -50,7 +50,7 @@
                     <v-divider></v-divider>
                     <div class="text-center">
                     <qr-code 
-                      :text="'https://emp-app-ten.vercel.app/user/notebook'"
+                      :text="notebook.asset_number"
                       :size="200">
                     </qr-code>
                     </div>
@@ -77,7 +77,7 @@
         users: [],
         store: [],
         currentExpanded: null,
-      }
+      };
     },
     computed: {
       filtered() {
