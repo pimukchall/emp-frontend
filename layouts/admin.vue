@@ -106,7 +106,7 @@
               <v-list-item class="mr-2" v-on="on">{{ $auth.user.fname }}</v-list-item>
             </template>
             <v-list>
-              <v-list-item @click="user"> โปรไฟล์ </v-list-item>
+              <v-list-item @click="profile"> โปรไฟล์ </v-list-item>
               <v-list-item @click="buttonSignOut"> ลงชื่อออก </v-list-item>
             </v-list>
           </v-menu>
@@ -125,6 +125,8 @@
 </template>
 
 <script>
+import User from './user.vue'
+
 export default {
   name: 'DefaultLayout',
   data() {
@@ -144,6 +146,9 @@ export default {
   methods: {
     user() {
       this.$router.push('/admin/user')
+    },
+    profile() {
+      this.$router.push('/admin/user/profile')
     },
     notebook() {
       this.$router.push('/admin/notebook')

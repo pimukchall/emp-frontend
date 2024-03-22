@@ -25,6 +25,8 @@ const _0aaa91a5 = () => interopDefault(import('..\\pages\\admin\\equipment\\crea
 const _17fedce6 = () => interopDefault(import('..\\pages\\admin\\location\\create.vue' /* webpackChunkName: "pages/admin/location/create" */))
 const _aa1853e8 = () => interopDefault(import('..\\pages\\admin\\notebook\\create.vue' /* webpackChunkName: "pages/admin/notebook/create" */))
 const _692a8c10 = () => interopDefault(import('..\\pages\\admin\\store\\create.vue' /* webpackChunkName: "pages/admin/store/create" */))
+const _74763a89 = () => interopDefault(import('..\\pages\\admin\\user\\profile\\index.vue' /* webpackChunkName: "pages/admin/user/profile/index" */))
+const _421c27b9 = () => interopDefault(import('..\\pages\\user\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/user/notebook/profile/index" */))
 const _01865810 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -122,6 +124,14 @@ export const routerOptions = {
     path: "/admin/store/create",
     component: _692a8c10,
     name: "admin-store-create"
+  }, {
+    path: "/admin/user/profile",
+    component: _74763a89,
+    name: "admin-user-profile"
+  }, {
+    path: "/user/notebook/profile",
+    component: _421c27b9,
+    name: "user-notebook-profile"
   }, {
     path: "/",
     component: _01865810,

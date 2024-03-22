@@ -6,8 +6,8 @@ export const actions = {
     },
     async getUsersID({ getters }, data) {
       return await this.$axios
-      .get('api/users:id', data)
-      .then((res) => res.data)
+      .get('api/users/:id', data)
+        .then((res) => res.data)
     },
     async postUsers({ getters }, data) {
         return await this.$axios

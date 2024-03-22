@@ -79,10 +79,10 @@
                     <p>อีเมล : {{ user.email }}</p>
                     <p>เบอร์ติดต่อ : {{ user.phone }}</p>
                     <p>วันที่สมัคร : {{ formatDate(user.date_in) }}</p>
-                    <v-btn class="ma-2" color="warning" dark @click="openEditPasswordDialog(user)">
-                      เปลี่ยนรหัสผ่าน
-                    </v-btn>
                   </v-card-text>
+                  <v-btn class="ma-2" color="warning" dark @click="openEditPasswordDialog(user)">
+                    เปลี่ยนรหัสผ่าน
+                  </v-btn>
                 </div>
               </v-expand-transition>
             </v-card>
