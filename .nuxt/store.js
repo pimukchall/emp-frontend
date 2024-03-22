@@ -8,7 +8,7 @@ const VUEX_PROPERTIES = ['state', 'getters', 'actions', 'mutations']
 let store = {};
 
 (function updateModules () {
-  store = normalizeRoot(require('../store/index.js'), 'store/index.js')
+  store = normalizeRoot(require('..\\store\\index.js'), 'store/index.js')
 
   // If store is an exported method = classic mode (deprecated)
 
@@ -19,27 +19,27 @@ let store = {};
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('../store/api/department.js'), 'api/department.js')
-  resolveStoreModules(require('../store/api/equipment.js'), 'api/equipment.js')
-  resolveStoreModules(require('../store/api/location.js'), 'api/location.js')
-  resolveStoreModules(require('../store/api/notebook.js'), 'api/notebook.js')
-  resolveStoreModules(require('../store/api/role.js'), 'api/role.js')
-  resolveStoreModules(require('../store/api/store.js'), 'api/store.js')
-  resolveStoreModules(require('../store/api/user.js'), 'api/user.js')
+  resolveStoreModules(require('..\\store\\api\\department.js'), 'api/department.js')
+  resolveStoreModules(require('..\\store\\api\\equipment.js'), 'api/equipment.js')
+  resolveStoreModules(require('..\\store\\api\\location.js'), 'api/location.js')
+  resolveStoreModules(require('..\\store\\api\\notebook.js'), 'api/notebook.js')
+  resolveStoreModules(require('..\\store\\api\\role.js'), 'api/role.js')
+  resolveStoreModules(require('..\\store\\api\\store.js'), 'api/store.js')
+  resolveStoreModules(require('..\\store\\api\\user.js'), 'api/user.js')
 
   // If the environment supports hot reloading...
 
   if (process.client && module.hot) {
     // Whenever any Vuex module is updated...
     module.hot.accept([
-      '../store/index.js',
-      '../store/api/department.js',
-      '../store/api/equipment.js',
-      '../store/api/location.js',
-      '../store/api/notebook.js',
-      '../store/api/role.js',
-      '../store/api/store.js',
-      '../store/api/user.js',
+      '..\\store\\index.js',
+      '..\\store\\api\\department.js',
+      '..\\store\\api\\equipment.js',
+      '..\\store\\api\\location.js',
+      '..\\store\\api\\notebook.js',
+      '..\\store\\api\\role.js',
+      '..\\store\\api\\store.js',
+      '..\\store\\api\\user.js',
     ], () => {
       // Update `root.modules` with the latest definitions.
       updateModules()

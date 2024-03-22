@@ -1,10 +1,10 @@
 <template>
   <div>
     <ModalConfirmLogout
-      :open="modal.confirm.open"
-      :message="modal.confirm.message"
-      @update:confirm="(value) => (modal.confirm.open = value)"
-      @update:message="(value) => (modal.confirm.message = value)"
+      :open="modal.confirmLogout.open"
+      :message="modal.confirmLogout.message"
+      @update:confirmLogout="(value) => (modal.confirmLogout.open = value)"
+      @update:message="(value) => (modal.confirmLogout.message = value)"
       :method="signout"
     />
     <v-app dark>
@@ -90,7 +90,7 @@ export default {
       title: 'EMP WAREHOUSES',
       tabs: null,
       modal: {
-        confirm: {
+        confirmLogout: {
           open: false,
           message: 'คุณต้องการออกจากระบบหรือไม่?',
         },
@@ -123,7 +123,7 @@ export default {
       this.$router.push('/admin/home')
     },
     buttonSignOut() {
-      this.modal.confirm.open = true
+      this.modal.confirmLogout.open = true
     },
     theme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
