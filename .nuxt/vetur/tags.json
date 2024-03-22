@@ -5,11 +5,11 @@
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },
-  "DepartmentEditDialog": {
-    "description": "Auto imported from components/Department/EditDialog.vue"
-  },
   "EquipmentEditDialog": {
     "description": "Auto imported from components/Equipment/EditDialog.vue"
+  },
+  "DepartmentEditDialog": {
+    "description": "Auto imported from components/Department/EditDialog.vue"
   },
   "LoadingLineLoading": {
     "description": "Auto imported from components/Loading/LineLoading.vue"

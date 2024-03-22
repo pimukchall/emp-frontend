@@ -1,7 +1,12 @@
 <template>
   <div>
   <v-app dark>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar 
+      :clipped-left="clipped" 
+      fixed app 
+      color= #4F6F52
+      dark
+      >
       <v-toolbar-title
         class="text-uppercase"
         @click="home"
@@ -9,7 +14,15 @@
         {{ title }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-btn text @click="gotoLogin">เข้าสู่ระบบ</v-btn>
+      <v-btn @click="theme" elevation="2" rounded>
+        <h4 v-if="$vuetify.theme.dark">
+          <v-icon>mdi-weather-night</v-icon>
+        </h4>
+        <h4 v-else>
+          <v-icon>mdi-white-balance-sunny</v-icon>
+        </h4>
+      </v-btn>
+        <v-btn text @click="gotoLogin" elevation="2" rounded>เข้าสู่ระบบ</v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -35,6 +48,7 @@ export default {
     return {
       title: 'EMP WAREHOUSES',
       clipped: false,
+
     };
   },
   methods: {
@@ -42,7 +56,10 @@ export default {
       this.$router.push('/auth/login');
     },
     home() {
-      this.$router.push('/home');
+      this.$router.push('/');
+    },
+    theme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     },
   },
 };

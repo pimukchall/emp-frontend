@@ -1,44 +1,87 @@
 <template>
   <v-app dark>
-    <v-app-bar app>
+    <v-app-bar 
+      :clipped-left="clipped" 
+      fixed app 
+      color= #4F6F52
+      dark
+    >
       <v-toolbar-title class="text-uppercase font-weight-bold" @click="home">
         {{ title }}
       </v-toolbar-title>
-      <div>
-        <v-tabs v-model="tabs" background-color="transparent">
-          <v-tabs-slider></v-tabs-slider>
-          <v-tab text @click="user">
-            <v-icon>mdi-account</v-icon>
-            ผู้ใช้
-          </v-tab>
-          <v-tab text @click="notebook">
-            <v-icon>mdi-laptop</v-icon>
-            โน๊ตบุ๊ค
-          </v-tab>
-          <v-tab text @click="equipment">
-            <v-icon>mdi-wheel-barrow</v-icon>
-            อุปกรณ์
-          </v-tab>
-          <v-menu offset-y>
+      <div class="d-flex">
+          <v-menu offset-y open-on-hover>
+            <template v-slot:activator="{ on }">
+              <v-tab text v-on="on">อุปกรณ์ไอที</v-tab>
+            </template>
+            <v-list>
+              <v-list-item @click="">
+                คอมพิวเตอร์
+              </v-list-item>
+              <v-list-item @click="notebook">
+                โน๊ตบุ๊ค
+              </v-list-item>
+              <v-list-item @click="">
+                จอคอมพิวเตอร์
+              </v-list-item>
+              <v-list-item @click="">
+                UPS
+              </v-list-item>
+              <v-list-item @click="">
+                สมาร์ทโฟน และ แท็บเล็ต
+              </v-list-item>
+              <v-list-item @click="">
+                ปริ้นเตอร์
+              </v-list-item>
+              <v-list-item @click="">
+                เซิร์ฟเวอร์ และ ระบบเครือข่าย
+              </v-list-item>
+              <v-list-item @click="">
+                ซิมการ์ด และ อุปกรณ์เสริม
+              </v-list-item>
+              <v-list-item @click="">
+                กล้อง และ อุปกรณ์เสริม
+              </v-list-item>
+              <v-list-item @click="">
+                ไอพีโทรศัพท์
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          <v-menu offset-y open-on-hover>
+            <template v-slot:activator="{ on }">
+              <v-tab text v-on="on">อุปกรณ์</v-tab>
+            </template>
+            <v-list>
+              <v-list-item @click="">
+                อุปกรณ์เครื่องใช้สำนักงาน
+              </v-list-item>
+              <v-list-item @click="equipment">
+                เครื่องมือเครื่องใช้
+              </v-list-item>
+              <v-list-item @click="">
+                ยานพาหนะ
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          <v-menu offset-y open-on-hover>
             <template v-slot:activator="{ on }">
               <v-tab text v-on="on">อื่นๆ</v-tab>
             </template>
             <v-list>
               <v-list-item @click="department">
-                <v-icon>mdi-folder-account</v-icon>
                 แผนก
               </v-list-item>
               <v-list-item @click="location">
-                <v-icon>mdi-map-marker-radius</v-icon>
                 ที่ตั้ง
               </v-list-item>
               <v-list-item @click="store">
-                <v-icon>mdi-store-marker</v-icon>
                 ร้านค้า
+              </v-list-item>
+              <v-list-item @click="user">
+                ผู้ใช้
               </v-list-item>
             </v-list>
           </v-menu>
-        </v-tabs>
       </div>
       <v-spacer />
       <v-btn @click="theme" elevation="2" rounded>
