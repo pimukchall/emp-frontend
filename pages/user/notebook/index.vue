@@ -49,7 +49,7 @@
                     </v-card-text>
                     <v-divider></v-divider>
                     <div class="text-center">
-                    <qrcode-vue :value="notebook.asset_number" :size="150" level="H"></qrcode-vue>
+                      <qrcode-vue :value="generateQRData(notebook)" :size="200"></qrcode-vue>
                     </div>
                   </div>
                 </v-expand-transition>
@@ -62,7 +62,7 @@
   <script>
   import moment from 'moment';
   moment.locale('th');
-  import QrcodeVue from 'qrcode.vue'
+  import QrcodeVue, { data } from 'qrcode.vue'
   export default {
   layout: 'user',
     data() {
@@ -142,6 +142,22 @@
       Expire(date_in) {
         return moment(date_in).add(3, 'years').format('Do MMMM YYYY');
       },
+      generateQRData(notebook) {
+        return JSON.stringify({
+          รหัสทรัพย์สิน: notebook.asset_number,
+          ยี่ห้อ: notebook.brand,
+          รุ่น: notebook.model,
+          หน่วยประมวลผล: notebook.cpu,
+          หน่วยความจำ: notebook.ram,
+          หน่วยประมวลผลกราฟฟิค: notebook.gpu,
+          หน่วยจัดเก็บข้อมูล: notebook.storage,
+          ระบบปฏิบัติการ: notebook.os,
+          หมายเลขลิขสิทธิ์: notebook.license_window,
+          สาขาที่ซื้อ: this.mapStore(notebook.store_id),
+          วันที่ลงทะเบียน: this.formatDate(notebook.date_in),
+          วันที่ประกันหมด: this.Expire(notebook.date_in),
+        });
+      }
     }
   }
   </script>
