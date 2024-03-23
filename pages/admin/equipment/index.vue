@@ -76,7 +76,7 @@
                         <p>สถานที่: {{ mapLocation(equipment.location_id) }}</p>
                         <p>ผู้รับผิดชอบ: {{ mapUser(equipment.user_id) }}</p>
                         <p>ร้านที่ซื้อ: {{ mapStore(equipment.store_id) }}</p>
-                        <p>หมายเลขครุภัณฑ์: {{ equipment.asset_number }}</p>
+                        <p>รหัสทรัพย์สิน: {{ equipment.asset_number }}</p>
                         <p>หมายเลขเอกสาร: {{ equipment.document_number }}</p>
                         <p>ราคา: {{ equipment.price }}</p>
                         <p>จำนวน: {{ equipment.quantity }}</p>

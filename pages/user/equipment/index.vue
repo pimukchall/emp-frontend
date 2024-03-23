@@ -40,13 +40,23 @@
                         <p>สถานที่: {{ mapLocation(equipment.location_id) }}</p>
                         <p>ผู้รับผิดชอบ: {{ mapUser(equipment.user_id) }}</p>
                         <p>ร้านที่ซื้อ: {{ mapStore(equipment.store_id) }}</p>
-                        <p>หมายเลขครุภัณฑ์: {{ equipment.asset_number }}</p>
+                        <p>รหัสทรัพย์สิน: {{ equipment.asset_number }}</p>
                         <p>หมายเลขเอกสาร: {{ equipment.document_number }}</p>
                         <p>ราคา: {{ equipment.price }}</p>
                         <p>จำนวน: {{ equipment.quantity }}</p>
                         <p>วันที่ลงทะเบียน: {{ formatDate(equipment.created_at) }}</p>
                         <p>วันที่เบิก: {{ formatDate(equipment.date_out) }}</p>
                     </v-card-text>
+                    <v-divider></v-divider>
+                    <div>
+                      <div class="text-center">
+                        <qrcode-vue v-if="showQR" :value="generateData(equipment)" :size="200"></qrcode-vue>
+                        <vue-barcode v-else :value="equipment.asset_number" :options="{width: 1, height: 30}"></vue-barcode>
+                      </div>
+                      <div class="text-center">
+                        <v-btn @click="toggleDisplay">{{ showQR ? 'แสดง Barcode' : 'แสดง QR Code' }}</v-btn>
+                      </div>
+                    </div>
                   </div>
                 </v-expand-transition>
               </v-card>
@@ -58,6 +68,8 @@
   <script>
   import moment from 'moment';
   moment.locale('th');
+  import QrcodeVue from 'qrcode.vue';
+  import VueBarcode from 'vue-barcode';
   export default {
   layout: 'user',
     data() {
@@ -68,7 +80,12 @@
         users: [],
         store: [],
         currentExpanded: null,
+        showQR: true,
       }
+    },
+    components: {
+      QrcodeVue,
+      VueBarcode,
     },
     computed: {
       filtered() {
@@ -141,6 +158,23 @@
       },
       formatDate(date) {
         return moment(date).format('Do MMMM YYYY');
+      },
+      generateData(equipment) {
+        return JSON.stringify({
+          รหัสทรัพย์สิน: equipment.asset_number,
+          ชื่อรายการ: equipment.name,
+          สถานที่: this.mapLocation(equipment.location_id),
+          ผู้รับผิดชอบ: this.mapUser(equipment.user_id),
+          ร้านที่ซื้อ: this.mapStore(equipment.store_id),
+          หมายเลขเอกสาร: equipment.document_number,
+          ราคา: equipment.price,
+          จำนวน: equipment.quantity,
+          วันที่ลงทะเบียน: this.formatDate(equipment.created_at),
+          วันที่เบิก: this.formatDate(equipment.date_out),
+        });
+      },
+      toggleDisplay() {
+        this.showQR = !this.showQR;
       },
     },
   }

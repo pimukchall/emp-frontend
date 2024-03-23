@@ -48,8 +48,14 @@
                         <p>วันที่ประกันหมด : {{ Expire(notebook.date_in) }}</p>
                     </v-card-text>
                     <v-divider></v-divider>
-                    <div class="text-center">
-                      <qrcode-vue :value="generateQRData(notebook)" :size="200"></qrcode-vue>
+                    <div>
+                      <div class="text-center">
+                        <qrcode-vue v-if="showQR" :value="generateData(notebook)" :size="200"></qrcode-vue>
+                        <vue-barcode v-else :value="notebook.asset_number" :options="{width: 1, height: 30}"></vue-barcode>
+                      </div>
+                      <div class="text-center">
+                        <v-btn @click="toggleDisplay">{{ showQR ? 'แสดง Barcode' : 'แสดง QR Code' }}</v-btn>
+                      </div>
                     </div>
                   </div>
                 </v-expand-transition>
@@ -63,6 +69,7 @@
   import moment from 'moment';
   moment.locale('th');
   import QrcodeVue, { data } from 'qrcode.vue'
+  import VueBarcode from 'vue-barcode';
   export default {
   layout: 'user',
     data() {
@@ -72,10 +79,12 @@
         users: [],
         store: [],
         currentExpanded: null,
+        showQR: true,
       };
     },
     components: {
-      QrcodeVue
+      QrcodeVue,
+      VueBarcode
     },
     computed: {
       filtered() {
@@ -142,7 +151,7 @@
       Expire(date_in) {
         return moment(date_in).add(3, 'years').format('Do MMMM YYYY');
       },
-      generateQRData(notebook) {
+      generateData(notebook) {
         return JSON.stringify({
           รหัสทรัพย์สิน: notebook.asset_number,
           ยี่ห้อ: notebook.brand,
@@ -157,7 +166,10 @@
           วันที่ลงทะเบียน: this.formatDate(notebook.date_in),
           วันที่ประกันหมด: this.Expire(notebook.date_in),
         });
-      }
+      },
+      toggleDisplay() {
+        this.showQR = !this.showQR;
+      },
     }
   }
   </script>
