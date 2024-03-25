@@ -72,8 +72,8 @@
                   v-model="form.ram"
                   :rules="[
                     (v) => !!v || 'กรุณากรอกขนาด RAM',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น']"
-                  
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
+                  ]"
                   label="หน่วยความจำ"
                   outlined
                   required
@@ -85,8 +85,8 @@
                   v-model="form.storage"
                   :rules="[
                     (v) => !!v || 'กรุณากรอกพื้นที่จัดเก็บข้อมูล',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
-                    ]"
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
+                  ]"
                   label="พื้นที่จัดเก็บข้อมูล"
                   outlined
                   required
@@ -138,6 +138,19 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
+                  :items="emPloyee"
+                  v-model="form.employee_id"
+                  item-text="fname"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกพนักงานที่รับผิดชอบ']"
+                  label="พนักงานที่รับผิดชอบ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
                   :items="sTore"
                   v-model="form.store_id"
                   item-text="name"
@@ -148,6 +161,27 @@
                   required
                 >
                 </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="[
+                    { id: 0, name: 'In use' },
+                    { id: 1, name: 'Write off' },
+                    { id: 2, name: 'Available' },
+                  ]"
+                  v-model="form.status"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
+                  label="สถานะ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field v-model="form.note" label="หมายเหตุ" outlined>
+                </v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-menu
@@ -209,8 +243,8 @@
   </div>
 </template>
 <script>
-import moment from 'moment';
-moment.locale('th');
+import moment from 'moment'
+moment.locale('th')
 
 export default {
   layout: 'admin',
@@ -233,16 +267,19 @@ export default {
         asset_number: '',
         license_window: '',
         user_id: null,
+        employee_id: null,
         store_id: null,
         date_in: new Date().toISOString().substr(0, 10),
+        status: null,
+        note: '',
       },
       uSer: [],
       sTore: [],
+      emPloyee: [],
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-
       modal: {
         confirm: {
           open: false,
@@ -268,13 +305,14 @@ export default {
 
   computed: {
     formattedDate() {
-      return moment(this.form.date_in).format('Do MMMM YYYY');
+      return moment(this.form.date_in).format('Do MMMM YYYY')
     },
   },
 
   async fetch() {
     await this.fetchUserData()
     await this.fetchStoreData()
+    await this.fetchEmployeeData()
   },
 
   methods: {
@@ -285,8 +323,11 @@ export default {
           this.modal.error.open = true
           return
         }
-        const req = await this.$store.dispatch('api/notebook/postNotebooks', this.form)
-
+        const req = await this.$store.dispatch(
+          'api/notebook/postNotebooks',
+          this.form
+        )
+        console.log(req)
         this.modal.confirm.open = false
         this.modal.complete.open = true
       } catch (error) {
@@ -297,17 +338,17 @@ export default {
       this.$router.push('/admin/notebook')
     },
     async fetchUserData() {
-            const USer = await this.$store.dispatch(
-              'api/user/getUsers'
-            )
-            this.uSer = USer
-        },
-        async fetchStoreData() {
-            const STore = await this.$store.dispatch(
-              'api/store/getStores'
-              )
-            this.sTore = STore
-        },
+      const USer = await this.$store.dispatch('api/user/getUsers')
+      this.uSer = USer
+    },
+    async fetchStoreData() {
+      const STore = await this.$store.dispatch('api/store/getStores')
+      this.sTore = STore
+    },
+    async fetchEmployeeData() {
+      const EMployee = await this.$store.dispatch('api/employee/getEmployees')
+      this.emPloyee = EMployee
+    },
   },
 }
 </script>

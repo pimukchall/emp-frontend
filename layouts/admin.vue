@@ -88,6 +88,9 @@
               <v-list-item @click="user">
                 ผู้ใช้
               </v-list-item>
+              <v-list-item @click="employee">
+                พนักงาน
+              </v-list-item>
             </v-list>
           </v-menu>
       </div>
@@ -125,7 +128,6 @@
 </template>
 
 <script>
-import User from './user.vue'
 
 export default {
   name: 'DefaultLayout',
@@ -170,6 +172,9 @@ export default {
     },
     home() {
       this.$router.push('/admin/home')
+    },
+    employee() {
+      this.$router.push('/admin/employee')
     },
     buttonSignOut() {
       this.modal.confirmLogout.open = true

@@ -18,8 +18,7 @@
                 <v-card-title>{{ user.fname }}</v-card-title>
                 <v-card-subtitle>
                   แผนก: {{ mapDataDepartment(user.department_id) }}
-                </v-card-subtitle>
-                <v-card-subtitle>
+                  <br>
                   สิทธิ์: {{ mapDataRole(user.role_id) }}
                 </v-card-subtitle>
                     <v-divider></v-divider>

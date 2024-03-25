@@ -63,25 +63,6 @@
               </v-list-item>
             </v-list>
           </v-menu>
-          <v-menu offset-y open-on-hover>
-            <template v-slot:activator="{ on }">
-              <v-tab text v-on="on">อื่นๆ</v-tab>
-            </template>
-            <v-list>
-              <v-list-item @click="department">
-                แผนก
-              </v-list-item>
-              <v-list-item @click="location">
-                ที่ตั้ง
-              </v-list-item>
-              <v-list-item @click="store">
-                ร้านค้า
-              </v-list-item>
-              <v-list-item @click="user">
-                ผู้ใช้
-              </v-list-item>
-            </v-list>
-          </v-menu>
       </div>
       <v-spacer />
       <v-btn @click="theme" elevation="2" rounded>

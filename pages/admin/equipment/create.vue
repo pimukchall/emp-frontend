@@ -31,7 +31,17 @@
                 <v-text-field
                   v-model="form.name"
                   :rules="[(v) => !!v || 'กรุณากรอกชื่อรายการ']"
-                  label="ชื่อ"
+                  label="ชื่อรายการ"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.asset_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
+                  label="รหัสทรัพย์สิน"
                   outlined
                   required
                 >
@@ -51,14 +61,17 @@
                 </v-select>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="form.asset_number"
-                  :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
-                  label="รหัสทรัพย์สิน"
+                <v-select
+                  :items="emPloyee"
+                  v-model="form.employee_id"
+                  item-text="fname"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกพนักงานที่รับผิดชอบ']"
+                  label="พนักงานที่รับผิดชอบ"
                   outlined
                   required
                 >
-                </v-text-field>
+                </v-select>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
@@ -72,16 +85,6 @@
                   required
                 >
                 </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="form.document_number"
-                  :rules="[(v) => !!v || 'กรุณากรอกหมายเลขเอกสาร']"
-                  label="หมายเลขเอกสาร"
-                  outlined
-                  required
-                >
-                </v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
@@ -101,7 +104,7 @@
                   v-model="form.quantity"
                   :rules="[
                     (v) => !!v || 'กรุณากรอกจำนวน',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
                   ]"
                   label="จำนวน"
                   outlined
@@ -114,7 +117,7 @@
                   v-model="form.price"
                   :rules="[
                     (v) => !!v || 'กรุณากรอกราคา',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น'
+                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
                   ]"
                   label="ราคา"
                   outlined
@@ -124,10 +127,34 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="form.image"
-                  label="รูปภาพ"
+                  v-model="form.document_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกหมายเลขเอกสาร']"
+                  label="หมายเลขเอกสาร"
                   outlined
-                ></v-text-field>
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-select
+                  :items="[
+                    { id: 0, name: 'In use' },
+                    { id: 1, name: 'Write off' },
+                    { id: 2, name: 'Available' },
+                  ]"
+                  v-model="form.status"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
+                  label="สถานะ"
+                  outlined
+                  required
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field v-model="form.note" label="หมายเหตุ" outlined>
+                </v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-menu
@@ -189,8 +216,8 @@
   </div>
 </template>
 <script>
-import moment from 'moment';
-moment.locale('th');
+import moment from 'moment'
+moment.locale('th')
 export default {
   layout: 'admin',
   middleware: 'auth',
@@ -206,16 +233,19 @@ export default {
         location_id: null,
         user_id: null,
         store_id: null,
+        employee_id: null,
         asset_number: '',
         document_number: '',
         price: '',
         quantity: '',
-        image: '',
+        status: null,
+        note: '',
         date_in: new Date().toISOString().substr(0, 10),
       },
       uSer: [],
       sTore: [],
       lOcation: [],
+      emPloyee: [],
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -246,7 +276,7 @@ export default {
 
   computed: {
     formattedDate() {
-      return moment(this.form.date_in).format('Do MMMM YYYY');
+      return moment(this.form.date_in).format('Do MMMM YYYY')
     },
   },
 
@@ -254,7 +284,7 @@ export default {
     await this.fetchUserData()
     await this.fetchStoreData()
     await this.fetchLocationData()
-
+    await this.fetchEmployeeData()
   },
 
   methods: {
@@ -265,7 +295,10 @@ export default {
           this.modal.error.open = true
           return
         }
-        const req = await this.$store.dispatch('api/equipment/postEquipments', this.form)
+        const req = await this.$store.dispatch(
+          'api/equipment/postEquipments',
+          this.form
+        )
 
         this.modal.confirm.open = false
         this.modal.complete.open = true
@@ -277,23 +310,21 @@ export default {
       this.$router.push('/admin/equipment')
     },
     async fetchUserData() {
-            const USer = await this.$store.dispatch(
-              'api/user/getUsers'
-            )
-            this.uSer = USer
-        },
+      const USer = await this.$store.dispatch('api/user/getUsers')
+      this.uSer = USer
+    },
     async fetchStoreData() {
-            const STore = await this.$store.dispatch(
-              'api/store/getStores'
-              )
-            this.sTore = STore
-        },
+      const STore = await this.$store.dispatch('api/store/getStores')
+      this.sTore = STore
+    },
     async fetchLocationData() {
-            const LOcation = await this.$store.dispatch(
-              'api/location/getLocations'
-              )
-            this.lOcation = LOcation
-        },
+      const LOcation = await this.$store.dispatch('api/location/getLocations')
+      this.lOcation = LOcation
+    },
+    async fetchEmployeeData() {
+      const EMployee = await this.$store.dispatch('api/employee/getEmployees')
+      this.emPloyee = EMployee
+    },
   },
 }
 </script>

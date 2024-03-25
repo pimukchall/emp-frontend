@@ -20,6 +20,7 @@ let store = {};
   store.modules = store.modules || {}
 
   resolveStoreModules(require('..\\store\\api\\department.js'), 'api/department.js')
+  resolveStoreModules(require('..\\store\\api\\employee.js'), 'api/employee.js')
   resolveStoreModules(require('..\\store\\api\\equipment.js'), 'api/equipment.js')
   resolveStoreModules(require('..\\store\\api\\location.js'), 'api/location.js')
   resolveStoreModules(require('..\\store\\api\\notebook.js'), 'api/notebook.js')
@@ -34,6 +35,7 @@ let store = {};
     module.hot.accept([
       '..\\store\\index.js',
       '..\\store\\api\\department.js',
+      '..\\store\\api\\employee.js',
       '..\\store\\api\\equipment.js',
       '..\\store\\api\\location.js',
       '..\\store\\api\\notebook.js',

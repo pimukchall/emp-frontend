@@ -6,6 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _4a6b6fb9 = () => interopDefault(import('..\\pages\\home\\index.vue' /* webpackChunkName: "pages/home/index" */))
 const _0e344c5b = () => interopDefault(import('..\\pages\\admin\\department\\index.vue' /* webpackChunkName: "pages/admin/department/index" */))
+const _f0554782 = () => interopDefault(import('..\\pages\\admin\\employee\\index.vue' /* webpackChunkName: "pages/admin/employee/index" */))
 const _757c7f8e = () => interopDefault(import('..\\pages\\admin\\equipment\\index.vue' /* webpackChunkName: "pages/admin/equipment/index" */))
 const _756be224 = () => interopDefault(import('..\\pages\\admin\\home\\index.vue' /* webpackChunkName: "pages/admin/home/index" */))
 const _208688d8 = () => interopDefault(import('..\\pages\\admin\\location\\index.vue' /* webpackChunkName: "pages/admin/location/index" */))
@@ -14,13 +15,10 @@ const _26fc7cf4 = () => interopDefault(import('..\\pages\\admin\\store\\index.vu
 const _665a66fc = () => interopDefault(import('..\\pages\\admin\\user\\index.vue' /* webpackChunkName: "pages/admin/user/index" */))
 const _f21ffb32 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
 const _db0eadd6 = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
-const _7659aabb = () => interopDefault(import('..\\pages\\user\\department\\index.vue' /* webpackChunkName: "pages/user/department/index" */))
 const _6dc715d9 = () => interopDefault(import('..\\pages\\user\\equipment\\index.vue' /* webpackChunkName: "pages/user/equipment/index" */))
-const _0d2fff38 = () => interopDefault(import('..\\pages\\user\\location\\index.vue' /* webpackChunkName: "pages/user/location/index" */))
 const _6cc44952 = () => interopDefault(import('..\\pages\\user\\notebook\\index.vue' /* webpackChunkName: "pages/user/notebook/index" */))
-const _5352e726 = () => interopDefault(import('..\\pages\\user\\store\\index.vue' /* webpackChunkName: "pages/user/store/index" */))
-const _1a7672e2 = () => interopDefault(import('..\\pages\\user\\user\\index.vue' /* webpackChunkName: "pages/user/user/index" */))
 const _3fecec7a = () => interopDefault(import('..\\pages\\admin\\department\\create.vue' /* webpackChunkName: "pages/admin/department/create" */))
+const _caeb1342 = () => interopDefault(import('..\\pages\\admin\\employee\\create.vue' /* webpackChunkName: "pages/admin/employee/create" */))
 const _0aaa91a5 = () => interopDefault(import('..\\pages\\admin\\equipment\\create.vue' /* webpackChunkName: "pages/admin/equipment/create" */))
 const _17fedce6 = () => interopDefault(import('..\\pages\\admin\\location\\create.vue' /* webpackChunkName: "pages/admin/location/create" */))
 const _aa1853e8 = () => interopDefault(import('..\\pages\\admin\\notebook\\create.vue' /* webpackChunkName: "pages/admin/notebook/create" */))
@@ -47,6 +45,10 @@ export const routerOptions = {
     path: "/admin/department",
     component: _0e344c5b,
     name: "admin-department"
+  }, {
+    path: "/admin/employee",
+    component: _f0554782,
+    name: "admin-employee"
   }, {
     path: "/admin/equipment",
     component: _757c7f8e,
@@ -80,33 +82,21 @@ export const routerOptions = {
     component: _db0eadd6,
     name: "auth-register"
   }, {
-    path: "/user/department",
-    component: _7659aabb,
-    name: "user-department"
-  }, {
     path: "/user/equipment",
     component: _6dc715d9,
     name: "user-equipment"
-  }, {
-    path: "/user/location",
-    component: _0d2fff38,
-    name: "user-location"
   }, {
     path: "/user/notebook",
     component: _6cc44952,
     name: "user-notebook"
   }, {
-    path: "/user/store",
-    component: _5352e726,
-    name: "user-store"
-  }, {
-    path: "/user/user",
-    component: _1a7672e2,
-    name: "user-user"
-  }, {
     path: "/admin/department/create",
     component: _3fecec7a,
     name: "admin-department-create"
+  }, {
+    path: "/admin/employee/create",
+    component: _caeb1342,
+    name: "admin-employee-create"
   }, {
     path: "/admin/equipment/create",
     component: _0aaa91a5,
