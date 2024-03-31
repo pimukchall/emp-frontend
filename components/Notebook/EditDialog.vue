@@ -139,8 +139,8 @@
                           v-model="data.employee_id"
                           item-text="fname"
                           item-value="id"
-                          :rules="[(v) => !!v || 'กรุณาเลือกพนักงานที่รับผิดชอบ']"
-                          label="พนักงานที่รับผิดชอบ"
+                          :rules="[(v) => !!v || 'กรุณาเลือกผู้ถือครอง']"
+                          label="ผู้ถือครอง"
                           outlined
                           required
                         >
@@ -183,6 +183,9 @@
                           outlined
                         >
                       </v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-divider></v-divider>
                       </v-col>
                       <v-col cols="12" sm="6">
                       <v-menu
@@ -307,6 +310,7 @@ export default {
               this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
             }
         },
+        
         async fetchUserData() {
             const USer = await this.$store.dispatch(
               'api/user/getUsers'

@@ -9,12 +9,11 @@
         <div>
           <v-row>
             <v-col v-for="user in users" :key="user.id" cols="12">
-              <v-card elevation="6" shaped>
-                <v-col cols="12" md="4">
-                  <v-avatar color="primary" size="75">
-                    <v-img :src="user.image" alt="Avatar"></v-img>
-                  </v-avatar>
-                </v-col>
+              <v-card 
+                class="mx-auto"
+                max-width="400"
+                outlined
+              >
                 <v-card-title>{{ user.fname }}</v-card-title>
                 <v-card-subtitle>
                   แผนก: {{ mapDataDepartment(user.department_id) }}
@@ -74,9 +73,7 @@
       async fetchUserData() {
         try {
             this.users = await this.$axios.$get('/api/users/' + this.$auth.user.id);
-            // console.log(this.users);
         } catch (error) {
-            // console.log(error);
             }
       },
       async fetchDepartmentData() {
@@ -117,4 +114,5 @@
     },
   };
   </script>
+
   

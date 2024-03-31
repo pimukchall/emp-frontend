@@ -32,7 +32,7 @@
               </v-chip>
             </v-card-actions>
             <v-card-subtitle>
-              พนักงานที่รับผิดชอบ: {{ mapEmployee(notebook.employee_id) }}
+              ผู้ถือครอง: {{ mapEmployee(notebook.employee_id) }}
               <br />
               ผู้รับผิดชอบ: {{ mapUser(notebook.user_id) }}
             </v-card-subtitle>
@@ -64,7 +64,7 @@
                 </v-card-text>
                 <v-divider></v-divider>
                 <div>
-                  <div class="text-center">
+                  <div id="qrCodeContainer" class="text-center">
                     <qrcode-vue
                       v-if="showQR"
                       :value="generateData(notebook)"
@@ -80,9 +80,9 @@
                     <v-btn @click="toggleDisplay">{{
                       showQR ? 'แสดง Barcode' : 'แสดง QR Code'
                     }}</v-btn>
-                  </div>
                 </div>
               </div>
+            </div>
             </v-expand-transition>
           </v-card>
         </v-col>
@@ -106,6 +106,7 @@ export default {
       store: [],
       currentExpanded: null,
       showQR: true,
+      employees: [],
     }
   },
   components: {
@@ -206,7 +207,7 @@ export default {
           return {
             รหัสทรัพย์สิน: notebook.asset_number,
             ผู้รับผิดชอบ: this.mapUser(notebook.user_id),
-            พนักงานที่รับผิดชอบ: this.mapEmployee(notebook.employee_id),
+            ผู้ถือครอง: this.mapEmployee(notebook.employee_id),
             ยี่ห้อ: notebook.brand,
             รุ่น: notebook.model,
             หน่วยประมวลผล: notebook.cpu,
@@ -220,7 +221,6 @@ export default {
             วันที่ประกันหมด: this.Expire(notebook.date_in),
             วันที่ส่งมอบ: this.Expire(notebook.date_out),
             สถานะ: this.statusCheck(notebook.status),
-            หมายเหตุ: notebook.note,
           }
         })
       )
@@ -249,20 +249,10 @@ export default {
     generateData(notebook) {
       return JSON.stringify({
         รหัสทรัพย์สิน: notebook.asset_number,
-        ยี่ห้อ: notebook.brand,
-        รุ่น: notebook.model,
-        หน่วยประมวลผล: notebook.cpu,
-        หน่วยความจำ: notebook.ram,
-        หน่วยประมวลผลกราฟฟิค: notebook.gpu,
-        หน่วยจัดเก็บข้อมูล: notebook.storage,
-        ระบบปฏิบัติการ: notebook.os,
-        หมายเลขลิขสิทธิ์: notebook.license_window,
-        สาขาที่ซื้อ: this.mapStore(notebook.store_id),
+        ผู้ถือครอง: this.mapEmployee(notebook.employee_id),
         วันที่ลงทะเบียน: this.formatDate(notebook.date_in),
-        วันที่ประกันหมด: this.Expire(notebook.date_in),
         วันที่ส่งมอบ: this.Expire(notebook.date_out),
         สถานะ: this.statusCheck(notebook.status),
-        หมายเหตุ: notebook.note,
       })
     },
     toggleDisplay() {

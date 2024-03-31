@@ -64,7 +64,7 @@
                 </v-chip>
               </v-card-actions>
               <v-card-subtitle>
-                พนักงานที่รับผิดชอบ: {{ mapEmployee(notebook.employee_id) }}
+                ผู้ถือครอง: {{ mapEmployee(notebook.employee_id) }}
                 <br />
                 ผู้รับผิดชอบ: {{ mapUser(notebook.user_id) }}
               </v-card-subtitle>
@@ -311,7 +311,7 @@ export default {
           return {
             รหัสทรัพย์สิน: notebook.asset_number,
             ผู้รับผิดชอบ: this.mapUser(notebook.user_id),
-            พนักงานที่รับผิดชอบ: this.mapEmployee(notebook.employee_id),
+            ผู้ถือครอง: this.mapEmployee(notebook.employee_id),
             ยี่ห้อ: notebook.brand,
             รุ่น: notebook.model,
             หน่วยประมวลผล: notebook.cpu,
@@ -354,20 +354,10 @@ export default {
     generateData(notebook) {
       return JSON.stringify({
         รหัสทรัพย์สิน: notebook.asset_number,
-        ยี่ห้อ: notebook.brand,
-        รุ่น: notebook.model,
-        หน่วยประมวลผล: notebook.cpu,
-        หน่วยความจำ: notebook.ram,
-        หน่วยประมวลผลกราฟฟิค: notebook.gpu,
-        หน่วยจัดเก็บข้อมูล: notebook.storage,
-        ระบบปฏิบัติการ: notebook.os,
-        หมายเลขลิขสิทธิ์: notebook.license_window,
-        สาขาที่ซื้อ: this.mapStore(notebook.store_id),
+        ผู้ถือครอง: this.mapEmployee(notebook.employee_id),
         วันที่ลงทะเบียน: this.formatDate(notebook.date_in),
-        วันที่ประกันหมด: this.Expire(notebook.date_in),
         วันที่ส่งมอบ: this.Expire(notebook.date_out),
         สถานะ: this.statusCheck(notebook.status),
-        หมายเหตุ: notebook.note,
       })
     },
     toggleDisplay() {

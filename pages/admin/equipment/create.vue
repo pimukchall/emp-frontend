@@ -66,8 +66,8 @@
                   v-model="form.employee_id"
                   item-text="fname"
                   item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกพนักงานที่รับผิดชอบ']"
-                  label="พนักงานที่รับผิดชอบ"
+                  :rules="[(v) => !!v || 'ผู้ถือครอง']"
+                  label="ผู้ถือครอง"
                   outlined
                   required
                 >

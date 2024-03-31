@@ -64,7 +64,7 @@
                 </v-chip>
               </v-card-actions>
               <v-card-subtitle>
-                พนักงานที่รับผิดชอบ: {{ mapEmployee(equipment.employee_id) }}
+                ผู้ถือครอง: {{ mapEmployee(equipment.employee_id) }}
                 <br />
                 ผู้รับผิดชอบ: {{ mapUser(equipment.user_id) }}
               </v-card-subtitle>
@@ -328,7 +328,7 @@ export default {
             รหัสทรัทย์สิน: equipment.asset_number,
             ชื่อรายการ: equipment.name,
             ผู้รับผิดชอบ: this.mapUser(equipment.user_id),
-            พนักงานที่รับผิดชอบ: this.mapEmployee(equipment.employee_id),
+            ผู้ถือครอง: this.mapEmployee(equipment.employee_id),
             สถานที่: this.mapLocation(equipment.location_id),
             ร้านที่ซื้อ: this.mapStore(equipment.store_id),
             หมายเลขเอกสาร: equipment.document_number,
@@ -368,15 +368,10 @@ export default {
         รหัสทรัพย์สิน: equipment.asset_number,
         ชื่อรายการ: equipment.name,
         สถานที่: this.mapLocation(equipment.location_id),
-        ผู้รับผิดชอบ: this.mapUser(equipment.user_id),
-        ร้านที่ซื้อ: this.mapStore(equipment.store_id),
-        หมายเลขเอกสาร: equipment.document_number,
-        ราคา: equipment.price,
-        จำนวน: equipment.quantity,
+        ผู้ถือครอง: this.mapEmployee(equipment.employee_id),
         สถานะ: this.statusCheck(equipment.status),
         วันที่ลงทะเบียน: this.formatDate(equipment.created_at),
         วันที่เบิก: this.formatDate(equipment.date_out),
-        หมายเหตุ: equipment.note,
       })
     },
     toggleDisplay() {

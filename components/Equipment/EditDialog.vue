@@ -70,8 +70,8 @@
                     v-model="data.employee_id"
                     item-text="fname"
                     item-value="id"
-                    :rules="[(v) => !!v || 'กรุณาเลือกพนักงานที่รับผิดชอบ']"
-                    label="พนักงานที่รับผิดชอบ"
+                    :rules="[(v) => !!v || 'กรุณาเลือกผู้ถือครอง']"
+                    label="ผู้ถือครอง"
                     outlined
                     required
                   >
