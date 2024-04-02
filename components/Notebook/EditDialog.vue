@@ -119,7 +119,7 @@
                       </v-col>  
                       <v-col cols="12" sm="6">
                         <v-select
-                          :items="uSer"
+                          :items="userOptions"
                           v-model="data.user_id"
                           item-text="fname"
                           item-value="id"
@@ -132,7 +132,7 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                          :items="sTore"
+                          :items="storeOptions"
                           v-model="data.store_id"
                           item-text="name"
                           item-value="id"
@@ -145,7 +145,7 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                          :items="lOcation"
+                          :items="locationOptions"
                           v-model="data.location_id"
                           item-text="name"
                           item-value="id"
@@ -158,7 +158,7 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                          :items="sTatus"
+                          :items="statusOptions"
                           v-model="data.status_id"
                           item-text="name"
                           item-value="id"
@@ -249,18 +249,19 @@ export default {
         return {
           valid:false,
           menu: false,
-          uSer: [],
+
+          userOptions: [],
           user_id: null,
-          sTore: [],
+          storeOptions: [],
           store_id: null,
-          lOcation: [],
+          locationOptions: [],
           location_id: null,
-          sTatus: [],
+          statusOptions: [],
           status_id: null,
 
-          
-          date_out: new Date().toISOString().substr(0, 10),
           date: new Date().toISOString().substr(0, 10),
+          date_out: new Date().toISOString().substr(0, 10),
+
 
           modal: {
             complete: {
@@ -283,10 +284,12 @@ export default {
   },
 
     async fetch() {
-        await this.fetchUserData()
-        await this.fetchStoreData()
-        await this.fetchLocationData()
-        await this.fetchStatusData()
+      await Promise.all([
+        this.fetchUserData(),
+        this.fetchStoreData(),
+        this.fetchLocationData(),
+        this.fetchStatusData(),
+      ]);
     },
 
     methods: {
@@ -296,6 +299,7 @@ export default {
                 await this.UpdateData(this.data.id)
                 // console.log(this.data)
             } catch (error) {
+              // console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน1')
                 this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
             }
         },
@@ -303,38 +307,39 @@ export default {
             this.$emit('update:edit', false)
         },
         async UpdateData() {
-            try {
-                const req = await this.$store.dispatch('api/product/putProducts',this.data)
-                this.modal.complete.open = true
-                console.log(req)
-            } catch (error) {
-                this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
-            }
+          try {
+            const req = await this.$store.dispatch('api/product/putProducts', this.data);
+            // console.log(req);
+            this.modal.complete.open = true; // แสดงข้อความเมื่อการอัปเดตสำเร็จ
+          } catch (error) {
+            // console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน2');
+            this.modal.error.open = true; // แสดงข้อความผิดพลาดใน ModalError
+          }
         },
         
         async fetchUserData() {
-            const USer = await this.$store.dispatch(
+            const user = await this.$store.dispatch(
               'api/user/getUsers'
             )
-            this.uSer = USer
+            this.userOptions = user
         },
         async fetchStoreData() {
-            const STore = await this.$store.dispatch(
+            const store = await this.$store.dispatch(
               'api/store/getStores'
               )
-            this.sTore = STore
+            this.storeOptions = store
         },
         async fetchLocationData() {
-            const LOcation = await this.$store.dispatch(
+            const location = await this.$store.dispatch(
               'api/location/getLocations'
               )
-            this.lOcation = LOcation
+            this.locationOptions = location
         },
         async fetchStatusData() {
-            const STatus = await this.$store.dispatch(
+            const status = await this.$store.dispatch(
               'api/status/getStatus'
               )
-            this.sTatus = STatus
+            this.statusOptions = status
         },
     },
 }

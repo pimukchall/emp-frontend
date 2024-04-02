@@ -323,6 +323,7 @@ export default {
           'api/product/deleteProducts',
           { params: { id } }
         )
+        this.modal.complete.open = true
         this.$fetch()
       } catch (error) {
         this.modal.error.open = true
@@ -406,10 +407,12 @@ export default {
       } else if (status === 2) {
         return 'warning'
       } else if (status === 3) {
-        return 'error'
+        return 'info'
+      } else if (status === 4) {
+        return 'error' 
       } else {
         return 'grey'
-      }
+      }  
     },
   },
 }

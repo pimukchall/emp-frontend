@@ -266,7 +266,7 @@ export default {
         status_id: '',
         date_in: '',
         note: '',
-        // category_id: 1,
+        category_id: 1,
 
       },
       uSer: [],
