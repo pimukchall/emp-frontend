@@ -257,7 +257,7 @@ export default {
           location_id: null,
           sTatus: [],
           status_id: null,
-          
+
           
           date_out: new Date().toISOString().substr(0, 10),
           date: new Date().toISOString().substr(0, 10),
@@ -294,6 +294,7 @@ export default {
             try {
                 this.$emit('update:edit', false)
                 await this.UpdateData(this.data.id)
+                // console.log(this.data)
             } catch (error) {
                 this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
             }
@@ -305,6 +306,7 @@ export default {
             try {
                 const req = await this.$store.dispatch('api/product/putProducts',this.data)
                 this.modal.complete.open = true
+                console.log(req)
             } catch (error) {
                 this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
             }

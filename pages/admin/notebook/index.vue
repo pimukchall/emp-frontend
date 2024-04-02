@@ -58,8 +58,8 @@
             <v-card elevation="6" shaped>
               <v-card-actions>
                 <v-card-title>
-                  {{ product.brand }} <br> 
-                  {{ product.model }}
+                  {{ product.brand }} {{ product.model }} <br>
+                  {{ product.asset_number }}
                 </v-card-title>
                 <v-spacer></v-spacer>
                 <v-chip :color="colorCheck(product.status_id)">
@@ -362,7 +362,7 @@ export default {
             หน่วยประมวลผลกราฟฟิค: product.gpu,
             หน่วยจัดเก็บข้อมูล: product.storage,
             ระบบปฏิบัติการ: product.os,
-            หมายเลขลิขสิทธิ์: product.license_window,
+            หมายเลขลิขสิทธิ์: product.license,
             สาขาที่ซื้อ: this.mapStore(product.store_id),
             วันที่ลงทะเบียน: this.formatDate(product.date_in),
             วันที่ส่งมอบ: this.formatDate(product.date_out),
@@ -387,7 +387,7 @@ export default {
         หน่วยประมวลผลกราฟฟิค: product.gpu,
         หน่วยจัดเก็บข้อมูล: product.storage,
         ระบบปฏิบัติการ: product.os,
-        หมายเลขลิขสิทธิ์: product.license_window,
+        หมายเลขลิขสิทธิ์: product.license,
         สาขาที่ซื้อ: this.mapStore(product.store_id),
         วันที่ลงทะเบียน: this.formatDate(product.date_in),
         วันที่ประกันหมด: this.Expire(product.date_in),
