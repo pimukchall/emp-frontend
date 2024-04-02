@@ -26,7 +26,7 @@
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
-                <v-col cols="12" sm="6">
+                <v-col cols="12">
                   <v-text-field
                     v-model="data.name"
                     :rules="[(v) => !!v || 'กรุณากรอกชื่อสถานที่']"
@@ -36,7 +36,28 @@
                   >
                   </v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6">
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="data.leader"
+                    label="ชื่อผู้รับผิดชอบพื้นที่"
+                    outlined
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="data.phone"
+                    :rules="[(v) => !!v || 'กรุณากรอกเบอร์โทรศัพท์'] && [(v) => (v && v.length === 10) || 'กรุณากรอกเบอร์โทรศัพท์ให้ครบ']"
+                    label="เบอร์โทรศัพท์"
+                    outlined
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-divider></v-divider>
+                </v-col>
+                <v-col cols="12">
                   <v-text-field
                     v-model="data.address"
                     :rules="[(v) => !!v || 'กรุณากรอกที่อยู่']"

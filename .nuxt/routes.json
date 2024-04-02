@@ -2,151 +2,127 @@
   {
     "name": "home",
     "path": "/home",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/home/index.vue",
     "chunkName": "pages/home/index"
-  },
-  {
-    "name": "admin-department",
-    "path": "/admin/department",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\department\\\\index.vue",
-    "chunkName": "pages/admin/department/index"
-  },
-  {
-    "name": "admin-employee",
-    "path": "/admin/employee",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\employee\\\\index.vue",
-    "chunkName": "pages/admin/employee/index"
   },
   {
     "name": "admin-equipment",
     "path": "/admin/equipment",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/equipment/index.vue",
     "chunkName": "pages/admin/equipment/index"
   },
   {
     "name": "admin-home",
     "path": "/admin/home",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/home/index.vue",
     "chunkName": "pages/admin/home/index"
   },
   {
     "name": "admin-location",
     "path": "/admin/location",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/location/index.vue",
     "chunkName": "pages/admin/location/index"
   },
   {
     "name": "admin-notebook",
     "path": "/admin/notebook",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/notebook/index.vue",
     "chunkName": "pages/admin/notebook/index"
   },
   {
     "name": "admin-store",
     "path": "/admin/store",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/store/index.vue",
     "chunkName": "pages/admin/store/index"
   },
   {
     "name": "admin-user",
     "path": "/admin/user",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\user\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/user/index.vue",
     "chunkName": "pages/admin/user/index"
   },
   {
     "name": "auth-login",
     "path": "/auth/login",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\auth\\\\login.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/auth/login.vue",
     "chunkName": "pages/auth/login"
   },
   {
     "name": "auth-register",
     "path": "/auth/register",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\auth\\\\register.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/auth/register.vue",
     "chunkName": "pages/auth/register"
   },
   {
     "name": "user-department",
     "path": "/user/department",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\department\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/department/index.vue",
     "chunkName": "pages/user/department/index"
   },
   {
     "name": "user-equipment",
     "path": "/user/equipment",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/equipment/index.vue",
     "chunkName": "pages/user/equipment/index"
   },
   {
     "name": "user-location",
     "path": "/user/location",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/location/index.vue",
     "chunkName": "pages/user/location/index"
   },
   {
     "name": "user-notebook",
     "path": "/user/notebook",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/notebook/index.vue",
     "chunkName": "pages/user/notebook/index"
   },
   {
     "name": "user-store",
     "path": "/user/store",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/store/index.vue",
     "chunkName": "pages/user/store/index"
   },
   {
     "name": "user-user",
     "path": "/user/user",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\user\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/user/index.vue",
     "chunkName": "pages/user/user/index"
-  },
-  {
-    "name": "admin-department-create",
-    "path": "/admin/department/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\department\\\\create.vue",
-    "chunkName": "pages/admin/department/create"
-  },
-  {
-    "name": "admin-employee-create",
-    "path": "/admin/employee/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\employee\\\\create.vue",
-    "chunkName": "pages/admin/employee/create"
   },
   {
     "name": "admin-equipment-create",
     "path": "/admin/equipment/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\equipment\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/equipment/create.vue",
     "chunkName": "pages/admin/equipment/create"
   },
   {
     "name": "admin-location-create",
     "path": "/admin/location/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\location\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/location/create.vue",
     "chunkName": "pages/admin/location/create"
   },
   {
     "name": "admin-notebook-create",
     "path": "/admin/notebook/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\notebook\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/notebook/create.vue",
     "chunkName": "pages/admin/notebook/create"
   },
   {
     "name": "admin-store-create",
     "path": "/admin/store/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\store\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/store/create.vue",
     "chunkName": "pages/admin/store/create"
   },
   {
     "name": "admin-user-profile",
     "path": "/admin/user/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\user\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/user/profile/index.vue",
     "chunkName": "pages/admin/user/profile/index"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/index.vue",
     "chunkName": "pages/index"
   }
 ]

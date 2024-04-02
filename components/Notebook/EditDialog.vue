@@ -13,7 +13,8 @@
     <v-dialog 
       persistent 
       :retain-focus="false" 
-      v-model="open" v-if="data" 
+      v-model="open" 
+      v-if="data" 
       max-width="650" 
       max-height="300"
       content-class="rounded-xl"
@@ -67,10 +68,7 @@
                       <v-col cols="12" sm="6">
                         <v-text-field 
                           v-model="data.ram" 
-                          :rules="[
-                            (v) => !!v || 'กรุณากรอกขนาด RAM',
-                            (v) => /^[0-9]*$/.test(v) || 'กรุณากรอกเป็นตัวเลข'
-                          ]"
+                          :rules="[(v) => !!v || 'กรุณากรอกหน่วยความจำ']"
                           label="หน่วยความจำ" 
                           outlined 
                           required
@@ -81,8 +79,7 @@
                         <v-text-field 
                           v-model="data.storage" 
                           :rules="[
-                            (v) => !!v || 'กรุณากรอกพื้นที่จัดเก็บข้อมูล',
-                            (v) => /^[0-9]*$/.test(v) || 'กรุณากรอกเป็นตัวเลข'
+                            (v) => !!v || 'กรุณากรอกพื้นที่จัดเก็บข้อมูล'
                           ]"
                           label="พื้นที่จัดเก็บข้อมูล" 
                           outlined 
@@ -102,7 +99,7 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-text-field 
-                          v-model="data.license_window" 
+                          v-model="data.license" 
                           :rules="[(v) => !!v || 'กรุณากรอกหมายเลขลิขสิทธิ์']"
                           label="หมายเลขลิขสิทธิ์" 
                           outlined 
@@ -119,7 +116,7 @@
                           required
                         >
                         </v-text-field>
-                      </v-col>
+                      </v-col>  
                       <v-col cols="12" sm="6">
                         <v-select
                           :items="uSer"
@@ -128,19 +125,6 @@
                           item-value="id"
                           :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
                           label="ผู้รับผิดชอบ"
-                          outlined
-                          required
-                        >
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-select
-                          :items="eMployee"
-                          v-model="data.employee_id"
-                          item-text="fname"
-                          item-value="id"
-                          :rules="[(v) => !!v || 'กรุณาเลือกผู้ถือครอง']"
-                          label="ผู้ถือครอง"
                           outlined
                           required
                         >
@@ -161,12 +145,21 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                          :items="[
-                            { id: 0, name: 'In use' },
-                            { id: 1, name: 'Write off' },
-                            { id: 2, name: 'Available' }
-                          ]"
-                          v-model="data.status"
+                          :items="lOcation"
+                          v-model="data.location_id"
+                          item-text="name"
+                          item-value="id"
+                          :rules="[(v) => !!v || 'กรุณาเลือกสถานที่ตั้ง']"
+                          label="สถานที่ตั้ง"
+                          outlined
+                          required
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-select
+                          :items="sTatus"
+                          v-model="data.status_id"
                           item-text="name"
                           item-value="id"
                           :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
@@ -175,17 +168,6 @@
                           required
                         >
                         </v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field
-                          v-model="data.note"
-                          label="หมายเหตุ"
-                          outlined
-                        >
-                      </v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-divider></v-divider>
                       </v-col>
                       <v-col cols="12" sm="6">
                       <v-menu
@@ -220,6 +202,17 @@
                           >
                         </v-date-picker>
                       </v-menu>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-divider></v-divider>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-textarea
+                          v-model="data.note"
+                          label="หมายเหตุ"
+                          outlined
+                        >
+                        </v-textarea>
                     </v-col>
                 </v-row>
               </v-form>
@@ -257,11 +250,15 @@ export default {
           valid:false,
           menu: false,
           uSer: [],
-          sTore: [],
-          eMployee: [],
-          store_id: null,
           user_id: null,
-          employee_id: null,
+          sTore: [],
+          store_id: null,
+          lOcation: [],
+          location_id: null,
+          sTatus: [],
+          status_id: null,
+          
+          
           date_out: new Date().toISOString().substr(0, 10),
           date: new Date().toISOString().substr(0, 10),
 
@@ -275,6 +272,7 @@ export default {
               message: 'ขออภัย กรุณากรอกข้อมูลให้ครบถ้วน',
             },
           },
+
         }
     },
 
@@ -287,7 +285,8 @@ export default {
     async fetch() {
         await this.fetchUserData()
         await this.fetchStoreData()
-        await this.fetchEmployeeData()
+        await this.fetchLocationData()
+        await this.fetchStatusData()
     },
 
     methods: {
@@ -304,10 +303,10 @@ export default {
         },
         async UpdateData() {
             try {
-                const req = await this.$store.dispatch('api/notebook/putNotebooks', this.data)
+                const req = await this.$store.dispatch('api/product/putProducts',this.data)
                 this.modal.complete.open = true
             } catch (error) {
-              this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
+                this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
             }
         },
         
@@ -323,11 +322,17 @@ export default {
               )
             this.sTore = STore
         },
-        async fetchEmployeeData() {
-            const EMployee = await this.$store.dispatch(
-              'api/employee/getEmployees'
-            )
-            this.eMployee = EMployee
+        async fetchLocationData() {
+            const LOcation = await this.$store.dispatch(
+              'api/location/getLocations'
+              )
+            this.lOcation = LOcation
+        },
+        async fetchStatusData() {
+            const STatus = await this.$store.dispatch(
+              'api/status/getStatus'
+              )
+            this.sTatus = STatus
         },
     },
 }

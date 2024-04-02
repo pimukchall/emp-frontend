@@ -36,7 +36,7 @@
                   <v-text-field
                       :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="show1 ? 'text' : 'password'"
-                      v-model="data.password"
+                      v-model="data.newPassword"
                       :rules="[
                       (v) => !!v || 'กรุณากรอกรหัสผ่านใหม่',
                       (v) => (v && v.length >= 8) || 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร',
@@ -54,7 +54,7 @@
                       :rules="[
                       (v) => !!v || 'กรุณากรอกยืนยันรหัสผ่านใหม่',
                       (v) => (v && v.length >= 8) || 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร',
-                      (v) => v === data.password || 'รหัสผ่านไม่ตรงกัน',
+                      (v) => v === data.newPassword || 'รหัสผ่านไม่ตรงกัน',
                       ]"
                       @click:append="show2 = !show2"
                       label="ยืนยันรหัสผ่านใหม่"
@@ -104,6 +104,7 @@ export default {
       valid: false,
       confirmPassword: '',
       password: '',
+      newPassword: '',
       show1: false,
       show2: false,
 
@@ -138,11 +139,11 @@ export default {
     },
     async UpdateData() {
       try {
-        if (this.data.password !== this.data.confirmPassword) {
+        if (this.data.newPassword !== this.data.confirmPassword) {
           this.modal.error.message = 'รหัสผ่านไม่ตรงกัน';
-          this.modal.error.open = true;
           return;
         }
+        this.data.password = this.data.newPassword;
         const req = await this.$store.dispatch('api/user/putUsersPassword', this.data);
         this.modal.complete.open = true;
       } catch (error) {

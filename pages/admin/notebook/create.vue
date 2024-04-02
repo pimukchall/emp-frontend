@@ -70,10 +70,7 @@
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="form.ram"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกขนาด RAM',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
-                  ]"
+                  :rules="[(v) => !!v || 'กรุณากรอกหน่วยความจำ']"
                   label="หน่วยความจำ"
                   outlined
                   required
@@ -83,10 +80,7 @@
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="form.storage"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกพื้นที่จัดเก็บข้อมูล',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
-                  ]"
+                  :rules="[(v) => !!v || 'กรุณากรอกพื้นที่จัดเก็บข้อมูล']"
                   label="พื้นที่จัดเก็บข้อมูล"
                   outlined
                   required
@@ -105,7 +99,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="form.license_window"
+                  v-model="form.license"
                   :rules="[(v) => !!v || 'กรุณากรอกหมายเลขลิขสิทธิ์']"
                   label="หมายเลขลิขสิทธิ์"
                   outlined
@@ -138,19 +132,6 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="emPloyee"
-                  v-model="form.employee_id"
-                  item-text="fname"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกผู้ถือครอง']"
-                  label="ผู้ถือครอง"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
                   :items="sTore"
                   v-model="form.store_id"
                   item-text="name"
@@ -163,26 +144,31 @@
                 </v-select>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-select
-                  :items="[
-                    { id: 0, name: 'In use' },
-                    { id: 1, name: 'Write off' },
-                    { id: 2, name: 'Available' },
-                  ]"
-                  v-model="form.status"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
-                  label="สถานะ"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field v-model="form.note" label="หมายเหตุ" outlined>
-                </v-text-field>
-              </v-col>
+                  <v-select
+                    :items="lOcation"
+                    v-model="form.location_id"
+                    item-text="name"
+                    item-value="id"
+                    :rules="[(v) => !!v || 'กรุณาเลือกสถานที่ตั้ง']"
+                    label="สถานที่ตั้ง"
+                    outlined
+                    required
+                  >
+                  </v-select>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-select
+                    :items="sTatus"
+                    v-model="form.status_id"
+                    item-text="name"
+                    item-value="id"
+                    :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
+                    label="สถานะ"
+                    outlined
+                    required
+                  >
+                  </v-select>
+               </v-col>
               <v-col cols="12" sm="6">
                 <v-menu
                   ref="menu"
@@ -216,6 +202,14 @@
                     >
                   </v-date-picker>
                 </v-menu>
+              </v-col>
+              <v-col cols="12">
+                  <v-textarea
+                      v-model="form.note"
+                      label="หมายเหตุ"
+                      outlined
+                      >
+                  </v-textarea>
               </v-col>
               <v-col cols="12">
                 <v-divider></v-divider>
@@ -264,18 +258,23 @@ export default {
         ram: '',
         storage: '',
         os: '',
+        license: '',
         asset_number: '',
-        license_window: '',
-        user_id: null,
-        employee_id: null,
-        store_id: null,
-        date_in: new Date().toISOString().substr(0, 10),
-        status: null,
+        user_id: '',
+        store_id: '',
+        location_id: '',
+        status_id: '',
+        date_in: '',
         note: '',
+        // category_id: 1,
+
       },
       uSer: [],
       sTore: [],
       emPloyee: [],
+      lOcation: [],
+      sTatus: [],
+
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -312,7 +311,9 @@ export default {
   async fetch() {
     await this.fetchUserData()
     await this.fetchStoreData()
-    await this.fetchEmployeeData()
+    await this.fetchLocationData()
+    await this.fetchStatusData()
+    
   },
 
   methods: {
@@ -323,12 +324,9 @@ export default {
           this.modal.error.open = true
           return
         }
-        const req = await this.$store.dispatch(
-          'api/notebook/postNotebooks',
-          this.form
-        )
+        const req = await this.$store.dispatch('api/product/postProducts',this.form)
         console.log(req)
-        this.modal.confirm.open = false
+        this.modal.confirm.open = true
         this.modal.complete.open = true
       } catch (error) {
         this.modal.error.message = 'เกิดข้อผิดพลาด'
@@ -345,10 +343,14 @@ export default {
       const STore = await this.$store.dispatch('api/store/getStores')
       this.sTore = STore
     },
-    async fetchEmployeeData() {
-      const EMployee = await this.$store.dispatch('api/employee/getEmployees')
-      this.emPloyee = EMployee
+    async fetchLocationData() {
+      const LOcation = await this.$store.dispatch('api/location/getLocations')
+      this.lOcation = LOcation
     },
+    async fetchStatusData() {
+      const STatus = await this.$store.dispatch('api/status/getStatus')
+      this.sTatus = STatus
+    }
   },
 }
 </script>

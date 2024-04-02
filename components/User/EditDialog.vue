@@ -100,16 +100,18 @@
                   >
                   </v-select>
                 </v-col>
+                <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="data.empcode"
+                  :rules="[(v) => !!v || 'กรุณากรอกรหัสพนักงาน']"
+                  label="รหัสพนักงาน"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
                 <v-col cols="12">
                   <v-divider></v-divider>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="data.image"
-                    label="ลิงค์รูปภาพ"
-                    outlined
-                  >
-                  </v-text-field>
                 </v-col>
               </v-row>
             </v-form>

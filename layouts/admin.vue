@@ -88,9 +88,6 @@
               <v-list-item @click="user">
                 ผู้ใช้
               </v-list-item>
-              <v-list-item @click="employee">
-                พนักงาน
-              </v-list-item>
             </v-list>
           </v-menu>
       </div>

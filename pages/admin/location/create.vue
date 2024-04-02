@@ -23,15 +23,33 @@
           max-width="800"
           max-height="auto"
         >
-          <v-card-title class="headline">เพิ่มสถานที่</v-card-title>
+          <v-card-title class="headline">เพิ่มร้านค้า</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
-                <v-col cols="12" sm="6">
+                <v-col cols="12">
                   <v-text-field
                     v-model="form.name"
-                    :rules="[(v) => !!v || 'กรุณากรอกชื่อสถานที่']"
-                    label="ชื่อสถานที่"
+                    :rules="[(v) => !!v || 'กรุณากรอกชื่อร้านค้า']"
+                    label="ชื่อร้านค้า"
+                    outlined
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="form.leader"
+                    label="ชื่อชื่อผู้รับผิดชอบพื้นที่"
+                    outlined
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="form.phone"
+                    :rules="[(v) => !!v || 'กรุณากรอกเบอร์โทรศัพท์'] && [(v) => (v && v.length === 10) || 'กรุณากรอกเบอร์โทรศัพท์ให้ครบ']"
+                    label="เบอร์โทรศัพท์"
                     outlined
                     required
                   >
@@ -41,20 +59,16 @@
                   <v-divider></v-divider>
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field
+                  <v-textarea
                     v-model="form.address"
                     :rules="[(v) => !!v || 'กรุณากรอกที่อยู่']"
-                    label="ที่อยู่"
+                    label="ที่อยู่สถานที่"
                     outlined
                     required
                   >
-                  </v-text-field>
+                  </v-textarea>
                 </v-col>
                 <v-col cols="12">
-                  <v-checkbox
-                    v-model="agree"
-                    label="ยอมรับข้อตกลงและเงื่อนไข"
-                  ></v-checkbox>
                   <v-card-actions class="justify-center">
                     <v-btn
                       @click="create"
@@ -86,6 +100,8 @@
         form: {
             name: '',
             address: '',
+            leader: '',
+            phone: '',
         },
   
         modal: {
@@ -107,14 +123,14 @@
           },
         },
         valid: false,
-        agree: false,
+
       }
     },
   
     methods: {
       async create() {
         try {
-          if (!this.$refs.form.validate() || !this.agree) {
+          if (!this.$refs.form.validate()) {
             this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
             this.modal.error.open = true
             return
