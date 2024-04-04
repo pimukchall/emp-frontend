@@ -59,7 +59,8 @@
                   <td :colspan="headers.length">
                     <v-col cols="12">
                       <v-card-subtitle class="expanded-details">
-                        ที่อยู่: {{ item.address }}
+                        ที่อยู่: {{ item.address }} <br>
+                        Link ที่อยู่: <a :href="item.link" target="_blank">คลิกเพื่อดูที่ Google</a>
                       </v-card-subtitle>
                     </v-col>
                   </td>

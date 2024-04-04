@@ -125,6 +125,8 @@
 </template>
 
 <script>
+  import moment from 'moment';
+  moment.locale('th');
 
 export default {
   name: 'DefaultLayout',
@@ -134,6 +136,7 @@ export default {
       clipped: false,
       title: 'EMP WAREHOUSES',
       tabs: null,
+      date: new Date(),
       modal: {
         confirmLogout: {
           open: false,
@@ -157,6 +160,7 @@ export default {
     },
     signout() {
       this.$auth.logout()
+      this.recordLog()
     },
     department() {
       this.$router.push('/admin/department')
@@ -178,6 +182,16 @@ export default {
     },
     theme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    },
+    recordLog(){
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'ออกจากระบบ',
+        description: this.$auth.user.email + ' ' +'ออกจากระบบเวลา ' + moment(this.date).format('HH:mm:ss'),
+        time: moment(this.date).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log);
+      this.$store.dispatch('api/log/postLogs', log);
     },
   },
 }

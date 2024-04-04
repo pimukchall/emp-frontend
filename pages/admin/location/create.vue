@@ -69,6 +69,17 @@
                   </v-textarea>
                 </v-col>
                 <v-col cols="12">
+                  <v-divider></v-divider>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="form.link"
+                    label="ลิงก์ที่อยู่"
+                    outlined
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12">
                   <v-card-actions class="justify-center">
                     <v-btn
                       @click="create"
@@ -102,6 +113,7 @@
             address: '',
             leader: '',
             phone: '',
+            link: '',
         },
   
         modal: {

@@ -67,6 +67,17 @@
                   >
                   </v-text-field>
                 </v-col>
+                <v-col cols="12">
+                  <v-divider></v-divider>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="data.link"
+                    label="ลิงก์ที่อยู่"
+                    outlined
+                  >
+                  </v-text-field>
+                </v-col>
               </v-row>
             </v-form>
           </v-card-text>

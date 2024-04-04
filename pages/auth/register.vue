@@ -237,9 +237,7 @@ export default {
       show1: false,
       show2: false,
       menu: false,
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+      date: new Date(),
       departmentOptions: [],
       roleOptions: [],
 
@@ -286,6 +284,7 @@ export default {
           return
         }
         const req = await this.$store.dispatch('api/user/postUsers', this.form)
+        this.recordLog()
         this.modal.confirm.open = true
         this.modal.complete.open = true
       } catch (error) {
@@ -302,6 +301,20 @@ export default {
     async fetchRoles() {
       const role = await this.$store.dispatch('api/role/getRoles')
       this.roleOptions = role
+    },
+    recordLog(){
+      const account = {
+        email: this.form.email
+      }
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'สมัครสมาชิก',
+        description: 'สมัครสมาชิกใหม่ ' + account.email + ' เวลา ' + moment(this.date).format('HH:mm:ss'),
+        time: moment(this.date).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log);
+
+      this.$store.dispatch('api/log/postLogs', log);
     },
   },
 }

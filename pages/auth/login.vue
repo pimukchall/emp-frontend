@@ -47,6 +47,9 @@
   </template>
 
 <script>
+import moment from 'moment';
+moment.locale('th');
+
 export default {
   name: 'Login',
   data() {
@@ -54,6 +57,7 @@ export default {
       message: 'You login on ' + new Date().toLocaleString(),
       show1: false,
       show2: false,
+      date: new Date(),
       form: {
         email: '',
         password: '',
@@ -88,6 +92,9 @@ export default {
             password: this.form.password,
           }
         });
+
+        this.recordLog();
+
         this.modal.complete.message = 'เข้าสู่ระบบสำเร็จ';
 
       } catch (error) {
@@ -97,6 +104,17 @@ export default {
     },
     goBack() {
       this.$router.push('/admin/user');
+    },
+    recordLog(){
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'เข้าสู่ระบบ',
+        description: this.$auth.user.email + ' เข้าสู่ระบบเวลา ' + moment(this.date).format('HH:mm:ss'),
+        time: moment(this.date).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log);
+
+      this.$store.dispatch('api/log/postLogs', log);
     },
   },
 }
