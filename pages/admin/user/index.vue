@@ -3,8 +3,8 @@
     <ModalConfirm
       :open="modal.confirm.open"
       :message="modal.confirm.message"
-      :method="deleteData"
       :confirm.sync="modal.confirm.open"
+      :method="deleteData"
     />
     <ModalComplete
       :open="modal.complete.open"
@@ -66,7 +66,7 @@
                     mdi-pencil
                   </v-icon>
                 </v-btn>
-                <v-btn class="ma-2" color="red" dark @click="deleteData(user.id)">
+                <v-btn class="ma-2" color="red" dark @click="confirmDelete(user.id)">
                   ลบ
                   <v-icon dark right>
                     mdi-cancel
@@ -107,7 +107,6 @@ export default {
     return {
       search: '',
       date: new Date().toISOString().substr(0, 10),
-      dateLog: new Date(),
       users: [],
       departments: [],
       roles: [],
@@ -178,19 +177,22 @@ export default {
       }
       return 'ไม่มีสิทธิ์';
     },
-    async deleteData(id) {
+    confirmDelete(id) {
+      this.modal.confirm.open = true;
+      this.modal.confirm.message = 'ยืนยันการลบข้อมูลหรือไม่?';
+      this.modal.confirm.id = id;
+    },
+    async deleteData() {
       try {
-        const req = await this.$store.dispatch('api/user/deleteUsers', { params: { id } });
+        const req = await this.$store.dispatch('api/user/deleteUsers', { params: { id: this.modal.confirm.id } });
         this.modal.complete.open = true;
-        this.recordLogDelete(id);
+        this.recordLogDelete(this.modal.confirm.id);
         this.$fetch();
       } catch (error) {
         this.modal.error.open = true;
         this.modal.error.message = 'ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่';
       }
     },
-
-
     gotoCreate() {
       this.$router.push('/auth/register');
     },
@@ -240,8 +242,8 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'ลบ',
-        description: this.$auth.user.email + ' ' + 'ลบผู้ใช้' + ' ' + user.email + ' ' + 'เวลา ' + moment(this.dateLog).format('HH:mm:ss'),
-        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + 'ลบผู้ใช้' + ' ' + user.email + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       };
       console.log(log);
       this.$store.dispatch('api/log/postLogs', log);
@@ -250,8 +252,8 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'ออกรายงาน',
-        description: this.$auth.user.email + ' ' + 'ออกรายงานผู้ใช้' + ' ' + 'เวลา ' + moment(this.dateLog).format('HH:mm:ss'),
-        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + 'ออกรายงานผู้ใช้' + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       };
       console.log(log);
       this.$store.dispatch('api/log/postLogs', log);

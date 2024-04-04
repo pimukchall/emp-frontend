@@ -136,7 +136,6 @@ export default {
       clipped: false,
       title: 'EMP WAREHOUSES',
       tabs: null,
-      date: new Date(),
       modal: {
         confirmLogout: {
           open: false,
@@ -187,8 +186,8 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'ออกจากระบบ',
-        description: this.$auth.user.email + ' ' +'ออกจากระบบเวลา ' + moment(this.date).format('HH:mm:ss'),
-        time: moment(this.date).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' +'ออกจากระบบเวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);
       this.$store.dispatch('api/log/postLogs', log);

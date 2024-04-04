@@ -199,7 +199,6 @@ export default {
       departmentOptions: [],
       roleOptions: [],
 
-      dateLog: new Date(),
       date: new Date().toISOString().substr(0, 10),
 
       modal: {
@@ -268,8 +267,8 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'อัพเดทข้อมูล',
-        description: this.$auth.user.email + ' ' + `อัพเดทข้อมูลผู้ใช้งาน ID: ${id}` + ' ' + this.data.fname + ' ' + 'เวลา: ' + moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
-        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + `อัพเดทข้อมูลผู้ใช้งาน ID: ${id}` + ' ' + this.data.fname + ' ' + 'เวลา: ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log)
       this.$store.dispatch('api/log/postLogs', log)
