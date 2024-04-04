@@ -1,5 +1,11 @@
 <template>
   <div>
+    <ModalConfirm
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
+      :confirm.sync="modal.confirm.open"
+      :method="UpdateData"
+    />
     <ModalComplete
       :open="modal.complete.open"
       :message="modal.complete.message"
@@ -193,6 +199,7 @@ export default {
       departmentOptions: [],
       roleOptions: [],
 
+      dateLog: new Date(),
       date: new Date().toISOString().substr(0, 10),
 
       modal: {
@@ -227,8 +234,9 @@ export default {
     async confirm() {
       try {
         this.$emit('update:edit', false)
-        await this.UpdateData(this.data.id)
-        console.log('ID : ' + this.data.id)
+        this.modal.confirm.open = true
+        // await this.UpdateData(this.data.id)
+        // console.log('ID : ' + this.data.id)
       } catch (error) {
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
       }
@@ -240,7 +248,8 @@ export default {
       try {
         const req = await this.$store.dispatch('api/user/putUsers', this.data)
         this.modal.complete.open = true
-        console.log('Data:', this.data);
+        console.log('Data:', this.data)
+        this.recordLogUpdate(this.data.id)
       } catch (error) {
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
       }
@@ -254,6 +263,16 @@ export default {
     async fetchRoles() {
       const role = await this.$store.dispatch('api/role/getRoles')
       this.roleOptions = role
+    },
+    recordLogUpdate(id) {
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'อัพเดทข้อมูล',
+        description: this.$auth.user.email + ' ' + `อัพเดทข้อมูลผู้ใช้งาน ID: ${id}` + ' ' + this.data.fname + ' ' + 'เวลา: ' + moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log)
+      this.$store.dispatch('api/log/postLogs', log)
     },
   },
 }

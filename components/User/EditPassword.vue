@@ -86,6 +86,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+moment.locale('th')
 
 export default {
 
@@ -107,6 +109,8 @@ export default {
       newPassword: '',
       show1: false,
       show2: false,
+
+      dateLog: new Date(),
 
       modal: {
         confirm: {
@@ -146,9 +150,20 @@ export default {
         this.data.password = this.data.newPassword;
         const req = await this.$store.dispatch('api/user/putUsersPassword', this.data);
         this.modal.complete.open = true;
+        this.recordLogUpdate(this.data.id);
       } catch (error) {
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน';
       }
+    },
+    recordLogUpdate(id) {
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'อัพเดทรหัสผ่าน',
+        description: this.$auth.user.email + ' ' + `อัพเดทข้อมูลผู้ใช้งาน ID: ${id}` + ' ' + this.data.fname + ' ' + 'เวลา: ' + moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log)
+      this.$store.dispatch('api/log/postLogs', log)
     },
   },
 };

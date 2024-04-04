@@ -237,7 +237,8 @@ export default {
       show1: false,
       show2: false,
       menu: false,
-      date: new Date(),
+      dateLog: new Date(),
+      date: new Date().toISOString().substr(0, 10),
       departmentOptions: [],
       roleOptions: [],
 
@@ -309,8 +310,8 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'สมัครสมาชิก',
-        description: 'สมัครสมาชิกใหม่ ' + account.email + ' เวลา ' + moment(this.date).format('HH:mm:ss'),
-        time: moment(this.date).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + 'ได้เพิ่มสมาชิกใหม่ ' + account.email + ' เวลา ' + moment(this.dateLog).format('HH:mm:ss'),
+        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);
 

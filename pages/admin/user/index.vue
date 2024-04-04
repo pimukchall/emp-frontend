@@ -106,7 +106,8 @@ export default {
   data() {
     return {
       search: '',
-
+      date: new Date().toISOString().substr(0, 10),
+      dateLog: new Date(),
       users: [],
       departments: [],
       roles: [],
@@ -181,12 +182,14 @@ export default {
       try {
         const req = await this.$store.dispatch('api/user/deleteUsers', { params: { id } });
         this.modal.complete.open = true;
+        this.recordLogDelete(id);
         this.$fetch();
       } catch (error) {
         this.modal.error.open = true;
         this.modal.error.message = 'ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่';
       }
     },
+
 
     gotoCreate() {
       this.$router.push('/auth/register');
@@ -230,6 +233,28 @@ export default {
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
       XLSX.writeFile(workbook, 'รายการผู้ใช้.xlsx');
+      this.recordLogExport();
+    },
+    async recordLogDelete(id) {
+      const user = this.users.find(user => user.id === id);
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'ลบ',
+        description: this.$auth.user.email + ' ' + 'ลบผู้ใช้' + ' ' + user.email + ' ' + 'เวลา ' + moment(this.dateLog).format('HH:mm:ss'),
+        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+      };
+      console.log(log);
+      this.$store.dispatch('api/log/postLogs', log);
+    },
+    recordLogExport() {
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'ออกรายงาน',
+        description: this.$auth.user.email + ' ' + 'ออกรายงานผู้ใช้' + ' ' + 'เวลา ' + moment(this.dateLog).format('HH:mm:ss'),
+        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+      };
+      console.log(log);
+      this.$store.dispatch('api/log/postLogs', log);
     },
   },
 };

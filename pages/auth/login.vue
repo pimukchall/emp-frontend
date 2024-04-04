@@ -57,7 +57,7 @@ export default {
       message: 'You login on ' + new Date().toLocaleString(),
       show1: false,
       show2: false,
-      date: new Date(),
+      dateLog: new Date(),
       form: {
         email: '',
         password: '',
@@ -100,6 +100,7 @@ export default {
       } catch (error) {
         this.modal.error.message = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
         this.modal.error.open = true;
+        this.recordLogError();
       }
     },
     goBack() {
@@ -109,8 +110,18 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'เข้าสู่ระบบ',
-        description: this.$auth.user.email + ' เข้าสู่ระบบเวลา ' + moment(this.date).format('HH:mm:ss'),
-        time: moment(this.date).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' เข้าสู่ระบบเวลา ' + moment(this.dateLog).format('HH:mm:ss'),
+        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log);
+
+      this.$store.dispatch('api/log/postLogs', log);
+    },
+    recordLogError(){
+      const log = {
+        action: 'เข้าสู่ระบบล้มเหลว',
+        description: 'มีการพยายามเข้าสู่ระบบเวลา ' + moment(this.dateLog).format('HH:mm:ss'),
+        time: moment(this.dateLog).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);
 
