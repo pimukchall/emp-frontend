@@ -44,7 +44,10 @@
                   <v-img :src="user.image" alt="Avatar"></v-img>
                 </v-avatar>
               </v-col>
-              <v-card-title>{{ user.fname }}</v-card-title>
+              <v-card-title>
+                {{ user.fname }} <br>
+                {{ user.empcode }}
+              </v-card-title>
               <v-card-subtitle>
                 แผนก: {{ mapDataDepartment(user.department_id) }}
               </v-card-subtitle>

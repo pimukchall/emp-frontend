@@ -112,7 +112,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="departMents"
+                  :items="departmentOptions"
                   v-model="form.department_id"
                   item-text="name"
                   item-value="id"
@@ -125,7 +125,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="roles"
+                  :items="roleOptions"
                   v-model="form.role_id"
                   item-text="name"
                   item-value="id"
@@ -236,12 +236,12 @@ export default {
       confirmPassword: '',
       show1: false,
       show2: false,
-      departMents: [],
-      roles: [],
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
+      departmentOptions: [],
+      roleOptions: [],
 
       modal: {
         confirm: {
@@ -268,7 +268,7 @@ export default {
 
   computed: {
     formattedDate() {
-      return moment(this.form.date_in).format('Do MMMM YYYY');
+      return moment(this.date).format('Do MMMM YYYY');
     },
   },
 
@@ -296,12 +296,12 @@ export default {
       this.$router.push('/admin/user')
     },
     async fetchDepartMents() {
-      const DepartMents = await this.$store.dispatch('api/department/getDepartments')
-      this.departMents = DepartMents
+      const department = await this.$store.dispatch('api/department/getDepartments')
+      this.departmentOptions = department
     },
     async fetchRoles() {
-      const Roles = await this.$store.dispatch('api/role/getRoles')
-      this.roles = Roles
+      const role = await this.$store.dispatch('api/role/getRoles')
+      this.roleOptions = role
     },
   },
 }

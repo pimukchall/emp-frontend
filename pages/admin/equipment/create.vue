@@ -39,73 +39,8 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="form.asset_number"
-                  :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
-                  label="รหัสทรัพย์สิน"
-                  outlined
-                  required
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="uSer"
-                  v-model="form.user_id"
-                  item-text="fname"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
-                  label="ผู้รับผิดชอบ"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="emPloyee"
-                  v-model="form.employee_id"
-                  item-text="fname"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'ผู้ถือครอง']"
-                  label="ผู้ถือครอง"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="lOcation"
-                  v-model="form.location_id"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกสถานที่']"
-                  label="สถานที่"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="sTore"
-                  v-model="form.store_id"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
-                  label="สาขาที่ซื้อ"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
                   v-model="form.quantity"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกจำนวน',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
-                  ]"
+                  :rules= "[(v) => !!v || 'กรุณากรอกจำนวน', v => /^\d+$/.test(v) || 'กรุณากรอกจำนวนให้ถูกต้อง']"
                   label="จำนวน"
                   outlined
                   required
@@ -115,11 +50,18 @@
               <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="form.price"
-                  :rules="[
-                    (v) => !!v || 'กรุณากรอกราคา',
-                    (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
-                  ]"
+                  :rules= "[(v) => !!v || 'กรุณากรอกราคา', v => /^\d+(\.\d+)?$/.test(v) || 'กรุณากรอกราคาให้ถูกต้อง']"
                   label="ราคา"
+                  outlined
+                  required
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="form.asset_number"
+                  :rules="[(v) => !!v || 'กรุณากรอกรหัสทรัพย์สิน']"
+                  label="รหัสทรัพย์สิน"
                   outlined
                   required
                 >
@@ -137,25 +79,56 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="[
-                    { id: 0, name: 'In use' },
-                    { id: 1, name: 'Write off' },
-                    { id: 2, name: 'Available' },
-                  ]"
-                  v-model="form.status"
-                  item-text="name"
+                  :items="userOptions"
+                  v-model="form.user_id"
+                  item-text="fname"
                   item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
-                  label="สถานะ"
+                  :rules="[(v) => !!v || 'กรุณาเลือกผู้รับผิดชอบ']"
+                  label="ผู้รับผิดชอบ"
                   outlined
                   required
                 >
                 </v-select>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field v-model="form.note" label="หมายเหตุ" outlined>
-                </v-text-field>
+                <v-select
+                  :items="storeOptions"
+                  v-model="form.store_id"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'กรุณาเลือกสาขาที่ซื้อ']"
+                  label="สาขาที่ซื้อ"
+                  outlined
+                  required
+                >
+                </v-select>
               </v-col>
+              <v-col cols="12" sm="6">
+                  <v-select
+                    :items="locationOptions"
+                    v-model="form.location_id"
+                    item-text="name"
+                    item-value="id"
+                    :rules="[(v) => !!v || 'กรุณาเลือกสถานที่ตั้ง']"
+                    label="สถานที่ตั้ง"
+                    outlined
+                    required
+                  >
+                  </v-select>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-select
+                    :items="statusOptions"
+                    v-model="form.status_id"
+                    item-text="name"
+                    item-value="id"
+                    :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
+                    label="สถานะ"
+                    outlined
+                    required
+                  >
+                  </v-select>
+               </v-col>
               <v-col cols="12" sm="6">
                 <v-menu
                   ref="menu"
@@ -191,6 +164,14 @@
                 </v-menu>
               </v-col>
               <v-col cols="12">
+                  <v-textarea
+                      v-model="form.note"
+                      label="หมายเหตุ"
+                      outlined
+                      >
+                  </v-textarea>
+              </v-col>
+              <v-col cols="12">
                 <v-divider></v-divider>
               </v-col>
               <v-col cols="12">
@@ -204,7 +185,7 @@
                     :disabled="!valid"
                     depressed
                     color="secondary"
-                    >เพิ่มรายการ</v-btn
+                    >สมัคร</v-btn
                   >
                 </v-card-actions>
               </v-col>
@@ -218,6 +199,7 @@
 <script>
 import moment from 'moment'
 moment.locale('th')
+
 export default {
   layout: 'admin',
   middleware: 'auth',
@@ -229,28 +211,29 @@ export default {
   data() {
     return {
       form: {
+        category_id: 11,
         name: '',
-        location_id: null,
-        user_id: null,
-        store_id: null,
-        employee_id: null,
+        quantity: '',
+        price: '',
         asset_number: '',
         document_number: '',
-        price: '',
-        quantity: '',
-        status: null,
-        note: '',
+        user_id: '',
+        store_id: '',
+        location_id: '',
+        status_id: '',
         date_in: new Date().toISOString().substr(0, 10),
+        note: '',
+
       },
-      uSer: [],
-      sTore: [],
-      lOcation: [],
-      emPloyee: [],
+      userOptions: [],
+      storeOptions: [],
+      locationOptions: [],
+      statusOptions: [],
+
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-
       modal: {
         confirm: {
           open: false,
@@ -284,7 +267,8 @@ export default {
     await this.fetchUserData()
     await this.fetchStoreData()
     await this.fetchLocationData()
-    await this.fetchEmployeeData()
+    await this.fetchStatusData()
+    
   },
 
   methods: {
@@ -295,12 +279,9 @@ export default {
           this.modal.error.open = true
           return
         }
-        const req = await this.$store.dispatch(
-          'api/equipment/postEquipments',
-          this.form
-        )
-
-        this.modal.confirm.open = false
+        const req = await this.$store.dispatch('api/product/postProducts',this.form)
+        console.log(req)
+        this.modal.confirm.open = true
         this.modal.complete.open = true
       } catch (error) {
         this.modal.error.message = 'เกิดข้อผิดพลาด'
@@ -310,21 +291,21 @@ export default {
       this.$router.push('/admin/equipment')
     },
     async fetchUserData() {
-      const USer = await this.$store.dispatch('api/user/getUsers')
-      this.uSer = USer
+      const user = await this.$store.dispatch('api/user/getUsers')
+      this.userOptions = user
     },
     async fetchStoreData() {
-      const STore = await this.$store.dispatch('api/store/getStores')
-      this.sTore = STore
+      const store = await this.$store.dispatch('api/store/getStores')
+      this.storeOptions = store
     },
     async fetchLocationData() {
-      const LOcation = await this.$store.dispatch('api/location/getLocations')
-      this.lOcation = LOcation
+      const Location = await this.$store.dispatch('api/location/getLocations')
+      this.locationOptions = Location
     },
-    async fetchEmployeeData() {
-      const EMployee = await this.$store.dispatch('api/employee/getEmployees')
-      this.emPloyee = EMployee
-    },
+    async fetchStatusData() {
+      const status = await this.$store.dispatch('api/status/getStatus')
+      this.statusOptions = status
+    }
   },
 }
 </script>

@@ -1,11 +1,5 @@
 <template>
   <div>
-    <ModalConfirm
-      :open="modal.confirm.open"
-      :message="modal.confirm.message"
-      :confirm.sync="modal.confirm.open"
-      @confirm="confirm"
-    />
     <ModalComplete
       :open="modal.complete.open"
       :message="modal.complete.message"
@@ -35,7 +29,34 @@
                   <v-text-field
                     v-model="data.name"
                     :rules="[(v) => !!v || 'กรุณากรอกชื่อรายการ']"
-                    label="ชื่อ"
+                    label="ชื่อรายการ"
+                    outlined
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field
+                    v-model="data.quantity"
+                    :rules="[
+                      (v) => !!v || 'กรุณากรอกจำนวน',
+                      (v) => /^\d+$/.test(v) || 'กรุณากรอกจำนวนให้ถูกต้อง',
+                    ]"
+                    label="จำนวน"
+                    outlined
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field
+                    v-model="data.price"
+                    :rules="[
+                      (v) => !!v || 'กรุณากรอกราคา',
+                      (v) =>
+                        /^\d+(\.\d+)?$/.test(v) || 'กรุณากรอกราคาให้ถูกต้อง',
+                    ]"
+                    label="ราคา"
                     outlined
                     required
                   >
@@ -52,8 +73,18 @@
                   </v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6">
+                  <v-text-field
+                    v-model="data.document_number"
+                    :rules="[(v) => !!v || 'กรุณากรอกหมายเลขเอกสาร']"
+                    label="หมายเลขเอกสาร"
+                    outlined
+                    required
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
                   <v-select
-                    :items="uSer"
+                    :items="userOptions"
                     v-model="data.user_id"
                     item-text="fname"
                     item-value="id"
@@ -66,33 +97,7 @@
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-select
-                    :items="emPloyee"
-                    v-model="data.employee_id"
-                    item-text="fname"
-                    item-value="id"
-                    :rules="[(v) => !!v || 'กรุณาเลือกผู้ถือครอง']"
-                    label="ผู้ถือครอง"
-                    outlined
-                    required
-                  >
-                  </v-select>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-select
-                    :items="lOcation"
-                    v-model="data.location_id"
-                    item-text="name"
-                    item-value="id"
-                    :rules="[(v) => !!v || 'กรุณาเลือกสถานที่']"
-                    label="สถานที่"
-                    outlined
-                    required
-                  >
-                  </v-select>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-select
-                    :items="sTore"
+                    :items="storeOptions"
                     v-model="data.store_id"
                     item-text="name"
                     item-value="id"
@@ -104,53 +109,22 @@
                   </v-select>
                 </v-col>
                 <v-col cols="12" sm="6">
-                  <v-text-field
-                    v-model="data.quantity"
-                    :rules="[
-                      (v) => !!v || 'กรุณากรอกจำนวน',
-                      (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
-                    ]"
-                    label="จำนวน"
+                  <v-select
+                    :items="locationOptions"
+                    v-model="data.location_id"
+                    item-text="name"
+                    item-value="id"
+                    :rules="[(v) => !!v || 'กรุณาเลือกสถานที่ตั้ง']"
+                    label="สถานที่ตั้ง"
                     outlined
                     required
                   >
-                  </v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-text-field
-                    v-model="data.price"
-                    :rules="[
-                      (v) => !!v || 'กรุณากรอกราคา',
-                      (v) => /^\d+$/.test(v) || 'กรุณากรอกตัวเลขเท่านั้น',
-                    ]"
-                    label="ราคา"
-                    outlined
-                    required
-                  >
-                  </v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-text-field
-                    v-model="data.document_number"
-                    :rules="[(v) => !!v || 'กรุณากรอกหมายเลขเอกสาร']"
-                    label="หมายเลขเอกสาร"
-                    outlined
-                    required
-                  >
-                  </v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-text-field v-model="data.note" label="หมายเหตุ" outlined>
-                  </v-text-field>
+                  </v-select>
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-select
-                    :items="[
-                      { id: 0, name: 'In use' },
-                      { id: 1, name: 'Write off' },
-                      { id: 2, name: 'Available' },
-                    ]"
-                    v-model="data.status"
+                    :items="statusOptions"
+                    v-model="data.status_id"
                     item-text="name"
                     item-value="id"
                     :rules="[(v) => !!v || 'กรุณาเลือกสถานะ']"
@@ -173,12 +147,12 @@
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
                         v-model="formattedDate"
-                        label="วันที่เบิกจ่าย"
+                        label="วันที่จัดส่ง"
                         prepend-icon="mdi-calendar"
                         readonly
                         v-bind="attrs"
                         v-on="on"
-                        :rules="[(v) => !!v || 'กรุณากรอกวันที่เบิกจ่าย']"
+                        :rules="[(v) => !!v || 'กรุณากรอกวันที่ส่งมอบ']"
                         outlined
                         required
                       ></v-text-field>
@@ -193,6 +167,13 @@
                       >
                     </v-date-picker>
                   </v-menu>
+                </v-col>
+                <v-col cols="12">
+                  <v-divider></v-divider>
+                </v-col>
+                <v-col cols="12">
+                  <v-textarea v-model="data.note" label="หมายเหตุ" outlined>
+                  </v-textarea>
                 </v-col>
               </v-row>
             </v-form>
@@ -233,22 +214,20 @@ export default {
     return {
       valid: false,
       menu: false,
-      uSer: [],
+
+      userOptions: [],
       user_id: null,
-      emPloyee: [],
-      employee_id: null,
-      sTore: [],
+      storeOptions: [],
       store_id: null,
-      lOcation: [],
+      locationOptions: [],
       location_id: null,
-      date_out: new Date().toISOString().substr(0, 10),
+      statusOptions: [],
+      status_id: null,
+
       date: new Date().toISOString().substr(0, 10),
+      date_out: new Date().toISOString().substr(0, 10),
 
       modal: {
-        confirm: {
-          open: false,
-          message: 'คุณต้องการแก้ไขรายการหรือไม่?',
-        },
         complete: {
           open: false,
           message: 'แก้ไขข้อมูลสำเร็จ',
@@ -268,10 +247,12 @@ export default {
   },
 
   async fetch() {
-    await this.fetchUserData()
-    await this.fetchStoreData()
-    await this.fetchLocationData()
-    await this.fetchEmployeeData()
+    await Promise.all([
+      this.fetchUserData(),
+      this.fetchStoreData(),
+      this.fetchLocationData(),
+      this.fetchStatusData(),
+    ])
   },
 
   methods: {
@@ -279,8 +260,9 @@ export default {
       try {
         this.$emit('update:edit', false)
         await this.UpdateData(this.data.id)
-        this.modal.complete.open = true
+        console.log(this.data + 'ผ่าน1')
       } catch (error) {
+        console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน1')
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
       }
     },
@@ -289,29 +271,31 @@ export default {
     },
     async UpdateData() {
       try {
-        const req = await this.$store.dispatch(
-          'api/equipment/putEquipments',
-          this.data
-        )
+        const req = await this.$store.dispatch('api/product/putProducts', this.data)
+        console.log('this.data2', this.data)
+        console.log("req2", req)
+        this.modal.complete.open = true // แสดงข้อความเมื่อการอัปเดตสำเร็จ
       } catch (error) {
-        this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
+        console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน2');
+        this.modal.error.open = true // แสดงข้อความผิดพลาดใน ModalError
       }
     },
+
     async fetchUserData() {
-      const USer = await this.$store.dispatch('api/user/getUsers')
-      this.uSer = USer
+      const user = await this.$store.dispatch('api/user/getUsers')
+      this.userOptions = user
     },
     async fetchStoreData() {
-      const STore = await this.$store.dispatch('api/store/getStores')
-      this.sTore = STore
+      const store = await this.$store.dispatch('api/store/getStores')
+      this.storeOptions = store
     },
     async fetchLocationData() {
-      const LOcation = await this.$store.dispatch('api/location/getLocations')
-      this.lOcation = LOcation
+      const location = await this.$store.dispatch('api/location/getLocations')
+      this.locationOptions = location
     },
-    async fetchEmployeeData() {
-      const EMployee = await this.$store.dispatch('api/employee/getEmployees')
-      this.emPloyee = EMployee
+    async fetchStatusData() {
+      const status = await this.$store.dispatch('api/status/getStatus')
+      this.statusOptions = status
     },
   },
 }

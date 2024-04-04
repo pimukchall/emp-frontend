@@ -169,40 +169,71 @@
                         >
                         </v-select>
                       </v-col>
-                      <v-col cols="12" sm="6">
+                  <v-col cols="12">
+                      <v-divider></v-divider>
+                  </v-col>
+
+                  <v-col cols="12" sm="6">
                       <v-menu
-                        ref="menu"
-                        v-model="menu"
-                        :close-on-content-click="false"
-                        :return-value.sync="data.date_out"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
+                          ref="menu1"
+                          v-model="menu1"
+                          :close-on-content-click="false"
+                          :return-value.sync="data.date_in"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
                       >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="formattedDate"
-                            label="วันที่ส่งมอบ"
-                            prepend-icon="mdi-calendar"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                            :rules="[(v) => !!v || 'กรุณากรอกวันที่ส่งมอบ']"
-                            outlined
-                            required
-                          ></v-text-field>
-                        </template>
-                        <v-date-picker v-model="date" no-title scrollable>
-                          <v-spacer></v-spacer>
-                          <v-btn text color="primary" @click="menu = false"
-                            >ยกเลิก</v-btn
-                          >
-                          <v-btn text color="primary" @click="$refs.menu.save(date)"
-                            >ยืนยัน</v-btn
-                          >
-                        </v-date-picker>
+                          <template v-slot:activator="{ on, attrs }">
+                              <v-text-field
+                                  v-model="formattedDateIn"
+                                  label="วันที่รับเข้า"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  :rules="[(v) => !!v || 'กรุณากรอกวันที่รับเข้า']"
+                                  outlined
+                                  required
+                              ></v-text-field>
+                          </template>
+                          <v-date-picker v-model="date1" no-title scrollable>
+                              <v-spacer></v-spacer>
+                              <v-btn text color="primary" @click="menu1 = false">ยกเลิก</v-btn>
+                              <v-btn text color="primary" @click="$refs.menu1.save(date1)">ยืนยัน</v-btn>
+                          </v-date-picker>
                       </v-menu>
-                    </v-col>
+                  </v-col>
+
+                  <v-col cols="12" sm="6">
+                      <v-menu
+                          ref="menu2"
+                          v-model="menu2"
+                          :close-on-content-click="false"
+                          :return-value.sync="data.date_out"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                      >
+                          <template v-slot:activator="{ on, attrs }">
+                              <v-text-field
+                                  v-model="formattedDateOut"
+                                  label="วันที่ส่งมอบ"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  :rules="[(v) => !!v || 'กรุณากรอกวันที่ส่งมอบ']"
+                                  outlined
+                                  required
+                              ></v-text-field>
+                          </template>
+                          <v-date-picker v-model="date2" no-title scrollable>
+                              <v-spacer></v-spacer>
+                              <v-btn text color="primary" @click="menu2 = false">ยกเลิก</v-btn>
+                              <v-btn text color="primary" @click="$refs.menu2.save(date2)">ยืนยัน</v-btn>
+                          </v-date-picker>
+                      </v-menu>
+                  </v-col>
                     <v-col cols="12">
                         <v-divider></v-divider>
                     </v-col>
@@ -231,9 +262,12 @@
       </v-dialog>
     </div>
 </template>
+
 <script>
+
 import moment from 'moment';
 moment.locale('th');
+
 export default {
     props: {
         method: { type: Function },
@@ -248,20 +282,15 @@ export default {
     data() {
         return {
           valid:false,
-          menu: false,
-
+          menu1: false,
+          menu2: false,
           userOptions: [],
-          user_id: null,
           storeOptions: [],
-          store_id: null,
           locationOptions: [],
-          location_id: null,
           statusOptions: [],
-          status_id: null,
 
-          date: new Date().toISOString().substr(0, 10),
-          date_out: new Date().toISOString().substr(0, 10),
-
+          date1: new Date().toISOString().substr(0, 10),
+          date2: new Date().toISOString().substr(0, 10),
 
           modal: {
             complete: {
@@ -273,50 +302,48 @@ export default {
               message: 'ขออภัย กรุณากรอกข้อมูลให้ครบถ้วน',
             },
           },
-
         }
     },
 
     computed: {
-    formattedDate() {
-      return moment(this.data.date_out).format('Do MMMM YYYY');
-    },
+      formattedDateOut() {
+        return moment(this.data.date_out).format('Do MMMM YYYY')
+      },
+      formattedDateIn() {
+        return moment(this.data.date_in).format('Do MMMM YYYY')
+      },
   },
 
     async fetch() {
-      await Promise.all([
-        this.fetchUserData(),
-        this.fetchStoreData(),
-        this.fetchLocationData(),
-        this.fetchStatusData(),
-      ]);
+      await this.fetchUserData()
+      await this.fetchStoreData()
+      await this.fetchLocationData()
+      await this.fetchStatusData()
     },
 
     methods: {
-        async confirm() {
-            try {
-                this.$emit('update:edit', false)
-                await this.UpdateData(this.data.id)
-                // console.log(this.data)
-            } catch (error) {
-              // console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน1')
-                this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
-            }
-        },
+      async confirm() {
+        try {
+          this.$emit('update:edit', false)
+          await this.UpdateData(this.data.id)
+          console.log('ID : ' + this.data.id)
+        } catch (error) {
+          this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
+        }
+      },
         cancel() {
             this.$emit('update:edit', false)
         },
         async UpdateData() {
           try {
             const req = await this.$store.dispatch('api/product/putProducts', this.data);
-            // console.log(req);
             this.modal.complete.open = true; // แสดงข้อความเมื่อการอัปเดตสำเร็จ
+            console.log('Data:', this.data);
           } catch (error) {
-            // console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน2');
+            console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน2');
             this.modal.error.open = true; // แสดงข้อความผิดพลาดใน ModalError
           }
         },
-        
         async fetchUserData() {
             const user = await this.$store.dispatch(
               'api/user/getUsers'

@@ -68,7 +68,8 @@
               </v-card-actions>
               <v-card-subtitle>
                 ผู้รับผิดชอบ: {{ mapUser(product.user_id) }} <br>
-                แผนก: {{ mapDepartment(product.user_id) }}
+                แผนก: {{ mapDepartment(product.user_id) }} <br>
+                สถานที่: {{ mapLocation(product.location_id) }}
               </v-card-subtitle>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -110,9 +111,6 @@
                     <p>Storage: {{ product.storage }}</p>
                     <p>OS: {{ product.os }}</p>
                     <p>หมายเลขลิขสิทธิ์: {{ product.license }}</p>
-                    <p>ผู้รับผิดชอบ: {{ mapUser(product.user_id) }}</p>
-                    <p>แผนก: {{ mapDepartment(product.user_id) }}</p>
-                    <p>สถานที่: {{ mapLocation(product.location_id) }}</p>
                     <p>หมายเหตุ: {{ product.note }}</p>
                     <p>วันที่ลงทะเบียน: {{ formatDate(product.date_in) }}</p>
                     <p>วันที่ส่งมอบ: {{ formatDate(product.date_out) }}</p>
@@ -199,21 +197,22 @@ export default {
         return (
           product.brand.toLowerCase().includes(this.search.toLowerCase()) ||
           product.model.toLowerCase().includes(this.search.toLowerCase()) ||
-          this.mapUser(product.user_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.mapDepartment(product.department_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.mapLocation(product.location_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.mapStore(product.store_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.mapStatus(product.status_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
+          product.asset_number.toLowerCase().includes(this.search.toLowerCase())||
+          this.mapUser(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapDepartment(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapLocation(product.location_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapStore(product.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapStatus(product.status_id).toLowerCase().includes(this.search.toLowerCase())||
+          product.cpu.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.gpu.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.ram.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.storage.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.os.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.license.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.note.toLowerCase().includes(this.search.toLowerCase()) ||
+          this.formatDate(product.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.Expire(product.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.formatDate(product.date_out).toLowerCase().includes(this.search.toLowerCase())
         )
       })
     },
@@ -230,7 +229,7 @@ export default {
   methods: {
     async fetchProductData() {
       this.products = await this.$store.dispatch(
-        'api/product/getProducts'
+        'api/product/getNotebook'
       )
     },
 
@@ -345,30 +344,37 @@ export default {
       this.currentExpanded = this.currentExpanded === id ? null : id
     },
     formatDate(date) {
-      return moment(date).format('Do MMMM YYYY')
+      if (date) {
+        return moment(date).format('Do MMMM YYYY')
+      }
+      return 'ไม่มีข้อมูลวันที่'
     },
     Expire(date_in) {
-      return moment(date_in).add(3, 'years').format('Do MMMM YYYY')
+      if (date_in) {
+        return moment(date_in).add(3, 'years').format('Do MMMM YYYY')
+      }
+      return 'ไม่มีข้อมูลวันที่'
     },
     exportToExcel() {
       const worksheet = XLSX.utils.json_to_sheet(
         this.products.map((product) => {
           return {
-            รหัสทรัพย์สิน: product.asset_number,
-            ผู้รับผิดชอบ: this.mapUser(product.user_id),
             ยี่ห้อ: product.brand,
             รุ่น: product.model,
-            หน่วยประมวลผล: product.cpu,
-            หน่วยความจำ: product.ram,
-            หน่วยประมวลผลกราฟฟิค: product.gpu,
-            หน่วยจัดเก็บข้อมูล: product.storage,
-            ระบบปฏิบัติการ: product.os,
+            CPU: product.cpu,
+            RAM: product.ram,
+            GPU: product.gpu,
+            STORAGE: product.storage,
+            OS: product.os,
+            หมายเลขทรัพย์สิน: product.asset_number,
             หมายเลขลิขสิทธิ์: product.license,
-            สาขาที่ซื้อ: this.mapStore(product.store_id),
+            ผู้รับผิดชอบ: this.mapUser(product.user_id),
+            แผนก: this.mapDepartment(product.user_id),
+            สถานที่: this.mapLocation(product.location_id),
+            ร้านที่ซื้อ: this.mapStore(product.store_id),
             วันที่ลงทะเบียน: this.formatDate(product.date_in),
-            วันที่ส่งมอบ: this.formatDate(product.date_out),
             วันที่ประกันหมด: this.Expire(product.date_in),
-            วันที่ส่งมอบ: this.Expire(product.date_out),
+            วันที่ส่งมอบ: this.formatDate(product.date_out),
             สถานะ: this.mapStatus(product.status_id),
             หมายเหตุ: product.note,
           }

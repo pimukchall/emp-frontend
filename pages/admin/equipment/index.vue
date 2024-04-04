@@ -39,7 +39,7 @@
           <v-spacer></v-spacer>
           <v-col class="text-right">
             <v-btn elevation="2" rounded @click="gotoCreate"
-              >เพิ่มอุปกรณ์</v-btn
+              >เพิ่มรายการ</v-btn
             >
             <v-btn elevation="2" rounded @click="exportToExcel"
               >ออกรายงาน</v-btn
@@ -50,29 +50,32 @@
       <div>
         <v-row>
           <v-col
-            v-for="equipment in filtered"
-            :key="equipment.id"
+            v-for="product in filtered"
+            :key="product.id"
             cols="12"
             md="4"
           >
             <v-card elevation="6" shaped>
               <v-card-actions>
-                <v-card-title>{{ equipment.asset_number }}</v-card-title>
+                <v-card-title>
+                  {{ product.name }} <br>
+                  {{ mapLocation(product.location_id) }} <br>
+                  {{ product.asset_number }}
+                </v-card-title>
                 <v-spacer></v-spacer>
-                <v-chip :color="statusColor(equipment)" label text-color="white"
-                  >{{ statusCheck(equipment.status) }}
+                <v-chip :color="colorCheck(product.status_id)">
+                  {{ mapStatus(product.status_id) }}
                 </v-chip>
               </v-card-actions>
               <v-card-subtitle>
-                ผู้ถือครอง: {{ mapEmployee(equipment.employee_id) }}
-                <br />
-                ผู้รับผิดชอบ: {{ mapUser(equipment.user_id) }}
+                ผู้รับผิดชอบ: {{ mapUser(product.user_id) }} <br>
+                แผนก: {{ mapDepartment(product.user_id) }}
               </v-card-subtitle>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn icon @click="toggleExpansion(equipment.id)">
+                <v-btn icon @click="toggleExpansion(product.id)">
                   <v-icon>{{
-                    isExpanded(equipment.id)
+                    isExpanded(product.id)
                       ? 'mdi-chevron-up'
                       : 'mdi-chevron-down'
                   }}</v-icon>
@@ -81,7 +84,7 @@
                   class="ma-2"
                   color="success"
                   dark
-                  @click="openEditEquipmentDialog(equipment)"
+                  @click="openEditEquipmentDialog(product)"
                 >
                   แก้ไข
                   <v-icon dark right> mdi-pencil </v-icon>
@@ -90,38 +93,35 @@
                   class="ma-2"
                   color="red"
                   dark
-                  @click="deleteData(equipment.id)"
+                  @click="deleteData(product.id)"
                 >
                   ลบ
                   <v-icon dark right> mdi-cancel </v-icon>
                 </v-btn>
               </v-card-actions>
               <v-expand-transition>
-                <div v-show="isExpanded(equipment.id)">
+                <div v-show="isExpanded(product.id)">
                   <v-divider></v-divider>
                   <v-card-text>
-                    <p>ชื่อรายการ: {{ equipment.name }}</p>
-                    <p>สถานที่: {{ mapLocation(equipment.location_id) }}</p>
-                    <p>ร้านที่ซื้อ: {{ mapStore(equipment.store_id) }}</p>
-                    <p>รหัสทรัพย์สิน: {{ equipment.asset_number }}</p>
-                    <p>หมายเลขเอกสาร: {{ equipment.document_number }}</p>
-                    <p>ราคา: {{ equipment.price }}</p>
-                    <p>จำนวน: {{ equipment.quantity }}</p>
-                    <p>วันที่ลงทะเบียน: {{ formatDate(equipment.date_in) }}</p>
-                    <p>วันที่เบิก: {{ formatDate(equipment.date_out) }}</p>
-                    <p>หมายเหตุ: {{ equipment.note }}</p>
+                    <p>จำนวน: {{ product.quantity }}</p>
+                    <p>ราคา: {{ product.price }}</p>
+                    <p>เลขที่เอกสาร: {{ product.document_number }}</p>
+                    <p>ร้านที่ซื้อ: {{ mapStore(product.store_id) }}</p>
+                    <p>วันที่ลงทะเบียน: {{ formatDate(product.date_in) }}</p>
+                    <p>วันที่จัดส่ง: {{ formatDate(product.date_out) }}</p>
+                    <p>หมายเหตุ: {{ product.note }}</p>
                   </v-card-text>
                   <v-divider></v-divider>
                   <div>
                     <div class="text-center">
                       <qrcode-vue
                         v-if="showQR"
-                        :value="generateData(equipment)"
+                        :value="generateData(product)"
                         :size="200"
                       ></qrcode-vue>
                       <vue-barcode
                         v-else
-                        :value="equipment.asset_number"
+                        :value="product.asset_number"
                         :options="{ width: 1, height: 30 }"
                       ></vue-barcode>
                     </div>
@@ -152,11 +152,12 @@ export default {
   data() {
     return {
       search: '',
-      equipments: [],
+      products: [],
       location: [],
       users: [],
-      employees: [],
       store: [],
+      status: [],
+      departments: [],
       showQR: true,
 
       currentExpanded: null,
@@ -186,57 +187,35 @@ export default {
   },
   computed: {
     filtered() {
-      return this.equipments.filter((equipment) => {
+      return this.products.filter((product) => {
         return (
-          equipment.asset_number
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          equipment.name.toLowerCase().includes(this.search.toLowerCase()) ||
-          this.mapUser(equipment.user_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.mapEmployee(notebook.employee_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.mapLocation(equipment.location_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.mapStore(equipment.store_id)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          equipment.document_number
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          equipment.price
-            .toString()
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          equipment.quantity
-            .toString()
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.formatDate(equipment.date_in)
-            .toLowerCase()
-            .includes(this.search.toLowerCase()) ||
-          this.formatDate(equipment.date_out)
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
+          product.name.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.asset_number.toLowerCase().includes(this.search.toLowerCase() ||
+          this.mapUser(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapDepartment(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapStore(product.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapLocation(product.location_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapStatus(product.status_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.formatDate(product.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.formatDate(product.date_out).toLowerCase().includes(this.search.toLowerCase())
+          )
         )
       })
     },
   },
 
   async fetch() {
-    await this.fetchEquipmentData()
+    await this.fetchProductData()
     await this.fetchUserData()
+    await this.fetchDepartmentData()
     await this.fetchStoreData()
     await this.fetchLocationData()
-    await this.fetchEmployeeData()
+    await this.fetchStatusData()
   },
   methods: {
-    async fetchEquipmentData() {
-      this.equipments = await this.$store.dispatch(
-        'api/equipment/getEquipments'
+    async fetchProductData() {
+      this.products = await this.$store.dispatch(
+        'api/product/getEquipment'
       )
     },
 
@@ -244,8 +223,8 @@ export default {
       this.users = await this.$store.dispatch('api/user/getUsers')
     },
 
-    async fetchEmployeeData() {
-      this.employees = await this.$store.dispatch('api/employee/getEmployees')
+    async fetchDepartmentData() {
+      this.departments = await this.$store.dispatch('api/department/getDepartments')
     },
 
     async fetchStoreData() {
@@ -254,6 +233,10 @@ export default {
 
     async fetchLocationData() {
       this.location = await this.$store.dispatch('api/location/getLocations')
+    },
+
+    async fetchStatusData() {
+      this.status = await this.$store.dispatch('api/status/getStatus')
     },
 
     mapUser(id) {
@@ -265,13 +248,31 @@ export default {
       return 'ไม่มีข้อมูลผู้ใช้'
     },
 
-    mapEmployee(id) {
-      for (let i = 0; i < this.employees.length; i++) {
-        if (this.employees[i].id === id) {
-          return this.employees[i].fname + ' ' + this.employees[i].lname
+    mapDepartment(userId) {
+      // หาผู้ใช้จาก user_id ในรายการ users
+      const user = this.users.find(user => user.id === userId);
+      // ตรวจสอบว่ามีผู้ใช้หรือไม่
+      if (user) {
+        // หากมีผู้ใช้ ให้ค้นหา department_id จากผู้ใช้
+        const departmentId = user.department_id;
+        // ตรวจสอบว่า department_id มีค่าหรือไม่
+        if (departmentId !== undefined && departmentId !== null) {
+          // หากมีค่า ให้ค้นหาชื่อแผนกจากรายการ departments
+          const department = this.departments.find(department => department.id === departmentId);
+          // ตรวจสอบว่ามีข้อมูลแผนกหรือไม่
+          if (department) {
+            return department.name;
+          } else {
+            return 'ไม่มีข้อมูลแผนก';
+          }
+        } else {
+          // หากไม่มีค่า department_id
+          return 'ไม่มีข้อมูลแผนก';
         }
+      } else {
+        // หากไม่พบผู้ใช้
+        return 'ไม่มีข้อมูลผู้ใช้';
       }
-      return 'ไม่มีข้อมูลผู้ใช้'
     },
 
     mapStore(id) {
@@ -292,12 +293,22 @@ export default {
       return 'ไม่มีข้อมูลสถานที่'
     },
 
+    mapStatus(id) {
+      for (let i = 0; i < this.status.length; i++) {
+        if (this.status[i].id === id) {
+          return this.status[i].name
+        }
+      }
+      return 'ไม่มีข้อมูลสถานะ'
+    },
+
     async deleteData(id) {
       try {
         const req = await this.$store.dispatch(
-          'api/equipment/deleteEquipments',
+          'api/product/deleteProducts',
           { params: { id } }
         )
+        this.modal.complete.open = true
         this.$fetch()
       } catch (error) {
         this.modal.error.open = true
@@ -323,21 +334,21 @@ export default {
     },
     exportToExcel() {
       const worksheet = XLSX.utils.json_to_sheet(
-        this.equipments.map((equipment) => {
+        this.products.map((product) => {
           return {
-            รหัสทรัทย์สิน: equipment.asset_number,
-            ชื่อรายการ: equipment.name,
-            ผู้รับผิดชอบ: this.mapUser(equipment.user_id),
-            ผู้ถือครอง: this.mapEmployee(equipment.employee_id),
-            สถานที่: this.mapLocation(equipment.location_id),
-            ร้านที่ซื้อ: this.mapStore(equipment.store_id),
-            หมายเลขเอกสาร: equipment.document_number,
-            ราคา: equipment.price,
-            จำนวน: equipment.quantity,
-            สถานะ: this.statusCheck(equipment.status),
-            วันที่ลงทะเบียน: this.formatDate(equipment.date_in),
-            วันที่เบิก: this.formatDate(equipment.date_out),
-            หมายเหตุ: equipment.note,
+            'ชื่ออุปกรณ์': product.name,
+            'จำนวน': product.quantity,
+            'ราคา': product.price,
+            'หมายเลขครุภัณฑ์': product.asset_number,
+            'เลขที่เอกสาร': product.document_number,
+            'ผู้รับผิดชอบ': this.mapUser(product.user_id),
+            'แผนก': this.mapDepartment(product.user_id),
+            'ร้านที่ซื้อ': this.mapStore(product.store_id),
+            'สถานที่': this.mapLocation(product.location_id),
+            'สถานะ': this.mapStatus(product.status_id),
+            'วันที่ลงทะเบียน': this.formatDate(product.date_in),
+            'วันที่จัดส่ง': this.formatDate(product.date_out),
+            'หมายเหตุ': product.note,
           }
         })
       )
@@ -345,37 +356,38 @@ export default {
       XLSX.utils.book_append_sheet(workbook, worksheet, 'รายการอุปกรณ์')
       XLSX.writeFile(workbook, 'รายการอุปกรณ์.xlsx')
     },
-    statusCheck(status) {
-      if (status === 0) {
-        return 'In use'
-      } else if (status === 1) {
-        return 'Write off'
-      } else if (status === 2) {
-        return 'Available'
-      }
-    },
-    statusColor(notebook) {
-      if (notebook.status === 0) {
-        return 'success'
-      } else if (notebook.status === 1) {
-        return 'error'
-      } else if (notebook.status === 2) {
-        return 'warning'
-      }
-    },
-    generateData(equipment) {
+    generateData(product) {
       return JSON.stringify({
-        รหัสทรัพย์สิน: equipment.asset_number,
-        ชื่อรายการ: equipment.name,
-        สถานที่: this.mapLocation(equipment.location_id),
-        ผู้ถือครอง: this.mapEmployee(equipment.employee_id),
-        สถานะ: this.statusCheck(equipment.status),
-        วันที่ลงทะเบียน: this.formatDate(equipment.created_at),
-        วันที่เบิก: this.formatDate(equipment.date_out),
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price,
+        asset_number: product.asset_number,
+        document_number: product.document_number,
+        user: this.mapUser(product.user_id),
+        department: this.mapDepartment(product.user_id),
+        store: this.mapStore(product.store_id),
+        location: this.mapLocation(product.location_id),
+        status: this.mapStatus(product.status_id),
+        date_in: this.formatDate(product.date_in),
+        date_out: this.formatDate(product.date_out),
       })
     },
     toggleDisplay() {
       this.showQR = !this.showQR
+    },
+
+    colorCheck(status) {
+      if (status === 1) {
+        return 'success'
+      } else if (status === 2) {
+        return 'warning'
+      } else if (status === 3) {
+        return 'info'
+      } else if (status === 4) {
+        return 'error' 
+      } else {
+        return 'grey'
+      }  
     },
   },
 }

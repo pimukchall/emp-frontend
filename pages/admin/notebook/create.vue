@@ -119,7 +119,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="uSer"
+                  :items="userOptions"
                   v-model="form.user_id"
                   item-text="fname"
                   item-value="id"
@@ -132,7 +132,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-select
-                  :items="sTore"
+                  :items="storeOptions"
                   v-model="form.store_id"
                   item-text="name"
                   item-value="id"
@@ -145,8 +145,7 @@
               </v-col>
               <v-col cols="12" sm="6">
                   <v-select
-                    :items="lOcation"
-                    v-model="form.location_id"
+                    :items="locationOptions"                    v-model="form.location_id"
                     item-text="name"
                     item-value="id"
                     :rules="[(v) => !!v || 'กรุณาเลือกสถานที่ตั้ง']"
@@ -158,7 +157,7 @@
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-select
-                    :items="sTatus"
+                    :items="statusOptions"
                     v-model="form.status_id"
                     item-text="name"
                     item-value="id"
@@ -269,11 +268,10 @@ export default {
         category_id: 1,
 
       },
-      uSer: [],
-      sTore: [],
-      emPloyee: [],
-      lOcation: [],
-      sTatus: [],
+      userOptions: [],
+      storeOptions: [],
+      locationOptions: [],
+      statusOptions: [],
 
       menu: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
@@ -304,7 +302,7 @@ export default {
 
   computed: {
     formattedDate() {
-      return moment(this.form.date_in).format('Do MMMM YYYY')
+      return moment(this.date).format('Do MMMM YYYY')
     },
   },
 
@@ -336,20 +334,20 @@ export default {
       this.$router.push('/admin/notebook')
     },
     async fetchUserData() {
-      const USer = await this.$store.dispatch('api/user/getUsers')
-      this.uSer = USer
+      const user = await this.$store.dispatch('api/user/getUsers')
+      this.userOptions = user
     },
     async fetchStoreData() {
-      const STore = await this.$store.dispatch('api/store/getStores')
-      this.sTore = STore
+      const store = await this.$store.dispatch('api/store/getStores')
+      this.storeOptions = store
     },
     async fetchLocationData() {
-      const LOcation = await this.$store.dispatch('api/location/getLocations')
-      this.lOcation = LOcation
+      const location = await this.$store.dispatch('api/location/getLocations')
+      this.locationOptions = location
     },
     async fetchStatusData() {
-      const STatus = await this.$store.dispatch('api/status/getStatus')
-      this.sTatus = STatus
+      const status = await this.$store.dispatch('api/status/getStatus')
+      this.statusOptions = status
     }
   },
 }
