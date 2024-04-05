@@ -18,6 +18,8 @@
     />
     <UserEditDialog :open="editDialog" :edit.sync="editDialog" :data="editData" />
     <UserEditPassword :open="editPasswordDialog" :edit.sync="editPasswordDialog" :data="editPasswordData" />
+    <UserEditUpload :open="editUploadDialog" :edit.sync="editUploadDialog" :data="editUploadData" />
+    
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
     <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
     <div v-else>
@@ -41,7 +43,7 @@
             <v-card elevation="6" shaped>
               <v-col cols="12" md="4">
                 <v-avatar color="primary" size="75">
-                  <v-img :src="user.image" alt="Avatar"></v-img>
+                  <v-img :src="`Emperor-Warehouse-Database/${user.file}`" />
                 </v-avatar>
               </v-col>
               <v-card-title>
@@ -60,17 +62,32 @@
                   <v-icon>{{ isExpanded(user.id) ? 'mdi-chevron-up' :
                   'mdi-chevron-down' }}</v-icon>
                 </v-btn>
-                <v-btn class="ma-2" color="success" dark @click="openEditUserDialog(user)">
-                  แก้ไขข้อมูล
-                  <v-icon dark right>
-                    mdi-pencil
-                  </v-icon>
-                </v-btn>
-                <v-btn class="ma-2" color="red" dark @click="confirmDelete(user.id)">
-                  ลบ
-                  <v-icon dark right>
-                    mdi-cancel
-                  </v-icon>
+                <v-btn class="mr-2">
+                  <v-menu offset-y>
+                    <template v-slot:activator="{ on }">
+                      <v-btn icon v-on="on">
+                        <v-icon>mdi-dots-vertical</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-list>
+                      <v-list-item @click="openEditUserDialog(user)">
+                        <v-icon class="ml-2">mdi-pencil</v-icon>
+                        <v-list-item-title class="ml-2" dense>แก้ไข</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="openEditPasswordDialog(user)">
+                        <v-icon class="ml-2">mdi-lock</v-icon>
+                        <v-list-item-title class="ml-2" dense>เปลี่ยนรหัสผ่าน</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="openEditUploadDialog(user)">
+                        <v-icon class="ml-2">mdi-upload</v-icon>
+                        <v-list-item-title class="ml-2" dense>อัพโหลด</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="confirmDelete(user.id)">
+                        <v-icon class="ml-2">mdi-delete</v-icon>
+                        <v-list-item-title class="ml-2" dense>ลบ</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
                 </v-btn>
               </v-card-actions>
               <v-expand-transition>
@@ -83,9 +100,6 @@
                     <p>เบอร์ติดต่อ : {{ user.phone }}</p>
                     <p>วันที่สมัคร : {{ formatDate(user.date_in) }}</p>
                   </v-card-text>
-                  <v-btn class="ma-2" color="warning" dark @click="openEditPasswordDialog(user)">
-                    เปลี่ยนรหัสผ่าน
-                  </v-btn>
                 </div>
               </v-expand-transition>
             </v-card>
@@ -117,6 +131,9 @@ export default {
 
       editPasswordDialog: false,
       editPasswordData: {},
+
+      editUploadDialog: false,
+      editUploadData: {},
 
       modal: {
         confirm: {
@@ -154,6 +171,9 @@ export default {
   methods: {
     async fetchUserData() {
       this.users = await this.$store.dispatch('api/user/getUsers');
+    },
+    async fetchFile(){
+      this.files = await this.$store.dispatch('api/file/getFiles');
     },
     async fetchDepartmentData() {
       this.departments = await this.$store.dispatch('api/department/getDepartments');
@@ -205,6 +225,11 @@ export default {
     openEditPasswordDialog(data) {
       this.editPasswordData = data;
       this.editPasswordDialog = true;
+    },
+
+    openEditUploadDialog(data) {
+      this.editUploadData = data;
+      this.editUploadDialog = true;
     },
 
     isExpanded(id) {

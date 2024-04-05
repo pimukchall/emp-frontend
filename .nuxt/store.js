@@ -21,6 +21,7 @@ let store = {};
 
   resolveStoreModules(require('../store/api/categories.js'), 'api/categories.js')
   resolveStoreModules(require('../store/api/department.js'), 'api/department.js')
+  resolveStoreModules(require('../store/api/file.js'), 'api/file.js')
   resolveStoreModules(require('../store/api/location.js'), 'api/location.js')
   resolveStoreModules(require('../store/api/log.js'), 'api/log.js')
   resolveStoreModules(require('../store/api/product.js'), 'api/product.js')
@@ -37,6 +38,7 @@ let store = {};
       '../store/index.js',
       '../store/api/categories.js',
       '../store/api/department.js',
+      '../store/api/file.js',
       '../store/api/location.js',
       '../store/api/log.js',
       '../store/api/product.js',

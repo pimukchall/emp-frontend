@@ -17,6 +17,7 @@ You can directly use them in pages and other components without the need to impo
 - `<ModalError>` | `<modal-error>` (components/Modal/Error.vue)
 - `<ModalLoading>` | `<modal-loading>` (components/Modal/Loading.vue)
 - `<NotebookEditDialog>` | `<notebook-edit-dialog>` (components/Notebook/EditDialog.vue)
+- `<StoreEditDialog>` | `<store-edit-dialog>` (components/Store/EditDialog.vue)
 - `<UserEditDialog>` | `<user-edit-dialog>` (components/User/EditDialog.vue)
 - `<UserEditPassword>` | `<user-edit-password>` (components/User/EditPassword.vue)
-- `<StoreEditDialog>` | `<store-edit-dialog>` (components/Store/EditDialog.vue)
+- `<UserEditUpload>` | `<user-edit-upload>` (components/User/EditUpload.vue)

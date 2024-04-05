@@ -29,9 +29,4 @@ export const actions = {
         .delete('api/users/delete', data)
         .then((res) => res.data)
     },
-    async postImage ({ getters }, data) {
-        return await this.$axios
-        .post('api/users/postImage', data)
-        .then((res) => res.data)
-    },
 }

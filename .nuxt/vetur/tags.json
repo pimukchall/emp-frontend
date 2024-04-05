@@ -32,13 +32,16 @@
   "NotebookEditDialog": {
     "description": "Auto imported from components/Notebook/EditDialog.vue"
   },
+  "StoreEditDialog": {
+    "description": "Auto imported from components/Store/EditDialog.vue"
+  },
   "UserEditDialog": {
     "description": "Auto imported from components/User/EditDialog.vue"
   },
   "UserEditPassword": {
     "description": "Auto imported from components/User/EditPassword.vue"
   },
-  "StoreEditDialog": {
-    "description": "Auto imported from components/Store/EditDialog.vue"
+  "UserEditUpload": {
+    "description": "Auto imported from components/User/EditUpload.vue"
   }
 }

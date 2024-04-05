@@ -9,9 +9,10 @@ export { default as ModalConfirmLogout } from '../../components/Modal/ConfirmLog
 export { default as ModalError } from '../../components/Modal/Error.vue'
 export { default as ModalLoading } from '../../components/Modal/Loading.vue'
 export { default as NotebookEditDialog } from '../../components/Notebook/EditDialog.vue'
+export { default as StoreEditDialog } from '../../components/Store/EditDialog.vue'
 export { default as UserEditDialog } from '../../components/User/EditDialog.vue'
 export { default as UserEditPassword } from '../../components/User/EditPassword.vue'
-export { default as StoreEditDialog } from '../../components/Store/EditDialog.vue'
+export { default as UserEditUpload } from '../../components/User/EditUpload.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
