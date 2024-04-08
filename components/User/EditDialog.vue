@@ -212,7 +212,7 @@ export default {
         },
         error: {
           open: false,
-          message: '',
+          message: 'ขออภัย กรุณากรอกข้อมูลให้ครบถ้วน',
         },
       },
     }

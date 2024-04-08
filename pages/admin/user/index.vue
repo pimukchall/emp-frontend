@@ -197,6 +197,7 @@ export default {
       }
       return 'ไม่มีสิทธิ์';
     },
+
     confirmDelete(id) {
       this.modal.confirm.open = true;
       this.modal.confirm.message = 'ยืนยันการลบข้อมูลหรือไม่?';
@@ -204,10 +205,15 @@ export default {
     },
     async deleteData() {
       try {
+
         const req = await this.$store.dispatch('api/user/deleteUsers', { params: { id: this.modal.confirm.id } });
+        
         this.modal.complete.open = true;
+
         this.recordLogDelete(this.modal.confirm.id);
+
         this.$fetch();
+
       } catch (error) {
         this.modal.error.open = true;
         this.modal.error.message = 'ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่';
@@ -266,8 +272,8 @@ export default {
       const user = this.users.find(user => user.id === id);
       const log = {
         user_id: this.$auth.user.id,
-        action: 'ลบ',
-        description: this.$auth.user.email + ' ' + 'ลบผู้ใช้' + ' ' + user.email + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        action: 'ลบข้อมูล',
+        description: this.$auth.user.email + ' ' + 'ลบข้อมูลผู้ใช้' + ' ' + user.email + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       };
       console.log(log);

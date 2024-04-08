@@ -3,8 +3,8 @@
     <ModalConfirm
       :open="modal.confirm.open"
       :message="modal.confirm.message"
-      :method="deleteData"
       :confirm.sync="modal.confirm.open"
+      :method="deleteData"
     />
     <ModalComplete
       :open="modal.complete.open"
@@ -80,23 +80,24 @@
                       : 'mdi-chevron-down'
                   }}</v-icon>
                 </v-btn>
-                <v-btn
-                  class="ma-2"
-                  color="success"
-                  dark
-                  @click="openEditNotebookDialog(product)"
-                >
-                  แก้ไข
-                  <v-icon dark right> mdi-pencil </v-icon>
-                </v-btn>
-                <v-btn
-                  class="ma-2"
-                  color="red"
-                  dark
-                  @click="deleteData(product.id)"
-                >
-                  ลบ
-                  <v-icon dark right> mdi-cancel </v-icon>
+                <v-btn class="mr-2">
+                  <v-menu offset-y>
+                    <template v-slot:activator="{ on }">
+                      <v-btn icon v-on="on">
+                        <v-icon>mdi-dots-vertical</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-list>
+                      <v-list-item @click="openEditNotebookDialog(product)">
+                        <v-icon class="ml-2">mdi-pencil</v-icon>
+                        <v-list-item-title class="ml-2" dense>แก้ไข</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="confirmDelete(product.id)">
+                        <v-icon class="ml-2">mdi-delete</v-icon>
+                        <v-list-item-title class="ml-2" dense>ลบ</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
                 </v-btn>
               </v-card-actions>
               <v-expand-transition>
@@ -170,6 +171,9 @@ export default {
 
       editDialog: false,
       editData: {},
+
+      // editUploadDialog: false,
+      // editUploadData: {},
 
       modal: {
         confirm: {
@@ -316,18 +320,26 @@ export default {
       return 'ไม่มีข้อมูลสถานะ'
     },
 
-    async deleteData(id) {
+    confirmDelete(id) {
+      this.modal.confirm.open = true;
+      this.modal.confirm.message = 'ยืนยันการลบข้อมูลหรือไม่?';
+      this.modal.confirm.id = id;
+    },
+
+    async deleteData() {
       try {
-        const req = await this.$store.dispatch(
-          'api/product/deleteProducts',
-          { params: { id } }
-        )
+
+        const req = await this.$store.dispatch('api/product/deleteProducts', { params: { id: this.modal.confirm.id } });
+  
         this.modal.complete.open = true
+
+        this.recordLogDelete(this.modal.confirm.id);
+
         this.$fetch()
+        
       } catch (error) {
         this.modal.error.open = true
-        this.modal.error.message =
-          'ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่'
+        this.modal.error.message ='ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่'
       }
     },
     gotoCreate() {
@@ -383,6 +395,7 @@ export default {
       const workbook = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(workbook, worksheet, 'รายการโน๊ตบุ๊ค')
       XLSX.writeFile(workbook, 'รายการโน๊ตบุ๊ค.xlsx')
+      this.recordLogExport()
     },
     generateData(product) {
       return JSON.stringify({
@@ -419,6 +432,27 @@ export default {
       } else {
         return 'grey'
       }  
+    },
+    async recordLogDelete(id) {
+      const product = this.products.find(product => product.id === id);
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'ลบข้อมูล',
+        description: this.$auth.user.email + ' ' + 'ลบข้อมูลโน๊ตบุ๊ค' + ' ' + product.asset_number + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      };
+      console.log(log);
+      this.$store.dispatch('api/log/postLogs', log);
+    },
+    recordLogExport() {
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'ออกรายงาน',
+        description: this.$auth.user.email + ' ' + 'ออกรายงานโน๊ตบุ๊ค' + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      };
+      console.log(log);
+      this.$store.dispatch('api/log/postLogs', log);
     },
   },
 }

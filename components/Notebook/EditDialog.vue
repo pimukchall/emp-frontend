@@ -1,5 +1,11 @@
 <template>
     <div>
+      <ModalConfirm
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
+      :confirm.sync="modal.confirm.open"
+      :method="UpdateData"
+    />
     <ModalComplete
       :open="modal.complete.open"
       :message="modal.complete.message"
@@ -293,6 +299,10 @@ export default {
           date2: new Date().toISOString().substr(0, 10),
 
           modal: {
+            confirm: {
+            open: false,
+            message: 'ยืนยันการแก้ไขข้อมูลหรือไม่?',
+          },
             complete: {
               open: false,
               message: 'แก้ไขข้อมูลสำเร็จ',
@@ -325,8 +335,9 @@ export default {
       async confirm() {
         try {
           this.$emit('update:edit', false)
-          await this.UpdateData(this.data.id)
-          console.log('ID : ' + this.data.id)
+          this.modal.confirm.open = true
+          // await this.UpdateData(this.data.id)
+          // console.log('ID : ' + this.data.id)
         } catch (error) {
           this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
         }
@@ -339,6 +350,7 @@ export default {
             const req = await this.$store.dispatch('api/product/putProducts', this.data);
             this.modal.complete.open = true; // แสดงข้อความเมื่อการอัปเดตสำเร็จ
             console.log('Data:', this.data);
+            this.recordLogUpdate(this.data.id);
           } catch (error) {
             console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน2');
             this.modal.error.open = true; // แสดงข้อความผิดพลาดใน ModalError
@@ -368,6 +380,17 @@ export default {
               )
             this.statusOptions = status
         },
+      recordLogUpdate(id) {
+      const product = this.data.brand + ' ' + this.data.model
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'อัพเดทข้อมูล',
+        description: this.$auth.user.email + ' ' + 'อัพเดทข้อมูลโน๊ตบุ๊ค' + ' ' + product + ' ' + 'เวลา' + ' ' + moment(new Date()).format('HH:mm:ss') + ' ' + 'วันที่' + ' ' + moment(new Date()).format('YYYY-MM-DD'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log)
+      this.$store.dispatch('api/log/postLogs', log)
+    },
     },
 }
 </script>
