@@ -130,6 +130,11 @@ export default {
   methods: {
     async confirm() {
       try {
+        if (!this.$refs.form.validate()) {
+          this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
+          this.modal.error.open = true
+          return
+        }
         this.$emit('update:edit', false);
         this.modal.confirm.open = true;
       } catch (error) {

@@ -1,5 +1,11 @@
 <template>
   <div>
+    <ModalConfirm
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
+      :confirm.sync="modal.confirm.open"
+      :method="UploadFile"
+    />
     <ModalComplete
       :open="modal.complete.open"
       :message="modal.complete.message"
@@ -28,15 +34,23 @@
               <v-col cols="12">
                 <v-file-input
                   v-model="file"
+                  :rules="[
+                    (v) => !!v || 'กรุณาเลือกรูปภาพ', 
+                  ]"
                   accept="image/*"
                   label="เลือกรูปภาพ"
                   outlined
+                  required
                 ></v-file-input>
               </v-col>
               <v-col cols="12">
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" @click="UploadFile" class="font-weight-medium mt-3">อัพโหลด</v-btn>
+                  <v-btn color="primary" 
+                    @click="confirm" 
+                    :disabled="!valid"
+                    depressed 
+                    class="font-weight-medium mt-3">อัพโหลด</v-btn>
                   <v-btn color="error" @click="cancel" class="font-weight-medium mt-3">ยกเลิก</v-btn>
                 </v-card-actions>
               </v-col>
@@ -88,7 +102,19 @@ export default {
   },
 
   methods: {
-
+    async confirm() {
+      try {
+        if (!this.$refs.form.validate()) {
+          this.modal.error.message = 'กรุณาเลือกรูปภาพ'
+          this.modal.error.open = true
+          return
+        }
+        this.$emit('update:edit', false)
+        this.modal.confirm.open = true
+      } catch (error) {
+        this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
+      }
+    },
     cancel() {
       this.$emit('update:edit', false)
     },

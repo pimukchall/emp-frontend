@@ -14,5 +14,10 @@ export const actions = {
         return await this.$axios
         .put('api/files/updatePath', data)
         .then((res) => res.data)
-    }
+    },
+    async deleteFiles ({ getters }, data) {
+        return await this.$axios
+        .delete('api/files/delete', data)
+        .then((res) => res.data)
+    },
 }
