@@ -43,12 +43,13 @@
             <v-card elevation="6" shaped>
               <v-col cols="12" md="4">
                 <v-avatar color="primary" size="75">
-                  <v-img :src="`Emperor-Warehouse-Database/${user.file}`" />
+                  <v-img :src="`http://localhost:3001/${user.file}`" />
                 </v-avatar>
               </v-col>
               <v-card-title>
                 {{ user.fname }} <br>
                 {{ user.empcode }}
+                {{ user.file }}
               </v-card-title>
               <v-card-subtitle>
                 แผนก: {{ mapDataDepartment(user.department_id) }}

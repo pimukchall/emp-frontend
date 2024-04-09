@@ -384,6 +384,7 @@ export default {
       const product = this.data.brand + ' ' + this.data.model
       const log = {
         user_id: this.$auth.user.id,
+        product_id: id,
         action: 'อัพเดทข้อมูล',
         description: this.$auth.user.email + ' ' + 'อัพเดทข้อมูลโน๊ตบุ๊ค' + ' ' + product + ' ' + 'เวลา' + ' ' + moment(new Date()).format('HH:mm:ss') + ' ' + 'วันที่' + ' ' + moment(new Date()).format('YYYY-MM-DD'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),

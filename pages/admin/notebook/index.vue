@@ -437,6 +437,7 @@ export default {
       const product = this.products.find(product => product.id === id);
       const log = {
         user_id: this.$auth.user.id,
+        product_id: id,
         action: 'ลบข้อมูล',
         description: this.$auth.user.email + ' ' + 'ลบข้อมูลโน๊ตบุ๊ค' + ' ' + product.asset_number + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),

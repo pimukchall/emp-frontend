@@ -99,7 +99,9 @@ export default {
           const formData = new FormData()
           formData.append('file', this.file)
           const req = await this.$store.dispatch('api/file/postFiles', formData)
-          const uploadedFilePath = req.path
+          let uploadedFilePath = req.path
+          uploadedFilePath = uploadedFilePath.replace(/\\/g, '/')
+
           console.log('Upload:', uploadedFilePath)
           this.modal.complete.open = true
 
