@@ -4,27 +4,28 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _73ab5a62 = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
-const _4e1b33b4 = () => interopDefault(import('../pages/admin/equipment/index.vue' /* webpackChunkName: "pages/admin/equipment/index" */))
-const _0a94b462 = () => interopDefault(import('../pages/admin/home/index.vue' /* webpackChunkName: "pages/admin/home/index" */))
-const _3bbeeaa5 = () => interopDefault(import('../pages/admin/location/index.vue' /* webpackChunkName: "pages/admin/location/index" */))
-const _1dcbf54b = () => interopDefault(import('../pages/admin/notebook/index.vue' /* webpackChunkName: "pages/admin/notebook/index" */))
-const _6b070e72 = () => interopDefault(import('../pages/admin/store/index.vue' /* webpackChunkName: "pages/admin/store/index" */))
-const _7f14e5bb = () => interopDefault(import('../pages/admin/user/index.vue' /* webpackChunkName: "pages/admin/user/index" */))
-const _23459122 = () => interopDefault(import('../pages/auth/login.vue' /* webpackChunkName: "pages/auth/login" */))
-const _7006f70d = () => interopDefault(import('../pages/auth/register.vue' /* webpackChunkName: "pages/auth/register" */))
-const _2498e208 = () => interopDefault(import('../pages/user/department/index.vue' /* webpackChunkName: "pages/user/department/index" */))
-const _8c829b8c = () => interopDefault(import('../pages/user/equipment/index.vue' /* webpackChunkName: "pages/user/equipment/index" */))
-const _cbe2f942 = () => interopDefault(import('../pages/user/location/index.vue' /* webpackChunkName: "pages/user/location/index" */))
-const _7c1b8e05 = () => interopDefault(import('../pages/user/notebook/index.vue' /* webpackChunkName: "pages/user/notebook/index" */))
-const _2bffab66 = () => interopDefault(import('../pages/user/store/index.vue' /* webpackChunkName: "pages/user/store/index" */))
-const _399c2916 = () => interopDefault(import('../pages/user/user/index.vue' /* webpackChunkName: "pages/user/user/index" */))
-const _c600e4ec = () => interopDefault(import('../pages/admin/equipment/create.vue' /* webpackChunkName: "pages/admin/equipment/create" */))
-const _63d2b4b9 = () => interopDefault(import('../pages/admin/location/create.vue' /* webpackChunkName: "pages/admin/location/create" */))
-const _7932025a = () => interopDefault(import('../pages/admin/notebook/create.vue' /* webpackChunkName: "pages/admin/notebook/create" */))
-const _a6722a52 = () => interopDefault(import('../pages/admin/store/create.vue' /* webpackChunkName: "pages/admin/store/create" */))
-const _a313d856 = () => interopDefault(import('../pages/admin/user/profile/index.vue' /* webpackChunkName: "pages/admin/user/profile/index" */))
-const _17abf7b5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _4a6b6fb9 = () => interopDefault(import('..\\pages\\home\\index.vue' /* webpackChunkName: "pages/home/index" */))
+const _757c7f8e = () => interopDefault(import('..\\pages\\admin\\equipment\\index.vue' /* webpackChunkName: "pages/admin/equipment/index" */))
+const _756be224 = () => interopDefault(import('..\\pages\\admin\\home\\index.vue' /* webpackChunkName: "pages/admin/home/index" */))
+const _208688d8 = () => interopDefault(import('..\\pages\\admin\\location\\index.vue' /* webpackChunkName: "pages/admin/location/index" */))
+const _ffca5a1c = () => interopDefault(import('..\\pages\\admin\\notebook\\index.vue' /* webpackChunkName: "pages/admin/notebook/index" */))
+const _26fc7cf4 = () => interopDefault(import('..\\pages\\admin\\store\\index.vue' /* webpackChunkName: "pages/admin/store/index" */))
+const _665a66fc = () => interopDefault(import('..\\pages\\admin\\user\\index.vue' /* webpackChunkName: "pages/admin/user/index" */))
+const _f21ffb32 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
+const _db0eadd6 = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
+const _7659aabb = () => interopDefault(import('..\\pages\\user\\department\\index.vue' /* webpackChunkName: "pages/user/department/index" */))
+const _6dc715d9 = () => interopDefault(import('..\\pages\\user\\equipment\\index.vue' /* webpackChunkName: "pages/user/equipment/index" */))
+const _0d2fff38 = () => interopDefault(import('..\\pages\\user\\location\\index.vue' /* webpackChunkName: "pages/user/location/index" */))
+const _6cc44952 = () => interopDefault(import('..\\pages\\user\\notebook\\index.vue' /* webpackChunkName: "pages/user/notebook/index" */))
+const _5352e726 = () => interopDefault(import('..\\pages\\user\\store\\index.vue' /* webpackChunkName: "pages/user/store/index" */))
+const _1a7672e2 = () => interopDefault(import('..\\pages\\user\\user\\index.vue' /* webpackChunkName: "pages/user/user/index" */))
+const _0aaa91a5 = () => interopDefault(import('..\\pages\\admin\\equipment\\create.vue' /* webpackChunkName: "pages/admin/equipment/create" */))
+const _17fedce6 = () => interopDefault(import('..\\pages\\admin\\location\\create.vue' /* webpackChunkName: "pages/admin/location/create" */))
+const _aa1853e8 = () => interopDefault(import('..\\pages\\admin\\notebook\\create.vue' /* webpackChunkName: "pages/admin/notebook/create" */))
+const _ea131bce = () => interopDefault(import('..\\pages\\admin\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/admin/notebook/profile/index" */))
+const _692a8c10 = () => interopDefault(import('..\\pages\\admin\\store\\create.vue' /* webpackChunkName: "pages/admin/store/create" */))
+const _74763a89 = () => interopDefault(import('..\\pages\\admin\\user\\profile\\index.vue' /* webpackChunkName: "pages/admin/user/profile/index" */))
+const _01865810 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -39,87 +40,91 @@ export const routerOptions = {
 
   routes: [{
     path: "/home",
-    component: _73ab5a62,
+    component: _4a6b6fb9,
     name: "home"
   }, {
     path: "/admin/equipment",
-    component: _4e1b33b4,
+    component: _757c7f8e,
     name: "admin-equipment"
   }, {
     path: "/admin/home",
-    component: _0a94b462,
+    component: _756be224,
     name: "admin-home"
   }, {
     path: "/admin/location",
-    component: _3bbeeaa5,
+    component: _208688d8,
     name: "admin-location"
   }, {
     path: "/admin/notebook",
-    component: _1dcbf54b,
+    component: _ffca5a1c,
     name: "admin-notebook"
   }, {
     path: "/admin/store",
-    component: _6b070e72,
+    component: _26fc7cf4,
     name: "admin-store"
   }, {
     path: "/admin/user",
-    component: _7f14e5bb,
+    component: _665a66fc,
     name: "admin-user"
   }, {
     path: "/auth/login",
-    component: _23459122,
+    component: _f21ffb32,
     name: "auth-login"
   }, {
     path: "/auth/register",
-    component: _7006f70d,
+    component: _db0eadd6,
     name: "auth-register"
   }, {
     path: "/user/department",
-    component: _2498e208,
+    component: _7659aabb,
     name: "user-department"
   }, {
     path: "/user/equipment",
-    component: _8c829b8c,
+    component: _6dc715d9,
     name: "user-equipment"
   }, {
     path: "/user/location",
-    component: _cbe2f942,
+    component: _0d2fff38,
     name: "user-location"
   }, {
     path: "/user/notebook",
-    component: _7c1b8e05,
+    component: _6cc44952,
     name: "user-notebook"
   }, {
     path: "/user/store",
-    component: _2bffab66,
+    component: _5352e726,
     name: "user-store"
   }, {
     path: "/user/user",
-    component: _399c2916,
+    component: _1a7672e2,
     name: "user-user"
   }, {
     path: "/admin/equipment/create",
-    component: _c600e4ec,
+    component: _0aaa91a5,
     name: "admin-equipment-create"
   }, {
     path: "/admin/location/create",
-    component: _63d2b4b9,
+    component: _17fedce6,
     name: "admin-location-create"
   }, {
     path: "/admin/notebook/create",
-    component: _7932025a,
+    component: _aa1853e8,
     name: "admin-notebook-create"
   }, {
+    path: "/admin/notebook/profile",
+    component: _ea131bce,
+    name: "admin-notebook-profile"
+  }, {
     path: "/admin/store/create",
-    component: _a6722a52,
+    component: _692a8c10,
     name: "admin-store-create"
   }, {
     path: "/admin/user/profile",
-    component: _a313d856,
+    component: _74763a89,
     name: "admin-user-profile"
   }, {
     path: "/",
-    component: _17abf7b5,
+    component: _01865810,
     name: "index"
   }],
 

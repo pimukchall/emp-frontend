@@ -5,14 +5,11 @@
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },
-  "EquipmentEditDialog": {
-    "description": "Auto imported from components/Equipment/EditDialog.vue"
+  "LoadingLineLoading": {
+    "description": "Auto imported from components/Loading/LineLoading.vue"
   },
-  "NotebookEditDialog": {
-    "description": "Auto imported from components/Notebook/EditDialog.vue"
-  },
-  "NotebookEditUpload": {
-    "description": "Auto imported from components/Notebook/EditUpload.vue"
+  "LocationEditDialog": {
+    "description": "Auto imported from components/Location/EditDialog.vue"
   },
   "ModalComplete": {
     "description": "Auto imported from components/Modal/Complete.vue"
@@ -29,14 +26,14 @@
   "ModalLoading": {
     "description": "Auto imported from components/Modal/Loading.vue"
   },
-  "LoadingLineLoading": {
-    "description": "Auto imported from components/Loading/LineLoading.vue"
+  "NotebookEditDialog": {
+    "description": "Auto imported from components/Notebook/EditDialog.vue"
   },
-  "LocationEditDialog": {
-    "description": "Auto imported from components/Location/EditDialog.vue"
+  "NotebookEditUpload": {
+    "description": "Auto imported from components/Notebook/EditUpload.vue"
   },
-  "StoreEditDialog": {
-    "description": "Auto imported from components/Store/EditDialog.vue"
+  "EquipmentEditDialog": {
+    "description": "Auto imported from components/Equipment/EditDialog.vue"
   },
   "UserEditDialog": {
     "description": "Auto imported from components/User/EditDialog.vue"
@@ -46,5 +43,8 @@
   },
   "UserEditUpload": {
     "description": "Auto imported from components/User/EditUpload.vue"
+  },
+  "StoreEditDialog": {
+    "description": "Auto imported from components/Store/EditDialog.vue"
   }
 }

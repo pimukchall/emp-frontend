@@ -85,6 +85,9 @@
                       : 'mdi-chevron-down'
                   }}</v-icon>
                 </v-btn>
+                <v-btn class="mr-2" @click="gotoProfile(product.id)">
+                  ดูรายละเอียด
+                </v-btn>
                 <v-btn class="mr-2">
                   <v-menu offset-y>
                     <template v-slot:activator="{ on }">
@@ -479,6 +482,13 @@ export default {
       };
       console.log(log);
       this.$store.dispatch('api/log/postLogs', log);
+    },
+    gotoProfile(product_id) {
+      this.$router.push({ 
+      path: '/admin/notebook/profile', 
+      query: { id: product_id } 
+      });
+      console.log(product_id);
     },
   },
 }

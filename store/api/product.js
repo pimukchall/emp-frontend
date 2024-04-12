@@ -4,11 +4,6 @@ export const actions = {
         .get('api/products', data)
         .then((res) => res.data)
     },
-    async getProductsID({ getters }, data) {
-      return await this.$axios
-      .get('api/products:id', data)
-      .then((res) => res.data)
-  },
     async postProducts({ getters }, data) {
         return await this.$axios
         .post('api/products/create', data)

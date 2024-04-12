@@ -9,7 +9,11 @@
         <h1>ข้อมูลส่วนตัว</h1>
         <div>
           <v-row>
-            <v-col v-for="user in users" :key="user.id" cols="12">
+            <v-col 
+              v-for="user in users" 
+              :key="user.id" 
+              cols="12"
+              >
               <v-card 
                 class="mx-auto"
                 max-width="400"
