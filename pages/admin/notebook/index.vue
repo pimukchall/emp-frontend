@@ -141,11 +141,12 @@
                   <v-divider></v-divider>
                   <div>
                     <div class="text-center">
-                      <qrcode-vue
-                        v-if="showQR"
-                        :value="generateData(product)"
+                      <qrcode-vue 
+                        v-if="showQR" 
+                        :value="'http://localhost:3000/admin/notebook/profile?id=' + product.id"
                         :size="200"
                       ></qrcode-vue>
+
                       <vue-barcode
                         v-else
                         :value="product.asset_number"
@@ -425,25 +426,6 @@ export default {
       window.open(`http://localhost:3001/${file}`, '_blank')
     },
 
-    generateData(product) {
-      return JSON.stringify({
-        รหัสทรัพย์สิน: product.asset_number,
-        ยี่ห้อ: product.brand,
-        รุ่น: product.model,
-        หน่วยประมวลผล: product.cpu,
-        หน่วยความจำ: product.ram,
-        หน่วยประมวลผลกราฟฟิค: product.gpu,
-        หน่วยจัดเก็บข้อมูล: product.storage,
-        ระบบปฏิบัติการ: product.os,
-        หมายเลขลิขสิทธิ์: product.license,
-        สาขาที่ซื้อ: this.mapStore(product.store_id),
-        วันที่ลงทะเบียน: this.formatDate(product.date_in),
-        วันที่ประกันหมด: this.Expire(product.date_in),
-        วันที่ส่งมอบ: this.Expire(product.date_out),
-        สถานะ: this.mapStatus(product.status_id),
-        หมายเหตุ: product.note,
-      })
-    },
     toggleDisplay() {
       this.showQR = !this.showQR
     },
@@ -483,12 +465,12 @@ export default {
       console.log(log);
       this.$store.dispatch('api/log/postLogs', log);
     },
-    gotoProfile(product_id) {
+    gotoProfile(id) {
       this.$router.push({ 
       path: '/admin/notebook/profile', 
-      query: { id: product_id } 
+      query: { id: id }
       });
-      console.log(product_id);
+      console.log(id);
     },
   },
 }

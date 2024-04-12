@@ -5,9 +5,6 @@
       <div v-else>
         <h1>รายการโน๊ตบุ๊ค</h1>
         <div>
-        </div>
-        <div>
-
             <v-col
               v-for="product in products"
               :key="product.id"
