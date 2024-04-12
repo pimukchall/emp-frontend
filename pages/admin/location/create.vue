@@ -23,15 +23,15 @@
           max-width="800"
           max-height="auto"
         >
-          <v-card-title class="headline">เพิ่มร้านค้า</v-card-title>
+          <v-card-title class="headline">เพิ่มสถานที่</v-card-title>
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
                 <v-col cols="12">
                   <v-text-field
                     v-model="form.name"
-                    :rules="[(v) => !!v || 'กรุณากรอกชื่อร้านค้า']"
-                    label="ชื่อร้านค้า"
+                    :rules="[(v) => !!v || 'กรุณากรอกชื่อสถานที่']"
+                    label="ชื่อสถานที่"
                     outlined
                     required
                   >

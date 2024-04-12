@@ -3,8 +3,8 @@
     <ModalConfirm
       :open="modal.confirm.open"
       :message="modal.confirm.message"
-      :method="deleteData"
       :confirm.sync="modal.confirm.open"
+      :method="deleteData"
     />
     <ModalComplete
       :open="modal.complete.open"
@@ -68,7 +68,7 @@
 
                 <template v-slot:item.actions="{ item }">
                   <v-icon small @click="openEditDialog(item)">mdi-pencil</v-icon>
-                  <v-icon small @click="deleteData(item.id)">mdi-delete</v-icon>
+                  <v-icon small @click="confirmDelete(item.id)">mdi-delete</v-icon>
                 </template>
 
                 </v-data-table>   
@@ -81,6 +81,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+moment.locale('th')
 export default {
   layout: 'admin',
   middleware: 'auth',
@@ -128,10 +130,16 @@ export default {
     async fetchData() {
       this.locations = await this.$store.dispatch('api/location/getLocations');
     },
-    async deleteData(id) {
+    confirmDelete(id) {
+      this.modal.confirm.open = true
+      this.modal.confirm.message = 'ยืนยันการลบข้อมูลหรือไม่?'
+      this.modal.confirm.id = id
+    },
+    async deleteData() {
       try {
-        const req = await this.$store.dispatch('api/location/deleteLocations', { params: { id } });
+        const req = await this.$store.dispatch('api/location/deleteLocations', { params: { id: this.modal.confirm.id } });
         this.modal.complete.open = true;
+        this.recordLogDelete(this.modal.confirm.id)
         this.$fetch();
       } catch (error) {
         this.modal.error.open = true;
@@ -144,6 +152,25 @@ export default {
     openEditDialog(data) {
       this.editData = data;
       this.editDialog = true;
+    },
+    async recordLogDelete(id) {
+      const location = this.locations.find((location) => location.id === id)
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'ลบข้อมูล',
+        description:
+          this.$auth.user.email +
+          ' ' +
+          'ลบสถานที่' +
+          ' ' +
+          location.name +
+          ' ' +
+          'เวลา ' +
+          moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log)
+      this.$store.dispatch('api/log/postLogs', log)
     },
   },
 };

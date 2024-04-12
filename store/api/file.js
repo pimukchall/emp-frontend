@@ -10,9 +10,14 @@ export const actions = {
         .post('api/files/upload', data)
         .then((res) => res.data)
     },
-    async putFilesPath ({ getters }, data) {
+    async putPathUser ({ getters }, data) {
         return await this.$axios
-        .put('api/files/updatePath', data)
+        .put('api/files/user', data)
+        .then((res) => res.data)
+    },
+    async putPathProduct ({ getters }, data) {
+        return await this.$axios
+        .put('api/files/product', data)
         .then((res) => res.data)
     },
     async deleteFiles ({ getters }, data) {

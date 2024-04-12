@@ -27,7 +27,7 @@
       content-class="rounded-xl"
     >
       <v-card class="rounded-xl">
-        <v-card-title>อัพโหลดรูป</v-card-title>
+        <v-card-title>อัพโหลดไฟล์</v-card-title>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-row>
@@ -37,17 +37,16 @@
                   :rules="[
                     (v) => {
                       if (!v) return 'กรุณาเลือกรไฟล์';
-                      if (!['image/jpeg', 'image/png'].includes(v.type)) {
-                        return 'อัพได้เฉพาะ รูปเท่านั้น';
+                      if (!['image/jpeg', 'image/png', 'application/pdf'].includes(v.type)) {
+                        return 'อัพได้เฉพาะ รูปและ pdf เท่านั้น';
                       }
-                      if (v.size > 5000000) {
-                        return 'ขนาดของรูปภาพต้องไม่เกิน 5 เมกะไบต์';
+                      if (v.size > 10000000) {
+                        return 'ขนาดของรูปภาพต้องไม่เกิน 10 เมกะไบต์';
                       }
                       return true;
                     }
                   ]" 
-                  accept="image/*"
-                  label="เลือกรูปภาพ"
+                  label="เลือกไฟล์"
                   outlined
                   required
                 ></v-file-input>
@@ -152,7 +151,7 @@ export default {
 
     async UpdateData(uploadedFilePath) {
       try {
-        const req = await this.$store.dispatch('api/file/putPathUser', {
+        const req = await this.$store.dispatch('api/file/putPathProduct', {
           id: this.data.id,
           file: uploadedFilePath,
         })

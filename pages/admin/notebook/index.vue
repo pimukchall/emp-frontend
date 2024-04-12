@@ -21,6 +21,11 @@
       :edit.sync="editDialog"
       :data="editData"
     />
+    <NotebookEditUpload
+      :open="editUploadDialog"
+      :edit.sync="editUploadDialog"
+      :data="editUploadData"
+    />
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
     <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
     <div v-else>
@@ -91,6 +96,12 @@
                       <v-list-item @click="openEditNotebookDialog(product)">
                         <v-icon class="ml-2">mdi-pencil</v-icon>
                         <v-list-item-title class="ml-2" dense>แก้ไข</v-list-item-title>
+                      </v-list-item>                      
+                      <v-list-item @click="openEditUploadDialog(product)">
+                        <v-icon class="ml-2">mdi-upload</v-icon>
+                        <v-list-item-title class="ml-2" dense
+                          >อัพโหลด</v-list-item-title
+                        >
                       </v-list-item>
                       <v-list-item @click="confirmDelete(product.id)">
                         <v-icon class="ml-2">mdi-delete</v-icon>
@@ -117,6 +128,12 @@
                     <p>วันที่ส่งมอบ: {{ formatDate(product.date_out) }}</p>
                     <p>วันที่ประกันหมด: {{ Expire(product.date_in) }}</p>
                     <p>ร้านที่ซื้อ: {{ mapStore(product.store_id) }}</p>
+                    <p>ไฟล์ที่แนบ: {{ product.file }}</p>
+                      <v-btn
+                        v-if="product.file"
+                        color="primary"
+                        @click="openFile(product.file)"
+                      >เปิด</v-btn>
                   </v-card-text>
                   <v-divider></v-divider>
                   <div>
@@ -172,8 +189,8 @@ export default {
       editDialog: false,
       editData: {},
 
-      // editUploadDialog: false,
-      // editUploadData: {},
+      editUploadDialog: false,
+      editUploadData: {},
 
       modal: {
         confirm: {
@@ -349,6 +366,10 @@ export default {
       this.editData = data
       this.editDialog = true
     },
+    openEditUploadDialog(data) {
+      this.editUploadData = data
+      this.editUploadDialog = true
+    },
     isExpanded(id) {
       return this.currentExpanded === id
     },
@@ -397,6 +418,10 @@ export default {
       XLSX.writeFile(workbook, 'รายการโน๊ตบุ๊ค.xlsx')
       this.recordLogExport()
     },
+    openFile(file) {
+      window.open(`http://localhost:3001/${file}`, '_blank')
+    },
+
     generateData(product) {
       return JSON.stringify({
         รหัสทรัพย์สิน: product.asset_number,
