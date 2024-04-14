@@ -84,6 +84,13 @@
     "_name": "_6dc715d9"
   },
   {
+    "name": "user-home",
+    "path": "/user/home",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\home\\\\index.vue",
+    "chunkName": "pages/user/home/index",
+    "_name": "_12edb54e"
+  },
+  {
     "name": "user-location",
     "path": "/user/location",
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\location\\\\index.vue",
@@ -103,13 +110,6 @@
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\store\\\\index.vue",
     "chunkName": "pages/user/store/index",
     "_name": "_5352e726"
-  },
-  {
-    "name": "user-user",
-    "path": "/user/user",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\user\\\\index.vue",
-    "chunkName": "pages/user/user/index",
-    "_name": "_1a7672e2"
   },
   {
     "name": "admin-department-create",
@@ -166,6 +166,20 @@
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\user\\\\profile\\\\index.vue",
     "chunkName": "pages/admin/user/profile/index",
     "_name": "_74763a89"
+  },
+  {
+    "name": "user-equipment-profile",
+    "path": "/user/equipment/profile",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\equipment\\\\profile\\\\index.vue",
+    "chunkName": "pages/user/equipment/profile/index",
+    "_name": "_c78cf9dc"
+  },
+  {
+    "name": "user-notebook-profile",
+    "path": "/user/notebook/profile",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\notebook\\\\profile\\\\index.vue",
+    "chunkName": "pages/user/notebook/profile/index",
+    "_name": "_421c27b9"
   },
   {
     "name": "index",

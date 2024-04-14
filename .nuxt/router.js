@@ -16,10 +16,10 @@ const _f21ffb32 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* we
 const _db0eadd6 = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
 const _7659aabb = () => interopDefault(import('..\\pages\\user\\department\\index.vue' /* webpackChunkName: "pages/user/department/index" */))
 const _6dc715d9 = () => interopDefault(import('..\\pages\\user\\equipment\\index.vue' /* webpackChunkName: "pages/user/equipment/index" */))
+const _12edb54e = () => interopDefault(import('..\\pages\\user\\home\\index.vue' /* webpackChunkName: "pages/user/home/index" */))
 const _0d2fff38 = () => interopDefault(import('..\\pages\\user\\location\\index.vue' /* webpackChunkName: "pages/user/location/index" */))
 const _6cc44952 = () => interopDefault(import('..\\pages\\user\\notebook\\index.vue' /* webpackChunkName: "pages/user/notebook/index" */))
 const _5352e726 = () => interopDefault(import('..\\pages\\user\\store\\index.vue' /* webpackChunkName: "pages/user/store/index" */))
-const _1a7672e2 = () => interopDefault(import('..\\pages\\user\\user\\index.vue' /* webpackChunkName: "pages/user/user/index" */))
 const _3fecec7a = () => interopDefault(import('..\\pages\\admin\\department\\create.vue' /* webpackChunkName: "pages/admin/department/create" */))
 const _0aaa91a5 = () => interopDefault(import('..\\pages\\admin\\equipment\\create.vue' /* webpackChunkName: "pages/admin/equipment/create" */))
 const _6ea884b2 = () => interopDefault(import('..\\pages\\admin\\equipment\\profile\\index.vue' /* webpackChunkName: "pages/admin/equipment/profile/index" */))
@@ -28,6 +28,8 @@ const _aa1853e8 = () => interopDefault(import('..\\pages\\admin\\notebook\\creat
 const _ea131bce = () => interopDefault(import('..\\pages\\admin\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/admin/notebook/profile/index" */))
 const _692a8c10 = () => interopDefault(import('..\\pages\\admin\\store\\create.vue' /* webpackChunkName: "pages/admin/store/create" */))
 const _74763a89 = () => interopDefault(import('..\\pages\\admin\\user\\profile\\index.vue' /* webpackChunkName: "pages/admin/user/profile/index" */))
+const _c78cf9dc = () => interopDefault(import('..\\pages\\user\\equipment\\profile\\index.vue' /* webpackChunkName: "pages/user/equipment/profile/index" */))
+const _421c27b9 = () => interopDefault(import('..\\pages\\user\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/user/notebook/profile/index" */))
 const _01865810 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -90,6 +92,10 @@ export const routerOptions = {
     component: _6dc715d9,
     name: "user-equipment"
   }, {
+    path: "/user/home",
+    component: _12edb54e,
+    name: "user-home"
+  }, {
     path: "/user/location",
     component: _0d2fff38,
     name: "user-location"
@@ -101,10 +107,6 @@ export const routerOptions = {
     path: "/user/store",
     component: _5352e726,
     name: "user-store"
-  }, {
-    path: "/user/user",
-    component: _1a7672e2,
-    name: "user-user"
   }, {
     path: "/admin/department/create",
     component: _3fecec7a,
@@ -137,6 +139,14 @@ export const routerOptions = {
     path: "/admin/user/profile",
     component: _74763a89,
     name: "admin-user-profile"
+  }, {
+    path: "/user/equipment/profile",
+    component: _c78cf9dc,
+    name: "user-equipment-profile"
+  }, {
+    path: "/user/notebook/profile",
+    component: _421c27b9,
+    name: "user-notebook-profile"
   }, {
     path: "/",
     component: _01865810,

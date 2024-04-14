@@ -75,7 +75,6 @@ export default {
     return {
       search: '',
       departments: [],
-      expanded: [],
       editDialog: false,
       editData: {},
 

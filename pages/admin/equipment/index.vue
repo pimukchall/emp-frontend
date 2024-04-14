@@ -369,6 +369,7 @@ export default {
       const workbook = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(workbook, worksheet, 'รายการอุปกรณ์')
       XLSX.writeFile(workbook, 'รายการอุปกรณ์.xlsx')
+      this.recordLogExport();
     },
     openFile(file) {
       window.open(`http://localhost:3001/${file}`, '_blank')
