@@ -31,7 +31,6 @@
       :edit.sync="editUploadDialog"
       :data="editUploadData"
     />
-
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
     <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
     <div v-else>
@@ -188,7 +187,9 @@ export default {
   computed: {
     filtered() {
       return this.users.filter((user) => {
-        return user.fname.toLowerCase().includes(this.search.toLowerCase())
+        return (
+          user.fname.toLowerCase().includes(this.search.toLowerCase())
+        )
       })
     },
   },
@@ -316,7 +317,7 @@ export default {
           user.email +
           ' ' +
           'เวลา ' +
-          moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+          moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log)
@@ -332,7 +333,7 @@ export default {
           'ออกรายงานผู้ใช้' +
           ' ' +
           'เวลา ' +
-          moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+          moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log)

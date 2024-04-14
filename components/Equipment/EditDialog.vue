@@ -1,5 +1,11 @@
 <template>
   <div>
+    <ModalConfirm
+      :open="modal.confirm.open"
+      :message="modal.confirm.message"
+      :confirm.sync="modal.confirm.open"
+      :method="UpdateData"
+    />
     <ModalComplete
       :open="modal.complete.open"
       :message="modal.complete.message"
@@ -134,45 +140,78 @@
                   >
                   </v-select>
                 </v-col>
-                <v-col cols="12" sm="6">
-                  <v-menu
-                    ref="menu"
-                    v-model="menu"
-                    :close-on-content-click="false"
-                    :return-value.sync="data.date_out"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="formattedDate"
-                        label="วันที่จัดส่ง"
-                        prepend-icon="mdi-calendar"
-                        readonly
-                        v-bind="attrs"
-                        v-on="on"
-                        :rules="[(v) => !!v || 'กรุณากรอกวันที่ส่งมอบ']"
-                        outlined
-                        required
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="date" no-title scrollable>
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu = false"
-                        >ยกเลิก</v-btn
-                      >
-                      <v-btn text color="primary" @click="$refs.menu.save(date)"
-                        >ยืนยัน</v-btn
-                      >
-                    </v-date-picker>
-                  </v-menu>
+                <v-col cols="12">
+                    <v-divider></v-divider>
                 </v-col>
+                <v-col cols="12" sm="6">
+                      <v-menu
+                          ref="menu1"
+                          v-model="menu1"
+                          :close-on-content-click="false"
+                          :return-value.sync="data.date_in"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                      >
+                          <template v-slot:activator="{ on, attrs }">
+                              <v-text-field
+                                  v-model="formattedDateIn"
+                                  label="วันที่รับเข้า"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  :rules="[(v) => !!v || 'กรุณากรอกวันที่รับเข้า']"
+                                  outlined
+                                  required
+                              ></v-text-field>
+                          </template>
+                          <v-date-picker v-model="date1" no-title scrollable>
+                              <v-spacer></v-spacer>
+                              <v-btn text color="primary" @click="menu1 = false">ยกเลิก</v-btn>
+                              <v-btn text color="primary" @click="$refs.menu1.save(date1)">ยืนยัน</v-btn>
+                          </v-date-picker>
+                      </v-menu>
+                  </v-col>
+
+                  <v-col cols="12" sm="6">
+                      <v-menu
+                          ref="menu2"
+                          v-model="menu2"
+                          :close-on-content-click="false"
+                          :return-value.sync="data.date_out"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="auto"
+                      >
+                          <template v-slot:activator="{ on, attrs }">
+                              <v-text-field
+                                  v-model="formattedDateOut"
+                                  label="วันที่ส่งมอบ"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  :rules="[(v) => !!v || 'กรุณากรอกวันที่ส่งมอบ']"
+                                  outlined
+                              ></v-text-field>
+                          </template>
+                          <v-date-picker v-model="date2" no-title scrollable>
+                              <v-spacer></v-spacer>
+                              <v-btn text color="primary" @click="menu2 = false">ยกเลิก</v-btn>
+                              <v-btn text color="primary" @click="$refs.menu2.save(date2)">ยืนยัน</v-btn>
+                          </v-date-picker>
+                      </v-menu>
+                  </v-col>
                 <v-col cols="12">
                   <v-divider></v-divider>
                 </v-col>
                 <v-col cols="12">
-                  <v-textarea v-model="data.note" label="หมายเหตุ" outlined>
+                  <v-textarea 
+                    v-model="data.note" 
+                    label="หมายเหตุ" 
+                    outlined
+                  >
                   </v-textarea>
                 </v-col>
               </v-row>
@@ -181,14 +220,20 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
+          <v-btn 
             @click="confirm"
+            :disabled="!valid"
+            depressed
+            color="primary"
             class="font-weight-medium mt-3"
-          >
+            >
             ยืนยัน
           </v-btn>
-          <v-btn color="error" @click="cancel" class="font-weight-medium mt-3">
+          <v-btn 
+            color="error" 
+            @click="cancel" 
+            class="font-weight-medium mt-3"
+          >
             ยกเลิก
           </v-btn>
         </v-card-actions>
@@ -213,21 +258,21 @@ export default {
   data() {
     return {
       valid: false,
-      menu: false,
-
+      menu1: false,
+      menu2: false,
       userOptions: [],
-      user_id: null,
       storeOptions: [],
-      store_id: null,
       locationOptions: [],
-      location_id: null,
       statusOptions: [],
-      status_id: null,
 
-      date: new Date().toISOString().substr(0, 10),
-      date_out: new Date().toISOString().substr(0, 10),
+      date1: new Date().toISOString().substr(0, 10),
+      date2: new Date().toISOString().substr(0, 10),
 
       modal: {
+        confirm: {
+            open: false,
+            message: 'ยืนยันการแก้ไขข้อมูลหรือไม่?',
+          },
         complete: {
           open: false,
           message: 'แก้ไขข้อมูลสำเร็จ',
@@ -241,9 +286,12 @@ export default {
   },
 
   computed: {
-    formattedDate() {
-      return moment(this.data.date_out).format('Do MMMM YYYY')
-    },
+    formattedDateOut() {
+        return moment(this.data.date_out).format('Do MMMM YYYY')
+      },
+      formattedDateIn() {
+        return moment(this.data.date_in).format('Do MMMM YYYY')
+      },
   },
 
   async fetch() {
@@ -259,10 +307,8 @@ export default {
     async confirm() {
       try {
         this.$emit('update:edit', false)
-        await this.UpdateData(this.data.id)
-        console.log(this.data + 'ผ่าน1')
+        this.modal.confirm.open = true
       } catch (error) {
-        console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน1')
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
       }
     },
@@ -272,15 +318,13 @@ export default {
     async UpdateData() {
       try {
         const req = await this.$store.dispatch('api/product/putProducts', this.data)
-        console.log('this.data2', this.data)
-        console.log("req2", req)
-        this.modal.complete.open = true // แสดงข้อความเมื่อการอัปเดตสำเร็จ
+        this.modal.complete.open = true
+        console.log('Data:', this.data);
+        this.recordLogUpdate(this.data.id);
       } catch (error) {
-        console.error(error + 'กรุณากรอกข้อมูลให้ครบถ้วน2');
-        this.modal.error.open = true // แสดงข้อความผิดพลาดใน ModalError
+        this.modal.error.open = true
       }
     },
-
     async fetchUserData() {
       const user = await this.$store.dispatch('api/user/getUsers')
       this.userOptions = user
@@ -297,6 +341,18 @@ export default {
       const status = await this.$store.dispatch('api/status/getStatus')
       this.statusOptions = status
     },
-  },
+    recordLogUpdate(id) {
+      const product = this.data.name + ' ' + this.data.asset_number
+      const log = {
+        user_id: this.$auth.user.id,
+        product_id: id,
+        action: 'อัพเดทข้อมูล',
+        description: this.$auth.user.email + ' ' + 'อัพเดทข้อมูลอุปกรณ์' + ' ' + product + ' ' + 'เวลา' + ' ' + moment(new Date()).format('HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log)
+      this.$store.dispatch('api/log/postLogs', log)
+    },
+  }
 }
 </script>

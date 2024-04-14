@@ -112,6 +112,13 @@
     "_name": "_0aaa91a5"
   },
   {
+    "name": "admin-equipment-profile",
+    "path": "/admin/equipment/profile",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\equipment\\\\profile\\\\index.vue",
+    "chunkName": "pages/admin/equipment/profile/index",
+    "_name": "_6ea884b2"
+  },
+  {
     "name": "admin-location-create",
     "path": "/admin/location/create",
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\location\\\\create.vue",

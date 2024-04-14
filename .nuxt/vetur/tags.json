@@ -5,6 +5,12 @@
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },
+  "EquipmentEditDialog": {
+    "description": "Auto imported from components/Equipment/EditDialog.vue"
+  },
+  "EquipmentEditUpload": {
+    "description": "Auto imported from components/Equipment/EditUpload.vue"
+  },
   "LoadingLineLoading": {
     "description": "Auto imported from components/Loading/LineLoading.vue"
   },
@@ -32,8 +38,8 @@
   "NotebookEditUpload": {
     "description": "Auto imported from components/Notebook/EditUpload.vue"
   },
-  "EquipmentEditDialog": {
-    "description": "Auto imported from components/Equipment/EditDialog.vue"
+  "StoreEditDialog": {
+    "description": "Auto imported from components/Store/EditDialog.vue"
   },
   "UserEditDialog": {
     "description": "Auto imported from components/User/EditDialog.vue"
@@ -43,8 +49,5 @@
   },
   "UserEditUpload": {
     "description": "Auto imported from components/User/EditUpload.vue"
-  },
-  "StoreEditDialog": {
-    "description": "Auto imported from components/Store/EditDialog.vue"
   }
 }

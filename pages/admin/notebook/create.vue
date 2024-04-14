@@ -220,12 +220,19 @@
                 ></v-checkbox>
                 <v-card-actions class="justify-center">
                   <v-btn
-                    @click="create"
+                    @click="confirm"
                     :disabled="!valid"
                     depressed
                     color="secondary"
-                    >สมัคร</v-btn
-                  >
+                    class="font-weight-medium mt-3"
+                    >เพิ่ม
+                  </v-btn>
+                  <v-btn 
+                    color="error" 
+                    @click="goBack"
+                    class="font-weight-medium mt-3"
+                    >ยกเลิก
+                  </v-btn>
                 </v-card-actions>
               </v-col>
             </v-row>
@@ -238,7 +245,6 @@
 <script>
 import moment from 'moment'
 moment.locale('th')
-
 export default {
   layout: 'admin',
   middleware: 'auth',
@@ -315,17 +321,24 @@ export default {
   },
 
   methods: {
-    async create() {
+    async confirm() {
       try {
         if (!this.$refs.form.validate() || !this.agree) {
           this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
           this.modal.error.open = true
           return
         }
+        this.modal.confirm.open = true
+      } catch (error) {
+        this.modal.error.message = 'เกิดข้อผิดพลาด'
+      }
+    },
+    async create() {
+      try {
         const req = await this.$store.dispatch('api/product/postProducts',this.form)
         console.log(req)
-        this.modal.confirm.open = true
         this.modal.complete.open = true
+        this.recordLog()
       } catch (error) {
         this.modal.error.message = 'เกิดข้อผิดพลาด'
       }
@@ -348,7 +361,17 @@ export default {
     async fetchStatusData() {
       const status = await this.$store.dispatch('api/status/getStatus')
       this.statusOptions = status
-    }
+    },
+    recordLog(){
+      const log = {
+        user_id: this.$auth.user.id,
+        product_id: this.form.id,
+        action: 'เพิ่มข้อมูล',
+        description: this.$auth.user.email + ' ' + 'เพิ่มอุปกรณ์' + ' ' + this.form.brand + ' ' + this.form.model + ' ' + 'เวลา ' + moment(new Date()).format('HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      this.$store.dispatch('api/log/postLogs', log);
+    },
   },
 }
 </script>

@@ -3,7 +3,7 @@
     <ModalConfirm
       :open="modal.confirm.open"
       :message="modal.confirm.message"
-      :method="register"
+      :method="create"
       :confirm.sync="modal.confirm.open"
     />
     <ModalComplete
@@ -171,29 +171,25 @@
                 </v-menu>
               </v-col>
               <v-col cols="12">
-                <v-divider></v-divider>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="form.image"
-                  label="ลิงค์รูปภาพ"
-                  outlined
-                >
-                </v-text-field>
-              </v-col>
-              <v-col cols="12">
                 <v-checkbox
                   v-model="agree"
                   label="ยอมรับข้อตกลงและเงื่อนไข"
                 ></v-checkbox>
                 <v-card-actions class="justify-center">
                   <v-btn
-                    @click="register"
+                    @click="confirm"
                     :disabled="!valid"
                     depressed
                     color="secondary"
-                    >สมัคร</v-btn
-                  >
+                    class="font-weight-medium mt-3"
+                    >สมัครสมาชิก
+                  </v-btn>
+                  <v-btn 
+                    color="error" 
+                    @click="goBack"
+                    class="font-weight-medium mt-3"
+                    >ยกเลิก
+                  </v-btn>
                 </v-card-actions>
               </v-col>
             </v-row>
@@ -227,7 +223,6 @@ export default {
         department_id: null,
         role_id: null,
         date_in: new Date().toISOString().substr(0, 10),
-        image: null,
       },
       emailRules: [
         (v) => !!v || 'กรุณากรอกอีเมล',
@@ -276,13 +271,20 @@ export default {
   },
 
   methods: {
-    async register() {
+    async confirm() {
       try {
         if (!this.$refs.form.validate() || !this.agree) {
           this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
           this.modal.error.open = true
           return
         }
+        this.modal.confirm.open = true
+      } catch (error) {
+        this.modal.error.message = 'เกิดข้อผิดพลาด'
+      }
+    },
+    async create() {
+      try {
         const req = await this.$store.dispatch('api/user/postUsers', this.form)
         this.recordLog()
         this.modal.confirm.open = true
@@ -309,7 +311,7 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'สมัครสมาชิก',
-        description: this.$auth.user.email + ' ' + 'ได้เพิ่มสมาชิกใหม่ ' + account.email + ' เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + 'ได้เพิ่มสมาชิกใหม่ ' + account.email + ' เวลา ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);

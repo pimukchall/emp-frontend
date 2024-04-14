@@ -150,9 +150,6 @@
                   </v-date-picker>
                 </v-menu>
               </v-col>
-              <v-col cols="12">
-                <v-divider></v-divider>
-              </v-col>
               </v-row>
             </v-form>
           </v-card-text>
@@ -161,14 +158,18 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="primary"
             @click="confirm"
+            :disabled="!valid"
+            depressed
+            color="primary"
             class="font-weight-medium mt-3"
           >
             แก้ไข
           </v-btn>
-          <v-btn color="error" @click="cancel" class="font-weight-medium mt-3">
-            ยกเลิก
+          <v-btn color="error" 
+            @click="cancel" 
+            class="font-weight-medium mt-3"
+            >ยกเลิก
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -234,8 +235,6 @@ export default {
       try {
         this.$emit('update:edit', false)
         this.modal.confirm.open = true
-        // await this.UpdateData(this.data.id)
-        // console.log('ID : ' + this.data.id)
       } catch (error) {
         this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
       }
@@ -267,7 +266,7 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'อัพเดทข้อมูล',
-        description: this.$auth.user.email + ' ' + `อัพเดทข้อมูลผู้ใช้งาน ID: ${id}` + ' ' + this.data.fname + ' ' + 'เวลา: ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + `อัพเดทข้อมูลผู้ใช้งาน ID: ${id}` + ' ' + this.data.fname + ' ' + 'เวลา: ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log)

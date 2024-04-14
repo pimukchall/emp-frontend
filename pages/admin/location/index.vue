@@ -21,19 +21,15 @@
       :data="editData"
       :edit.sync="editDialog"
     />
-
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
     <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
-
     <div v-else>
       <v-container>
         <v-row>
           <v-col cols="12">
             <v-card class="mx-auto mt-12 pa-2 pt-10 justify-center rounded-xl" max-width="auto" max-height="auto">
-
               <v-card-title class="headline">สถานที่</v-card-title>
               <v-card-subtitle>รายชื่อสถานที่ทั้งหมด</v-card-subtitle>
-
               <v-row>
                   <v-col cols="12" md="4">
                     <v-text-field v-model="search" append-icon="mdi-magnify" label="ค้นหา" single-line hide-details></v-text-field>
@@ -43,7 +39,6 @@
                     <v-btn elevation="2" rounded @click="gotoCreate">เพิ่มสถานที่</v-btn>
                   </v-col>
               </v-row>
-
                 <v-data-table
                   :headers="headers"
                   :items="reversed"
@@ -166,7 +161,7 @@ export default {
           location.name +
           ' ' +
           'เวลา ' +
-          moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+          moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log)

@@ -186,7 +186,7 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'ออกจากระบบ',
-        description: this.$auth.user.email + ' ' +'ออกจากระบบเวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' +'ออกจากระบบเวลา ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);

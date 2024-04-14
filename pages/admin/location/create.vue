@@ -82,7 +82,7 @@
                 <v-col cols="12">
                   <v-card-actions class="justify-center">
                     <v-btn
-                      @click="create"
+                      @click="confirm"
                       :disabled="!valid"
                       depressed
                       color="secondary"
@@ -98,6 +98,8 @@
     </div>
   </template>
   <script>
+  import moment from 'moment'
+  moment.locale('th')
   export default {
     layout: 'admin',
     middleware: 'auth',
@@ -140,18 +142,24 @@
     },
   
     methods: {
+      async confirm() {
+      try {
+        if (!this.$refs.form.validate()) {
+          this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
+          this.modal.error.open = true
+          return
+        }
+        this.modal.confirm.open = true
+      } catch (error) {
+        this.modal.error.message = 'เกิดข้อผิดพลาด'
+      }
+    },
       async create() {
         try {
-          if (!this.$refs.form.validate()) {
-            this.modal.error.message = 'กรุณากรอกข้อมูลให้ครบถ้วน'
-            this.modal.error.open = true
-            return
-          }
           const req = await this.$store.dispatch('api/location/postLocations', this.form)
-  
           console.log(req)
-          this.modal.confirm.open = false
           this.modal.complete.open = true
+          this.recordLog()
         } catch (error) {
           console.error('เกิดข้อผิดพลาด:', error)
           this.modal.error.message = 'เกิดข้อผิดพลาด'
@@ -160,6 +168,16 @@
       goBack() {
         this.$router.push('/admin/location')
       },
+      recordLog(){
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'เพิ่มข้อมูล',
+        description: this.$auth.user.email + ' ' + 'เพิ่มข้อมูลสถานที่' + ' ' + this.form.name + ' ' + 'เวลา' + ' ' + moment(new Date()).format('HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      }
+      console.log(log)
+      this.$store.dispatch('api/log/postLogs', log);
+    },
     },
   }
   </script>

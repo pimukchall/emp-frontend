@@ -110,7 +110,7 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'เข้าสู่ระบบ',
-        description: this.$auth.user.email + ' เข้าสู่ระบบเวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' เข้าสู่ระบบเวลา ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);
@@ -120,7 +120,7 @@ export default {
     recordLogError(){
       const log = {
         action: 'เข้าสู่ระบบล้มเหลว',
-        description: 'มีการพยายามเข้าสู่ระบบเวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        description: 'มีการพยายามเข้าสู่ระบบเวลา ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);

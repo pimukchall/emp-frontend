@@ -242,7 +242,6 @@ export default {
       })
     },
   },
-
   async fetch() {
     await this.fetchProductData()
     await this.fetchUserData()
@@ -257,27 +256,21 @@ export default {
         'api/product/getNotebook'
       )
     },
-
     async fetchUserData() {
       this.users = await this.$store.dispatch('api/user/getUsers')
     },
-
     async fetchDepartmentData() {
       this.departments = await this.$store.dispatch('api/department/getDepartments')
     },
-
     async fetchStoreData() {
       this.store = await this.$store.dispatch('api/store/getStores')
     },
-
     async fetchLocationData() {
       this.location = await this.$store.dispatch('api/location/getLocations')
     },
-
     async fetchStatusData() {
       this.status = await this.$store.dispatch('api/status/getStatus')
     },
-
     mapUser(id) {
       for (let i = 0; i < this.users.length; i++) {
         if (this.users[i].id === id) {
@@ -286,34 +279,24 @@ export default {
       }
       return 'ไม่มีข้อมูลผู้ใช้'
     },
-
     mapDepartment(userId) {
-      // หาผู้ใช้จาก user_id ในรายการ users
       const user = this.users.find(user => user.id === userId);
-      // ตรวจสอบว่ามีผู้ใช้หรือไม่
       if (user) {
-        // หากมีผู้ใช้ ให้ค้นหา department_id จากผู้ใช้
         const departmentId = user.department_id;
-        // ตรวจสอบว่า department_id มีค่าหรือไม่
         if (departmentId !== undefined && departmentId !== null) {
-          // หากมีค่า ให้ค้นหาชื่อแผนกจากรายการ departments
           const department = this.departments.find(department => department.id === departmentId);
-          // ตรวจสอบว่ามีข้อมูลแผนกหรือไม่
           if (department) {
             return department.name;
           } else {
             return 'ไม่มีข้อมูลแผนก';
           }
         } else {
-          // หากไม่มีค่า department_id
           return 'ไม่มีข้อมูลแผนก';
         }
       } else {
-        // หากไม่พบผู้ใช้
         return 'ไม่มีข้อมูลผู้ใช้';
       }
     },
-
     mapStore(id) {
       for (let i = 0; i < this.store.length; i++) {
         if (this.store[i].id === id) {
@@ -322,7 +305,6 @@ export default {
       }
       return 'ไม่มีข้อมูลสาขา'
     },
-
     mapLocation(id) {
       for (let i = 0; i < this.location.length; i++) {
         if (this.location[i].id === id) {
@@ -331,7 +313,6 @@ export default {
       }
       return 'ไม่มีข้อมูลสถานที่'
     },
-
     mapStatus(id) {
       for (let i = 0; i < this.status.length; i++) {
         if (this.status[i].id === id) {
@@ -340,24 +321,17 @@ export default {
       }
       return 'ไม่มีข้อมูลสถานะ'
     },
-
     confirmDelete(id) {
       this.modal.confirm.open = true;
       this.modal.confirm.message = 'ยืนยันการลบข้อมูลหรือไม่?';
       this.modal.confirm.id = id;
     },
-
     async deleteData() {
       try {
-
         const req = await this.$store.dispatch('api/product/deleteProducts', { params: { id: this.modal.confirm.id } });
-  
         this.modal.complete.open = true
-
         this.recordLogDelete(this.modal.confirm.id);
-
         this.$fetch()
-        
       } catch (error) {
         this.modal.error.open = true
         this.modal.error.message ='ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่'
@@ -425,11 +399,9 @@ export default {
     openFile(file) {
       window.open(`http://localhost:3001/${file}`, '_blank')
     },
-
     toggleDisplay() {
       this.showQR = !this.showQR
     },
-
     colorCheck(status) {
       if (status === 1) {
         return 'success'
@@ -449,7 +421,7 @@ export default {
         user_id: this.$auth.user.id,
         product_id: id,
         action: 'ลบข้อมูล',
-        description: this.$auth.user.email + ' ' + 'ลบข้อมูลโน๊ตบุ๊ค' + ' ' + product.asset_number + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + 'ลบข้อมูลโน๊ตบุ๊ค' + ' ' + product.asset_number + ' ' + 'เวลา ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       };
       console.log(log);
@@ -459,7 +431,7 @@ export default {
       const log = {
         user_id: this.$auth.user.id,
         action: 'ออกรายงาน',
-        description: this.$auth.user.email + ' ' + 'ออกรายงานโน๊ตบุ๊ค' + ' ' + 'เวลา ' + moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        description: this.$auth.user.email + ' ' + 'ออกรายงานโน๊ตบุ๊ค' + ' ' + 'เวลา ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       };
       console.log(log);

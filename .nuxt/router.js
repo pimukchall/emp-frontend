@@ -20,6 +20,7 @@ const _6cc44952 = () => interopDefault(import('..\\pages\\user\\notebook\\index.
 const _5352e726 = () => interopDefault(import('..\\pages\\user\\store\\index.vue' /* webpackChunkName: "pages/user/store/index" */))
 const _1a7672e2 = () => interopDefault(import('..\\pages\\user\\user\\index.vue' /* webpackChunkName: "pages/user/user/index" */))
 const _0aaa91a5 = () => interopDefault(import('..\\pages\\admin\\equipment\\create.vue' /* webpackChunkName: "pages/admin/equipment/create" */))
+const _6ea884b2 = () => interopDefault(import('..\\pages\\admin\\equipment\\profile\\index.vue' /* webpackChunkName: "pages/admin/equipment/profile/index" */))
 const _17fedce6 = () => interopDefault(import('..\\pages\\admin\\location\\create.vue' /* webpackChunkName: "pages/admin/location/create" */))
 const _aa1853e8 = () => interopDefault(import('..\\pages\\admin\\notebook\\create.vue' /* webpackChunkName: "pages/admin/notebook/create" */))
 const _ea131bce = () => interopDefault(import('..\\pages\\admin\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/admin/notebook/profile/index" */))
@@ -102,6 +103,10 @@ export const routerOptions = {
     path: "/admin/equipment/create",
     component: _0aaa91a5,
     name: "admin-equipment-create"
+  }, {
+    path: "/admin/equipment/profile",
+    component: _6ea884b2,
+    name: "admin-equipment-profile"
   }, {
     path: "/admin/location/create",
     component: _17fedce6,

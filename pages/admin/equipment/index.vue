@@ -3,8 +3,8 @@
     <ModalConfirm
       :open="modal.confirm.open"
       :message="modal.confirm.message"
-      :method="deleteData"
       :confirm.sync="modal.confirm.open"
+      :method="deleteData"
     />
     <ModalComplete
       :open="modal.complete.open"
@@ -20,6 +20,11 @@
       :open="editDialog"
       :edit.sync="editDialog"
       :data="editData"
+    />
+    <EquipmentEditUpload
+      :open="editUploadDialog"
+      :edit.sync="editUploadDialog"
+      :data="editUploadData"
     />
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
     <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
@@ -59,7 +64,6 @@
               <v-card-actions>
                 <v-card-title>
                   {{ product.name }} <br>
-                  {{ mapLocation(product.location_id) }} <br>
                   {{ product.asset_number }}
                 </v-card-title>
                 <v-spacer></v-spacer>
@@ -68,8 +72,9 @@
                 </v-chip>
               </v-card-actions>
               <v-card-subtitle>
-                ผู้รับผิดชอบ: {{ mapUser(product.user_id) }} <br>
-                แผนก: {{ mapDepartment(product.user_id) }}
+                  ผู้รับผิดชอบ: {{ mapUser(product.user_id) }} <br>
+                  แผนก: {{ mapDepartment(product.user_id) }} <br>
+                  สถานที่: {{ mapLocation(product.location_id) }}
               </v-card-subtitle>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -80,23 +85,33 @@
                       : 'mdi-chevron-down'
                   }}</v-icon>
                 </v-btn>
-                <v-btn
-                  class="ma-2"
-                  color="success"
-                  dark
-                  @click="openEditEquipmentDialog(product)"
-                >
-                  แก้ไข
-                  <v-icon dark right> mdi-pencil </v-icon>
+                <v-btn class="mr-2" @click="gotoProfile(product.id)">
+                  ดูรายละเอียด
                 </v-btn>
-                <v-btn
-                  class="ma-2"
-                  color="red"
-                  dark
-                  @click="deleteData(product.id)"
-                >
-                  ลบ
-                  <v-icon dark right> mdi-cancel </v-icon>
+                <v-btn class="mr-2">
+                  <v-menu offset-y>
+                    <template v-slot:activator="{ on }">
+                      <v-btn icon v-on="on">
+                        <v-icon>mdi-dots-vertical</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-list>
+                      <v-list-item @click="openEditEquipmentDialog(product)">
+                        <v-icon class="ml-2">mdi-pencil</v-icon>
+                        <v-list-item-title class="ml-2" dense>แก้ไข</v-list-item-title>
+                      </v-list-item>                      
+                      <v-list-item @click="openEditUploadDialog(product)">
+                        <v-icon class="ml-2">mdi-upload</v-icon>
+                        <v-list-item-title class="ml-2" dense
+                          >อัพโหลด</v-list-item-title
+                        >
+                      </v-list-item>
+                      <v-list-item @click="confirmDelete(product.id)">
+                        <v-icon class="ml-2">mdi-delete</v-icon>
+                        <v-list-item-title class="ml-2" dense>ลบ</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
                 </v-btn>
               </v-card-actions>
               <v-expand-transition>
@@ -110,15 +125,22 @@
                     <p>วันที่ลงทะเบียน: {{ formatDate(product.date_in) }}</p>
                     <p>วันที่จัดส่ง: {{ formatDate(product.date_out) }}</p>
                     <p>หมายเหตุ: {{ product.note }}</p>
+                    <p>ไฟล์ที่แนบ: {{ product.file }}</p>
+                      <v-btn
+                        v-if="product.file"
+                        color="primary"
+                        @click="openFile(product.file)"
+                      >เปิด</v-btn>
                   </v-card-text>
                   <v-divider></v-divider>
                   <div>
                     <div class="text-center">
-                      <qrcode-vue
-                        v-if="showQR"
-                        :value="generateData(product)"
+                      <qrcode-vue 
+                        v-if="showQR" 
+                        :value="'http://localhost:3000/admin/equipment/profile?id=' + product.id"
                         :size="200"
                       ></qrcode-vue>
+
                       <vue-barcode
                         v-else
                         :value="product.asset_number"
@@ -165,6 +187,9 @@ export default {
       editDialog: false,
       editData: {},
 
+      editUploadDialog: false,
+      editUploadData: {},
+
       modal: {
         confirm: {
           open: false,
@@ -190,7 +215,7 @@ export default {
       return this.products.filter((product) => {
         return (
           product.name.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.asset_number.toLowerCase().includes(this.search.toLowerCase() ||
+          product.asset_number.toLowerCase().includes(this.search.toLowerCase()) ||
           this.mapUser(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
           this.mapDepartment(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
           this.mapStore(product.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
@@ -198,12 +223,10 @@ export default {
           this.mapStatus(product.status_id).toLowerCase().includes(this.search.toLowerCase()) ||
           this.formatDate(product.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
           this.formatDate(product.date_out).toLowerCase().includes(this.search.toLowerCase())
-          )
         )
       })
     },
   },
-
   async fetch() {
     await this.fetchProductData()
     await this.fetchUserData()
@@ -218,7 +241,6 @@ export default {
         'api/product/getEquipment'
       )
     },
-
     async fetchUserData() {
       this.users = await this.$store.dispatch('api/user/getUsers')
     },
@@ -238,7 +260,6 @@ export default {
     async fetchStatusData() {
       this.status = await this.$store.dispatch('api/status/getStatus')
     },
-
     mapUser(id) {
       for (let i = 0; i < this.users.length; i++) {
         if (this.users[i].id === id) {
@@ -247,34 +268,24 @@ export default {
       }
       return 'ไม่มีข้อมูลผู้ใช้'
     },
-
     mapDepartment(userId) {
-      // หาผู้ใช้จาก user_id ในรายการ users
       const user = this.users.find(user => user.id === userId);
-      // ตรวจสอบว่ามีผู้ใช้หรือไม่
       if (user) {
-        // หากมีผู้ใช้ ให้ค้นหา department_id จากผู้ใช้
         const departmentId = user.department_id;
-        // ตรวจสอบว่า department_id มีค่าหรือไม่
         if (departmentId !== undefined && departmentId !== null) {
-          // หากมีค่า ให้ค้นหาชื่อแผนกจากรายการ departments
           const department = this.departments.find(department => department.id === departmentId);
-          // ตรวจสอบว่ามีข้อมูลแผนกหรือไม่
           if (department) {
             return department.name;
           } else {
             return 'ไม่มีข้อมูลแผนก';
           }
         } else {
-          // หากไม่มีค่า department_id
           return 'ไม่มีข้อมูลแผนก';
         }
       } else {
-        // หากไม่พบผู้ใช้
         return 'ไม่มีข้อมูลผู้ใช้';
       }
     },
-
     mapStore(id) {
       for (let i = 0; i < this.store.length; i++) {
         if (this.store[i].id === id) {
@@ -283,7 +294,6 @@ export default {
       }
       return 'ไม่มีข้อมูลสาขา'
     },
-
     mapLocation(id) {
       for (let i = 0; i < this.location.length; i++) {
         if (this.location[i].id === id) {
@@ -292,7 +302,6 @@ export default {
       }
       return 'ไม่มีข้อมูลสถานที่'
     },
-
     mapStatus(id) {
       for (let i = 0; i < this.status.length; i++) {
         if (this.status[i].id === id) {
@@ -301,19 +310,20 @@ export default {
       }
       return 'ไม่มีข้อมูลสถานะ'
     },
-
-    async deleteData(id) {
+    confirmDelete(id) {
+      this.modal.confirm.open = true;
+      this.modal.confirm.message = 'ยืนยันการลบข้อมูลหรือไม่?';
+      this.modal.confirm.id = id;
+    },
+    async deleteData() {
       try {
-        const req = await this.$store.dispatch(
-          'api/product/deleteProducts',
-          { params: { id } }
-        )
+        const req = await this.$store.dispatch('api/product/deleteProducts', { params: { id: this.modal.confirm.id } });
         this.modal.complete.open = true
+        this.recordLogDelete(this.modal.confirm.id);
         this.$fetch()
       } catch (error) {
         this.modal.error.open = true
-        this.modal.error.message =
-          'ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่'
+        this.modal.error.message ='ไม่สามารถลบข้อมูลได้เนื่องจากข้อมูลนี้ถูกใช้งานอยู่'
       }
     },
     gotoCreate() {
@@ -322,6 +332,10 @@ export default {
     openEditEquipmentDialog(data) {
       this.editData = data
       this.editDialog = true
+    },
+    openEditUploadDialog(data) {
+      this.editUploadData = data
+      this.editUploadDialog = true
     },
     isExpanded(id) {
       return this.currentExpanded === id
@@ -356,26 +370,12 @@ export default {
       XLSX.utils.book_append_sheet(workbook, worksheet, 'รายการอุปกรณ์')
       XLSX.writeFile(workbook, 'รายการอุปกรณ์.xlsx')
     },
-    generateData(product) {
-      return JSON.stringify({
-        name: product.name,
-        quantity: product.quantity,
-        price: product.price,
-        asset_number: product.asset_number,
-        document_number: product.document_number,
-        user: this.mapUser(product.user_id),
-        department: this.mapDepartment(product.user_id),
-        store: this.mapStore(product.store_id),
-        location: this.mapLocation(product.location_id),
-        status: this.mapStatus(product.status_id),
-        date_in: this.formatDate(product.date_in),
-        date_out: this.formatDate(product.date_out),
-      })
+    openFile(file) {
+      window.open(`http://localhost:3001/${file}`, '_blank')
     },
     toggleDisplay() {
       this.showQR = !this.showQR
     },
-
     colorCheck(status) {
       if (status === 1) {
         return 'success'
@@ -388,6 +388,35 @@ export default {
       } else {
         return 'grey'
       }  
+    },
+    async recordLogDelete(id) {
+      const product = this.products.find(product => product.id === id);
+      const log = {
+        user_id: this.$auth.user.id,
+        product_id: id,
+        action: 'ลบข้อมูล',
+        description: this.$auth.user.email + ' ' + 'ลบข้อมูลอุปกรณ์' + ' ' + product.asset_number + ' ' + 'เวลา ' + moment(new Date()).format('HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      };
+      console.log(log);
+      this.$store.dispatch('api/log/postLogs', log);
+    },
+    recordLogExport() {
+      const log = {
+        user_id: this.$auth.user.id,
+        action: 'ออกรายงาน',
+        description: this.$auth.user.email + ' ' + 'ออกรายงานอุปกรณ์' + ' ' + 'เวลา ' + moment(new Date()).format('HH:mm:ss'),
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      };
+      console.log(log);
+      this.$store.dispatch('api/log/postLogs', log);
+    },
+    gotoProfile(id) {
+      this.$router.push({ 
+      path: '/admin/equipment/profile', 
+      query: { id: id }
+      });
+      console.log(id);
     },
   },
 }

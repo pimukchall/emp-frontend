@@ -8,6 +8,8 @@ You can directly use them in pages and other components without the need to impo
 
 - `<NuxtLogo>` | `<nuxt-logo>` (components/NuxtLogo.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)
+- `<EquipmentEditDialog>` | `<equipment-edit-dialog>` (components/Equipment/EditDialog.vue)
+- `<EquipmentEditUpload>` | `<equipment-edit-upload>` (components/Equipment/EditUpload.vue)
 - `<LoadingLineLoading>` | `<loading-line-loading>` (components/Loading/LineLoading.vue)
 - `<LocationEditDialog>` | `<location-edit-dialog>` (components/Location/EditDialog.vue)
 - `<ModalComplete>` | `<modal-complete>` (components/Modal/Complete.vue)
@@ -17,8 +19,7 @@ You can directly use them in pages and other components without the need to impo
 - `<ModalLoading>` | `<modal-loading>` (components/Modal/Loading.vue)
 - `<NotebookEditDialog>` | `<notebook-edit-dialog>` (components/Notebook/EditDialog.vue)
 - `<NotebookEditUpload>` | `<notebook-edit-upload>` (components/Notebook/EditUpload.vue)
-- `<EquipmentEditDialog>` | `<equipment-edit-dialog>` (components/Equipment/EditDialog.vue)
+- `<StoreEditDialog>` | `<store-edit-dialog>` (components/Store/EditDialog.vue)
 - `<UserEditDialog>` | `<user-edit-dialog>` (components/User/EditDialog.vue)
 - `<UserEditPassword>` | `<user-edit-password>` (components/User/EditPassword.vue)
 - `<UserEditUpload>` | `<user-edit-upload>` (components/User/EditUpload.vue)
-- `<StoreEditDialog>` | `<store-edit-dialog>` (components/Store/EditDialog.vue)
