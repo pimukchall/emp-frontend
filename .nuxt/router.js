@@ -5,6 +5,7 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _4a6b6fb9 = () => interopDefault(import('..\\pages\\home\\index.vue' /* webpackChunkName: "pages/home/index" */))
+const _0e344c5b = () => interopDefault(import('..\\pages\\admin\\department\\index.vue' /* webpackChunkName: "pages/admin/department/index" */))
 const _757c7f8e = () => interopDefault(import('..\\pages\\admin\\equipment\\index.vue' /* webpackChunkName: "pages/admin/equipment/index" */))
 const _756be224 = () => interopDefault(import('..\\pages\\admin\\home\\index.vue' /* webpackChunkName: "pages/admin/home/index" */))
 const _208688d8 = () => interopDefault(import('..\\pages\\admin\\location\\index.vue' /* webpackChunkName: "pages/admin/location/index" */))
@@ -19,6 +20,7 @@ const _0d2fff38 = () => interopDefault(import('..\\pages\\user\\location\\index.
 const _6cc44952 = () => interopDefault(import('..\\pages\\user\\notebook\\index.vue' /* webpackChunkName: "pages/user/notebook/index" */))
 const _5352e726 = () => interopDefault(import('..\\pages\\user\\store\\index.vue' /* webpackChunkName: "pages/user/store/index" */))
 const _1a7672e2 = () => interopDefault(import('..\\pages\\user\\user\\index.vue' /* webpackChunkName: "pages/user/user/index" */))
+const _3fecec7a = () => interopDefault(import('..\\pages\\admin\\department\\create.vue' /* webpackChunkName: "pages/admin/department/create" */))
 const _0aaa91a5 = () => interopDefault(import('..\\pages\\admin\\equipment\\create.vue' /* webpackChunkName: "pages/admin/equipment/create" */))
 const _6ea884b2 = () => interopDefault(import('..\\pages\\admin\\equipment\\profile\\index.vue' /* webpackChunkName: "pages/admin/equipment/profile/index" */))
 const _17fedce6 = () => interopDefault(import('..\\pages\\admin\\location\\create.vue' /* webpackChunkName: "pages/admin/location/create" */))
@@ -43,6 +45,10 @@ export const routerOptions = {
     path: "/home",
     component: _4a6b6fb9,
     name: "home"
+  }, {
+    path: "/admin/department",
+    component: _0e344c5b,
+    name: "admin-department"
   }, {
     path: "/admin/equipment",
     component: _757c7f8e,
@@ -99,6 +105,10 @@ export const routerOptions = {
     path: "/user/user",
     component: _1a7672e2,
     name: "user-user"
+  }, {
+    path: "/admin/department/create",
+    component: _3fecec7a,
+    name: "admin-department-create"
   }, {
     path: "/admin/equipment/create",
     component: _0aaa91a5,

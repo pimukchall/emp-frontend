@@ -7,6 +7,13 @@
     "_name": "_4a6b6fb9"
   },
   {
+    "name": "admin-department",
+    "path": "/admin/department",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\department\\\\index.vue",
+    "chunkName": "pages/admin/department/index",
+    "_name": "_0e344c5b"
+  },
+  {
     "name": "admin-equipment",
     "path": "/admin/equipment",
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\equipment\\\\index.vue",
@@ -103,6 +110,13 @@
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\user\\\\index.vue",
     "chunkName": "pages/user/user/index",
     "_name": "_1a7672e2"
+  },
+  {
+    "name": "admin-department-create",
+    "path": "/admin/department/create",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\department\\\\create.vue",
+    "chunkName": "pages/admin/department/create",
+    "_name": "_3fecec7a"
   },
   {
     "name": "admin-equipment-create",
