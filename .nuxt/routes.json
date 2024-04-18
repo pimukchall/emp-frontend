@@ -7,6 +7,13 @@
     "_name": "_4a6b6fb9"
   },
   {
+    "name": "admin-customer",
+    "path": "/admin/customer",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\customer\\\\index.vue",
+    "chunkName": "pages/admin/customer/index",
+    "_name": "_4587b5e2"
+  },
+  {
     "name": "admin-department",
     "path": "/admin/department",
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\department\\\\index.vue",
@@ -70,6 +77,48 @@
     "_name": "_db0eadd6"
   },
   {
+    "name": "guest-department",
+    "path": "/guest/department",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\department\\\\index.vue",
+    "chunkName": "pages/guest/department/index",
+    "_name": "_f6c3509c"
+  },
+  {
+    "name": "guest-equipment",
+    "path": "/guest/equipment",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\equipment\\\\index.vue",
+    "chunkName": "pages/guest/equipment/index",
+    "_name": "_9f6523fc"
+  },
+  {
+    "name": "guest-home",
+    "path": "/guest/home",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\home\\\\index.vue",
+    "chunkName": "pages/guest/home/index",
+    "_name": "_29992785"
+  },
+  {
+    "name": "guest-location",
+    "path": "/guest/location",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\location\\\\index.vue",
+    "chunkName": "pages/guest/location/index",
+    "_name": "_1fd97def"
+  },
+  {
+    "name": "guest-notebook",
+    "path": "/guest/notebook",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\notebook\\\\index.vue",
+    "chunkName": "pages/guest/notebook/index",
+    "_name": "_7f6dc809"
+  },
+  {
+    "name": "guest-store",
+    "path": "/guest/store",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\store\\\\index.vue",
+    "chunkName": "pages/guest/store/index",
+    "_name": "_1215bbcf"
+  },
+  {
     "name": "user-department",
     "path": "/user/department",
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\department\\\\index.vue",
@@ -110,6 +159,20 @@
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\store\\\\index.vue",
     "chunkName": "pages/user/store/index",
     "_name": "_5352e726"
+  },
+  {
+    "name": "admin-customer-create",
+    "path": "/admin/customer/create",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\customer\\\\create.vue",
+    "chunkName": "pages/admin/customer/create",
+    "_name": "_1c0670e2"
+  },
+  {
+    "name": "admin-customer-profile",
+    "path": "/admin/customer/profile",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\customer\\\\profile\\\\index.vue",
+    "chunkName": "pages/admin/customer/profile/index",
+    "_name": "_d4f99ec8"
   },
   {
     "name": "admin-department-create",
@@ -166,6 +229,20 @@
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\user\\\\profile\\\\index.vue",
     "chunkName": "pages/admin/user/profile/index",
     "_name": "_74763a89"
+  },
+  {
+    "name": "guest-equipment-profile",
+    "path": "/guest/equipment/profile",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\equipment\\\\profile\\\\index.vue",
+    "chunkName": "pages/guest/equipment/profile/index",
+    "_name": "_2f194909"
+  },
+  {
+    "name": "guest-notebook-profile",
+    "path": "/guest/notebook/profile",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\notebook\\\\profile\\\\index.vue",
+    "chunkName": "pages/guest/notebook/profile/index",
+    "_name": "_387f723c"
   },
   {
     "name": "user-equipment-profile",

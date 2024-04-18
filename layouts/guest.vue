@@ -115,19 +115,19 @@ export default {
   },
   methods: {
     notebook() {
-      this.$router.push('/user/notebook')
+      this.$router.push('/guest/notebook')
     },
     equipment() {
-      this.$router.push('/user/equipment')
+      this.$router.push('/guest/equipment')
     },
     department() {
-      this.$router.push('/user/department')
+      this.$router.push('/guest/department')
     },
     location() {
-      this.$router.push('/user/location')
+      this.$router.push('/guest/location')
     },
     store() {
-      this.$router.push('/user/store')
+      this.$router.push('/guest/store')
     },
     login() {
       this.$router.push('/auth/login')

@@ -145,7 +145,8 @@
               </v-col>
               <v-col cols="12" sm="6">
                   <v-select
-                    :items="locationOptions"                    v-model="form.location_id"
+                    :items="locationOptions"
+                    v-model="form.location_id"
                     item-text="name"
                     item-value="id"
                     :rules="[(v) => !!v || 'กรุณาเลือกสถานที่ตั้ง']"
@@ -269,10 +270,9 @@ export default {
         store_id: '',
         location_id: '',
         status_id: '',
-        date_in: '',
+        date_in: new Date().toISOString().substr(0, 10),
         note: '',
         category_id: 1,
-
       },
       userOptions: [],
       storeOptions: [],
@@ -308,7 +308,7 @@ export default {
 
   computed: {
     formattedDate() {
-      return moment(this.date).format('Do MMMM YYYY')
+      return moment(this.form.date_in).format('Do MMMM YYYY')
     },
   },
 

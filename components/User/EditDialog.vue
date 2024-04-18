@@ -199,7 +199,6 @@ export default {
       menu: false,
       departmentOptions: [],
       roleOptions: [],
-
       date: new Date().toISOString().substr(0, 10),
 
       modal: {

@@ -12,8 +12,7 @@
 
 <script>
 export default {
-  layout: 'user',
-  middleware: 'auth',
+  layout: 'guest',
   data () {
     return {
       items: [

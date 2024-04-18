@@ -121,8 +121,7 @@ import * as XLSX from 'xlsx'
 import QrcodeVue from 'qrcode.vue'
 import VueBarcode from 'vue-barcode'
 export default {
-  layout: 'user',
-  middleware: 'auth',
+  layout: 'guest',
   data() {
     return {
       search: '',
@@ -313,7 +312,7 @@ export default {
     },
     gotoProfile(id) {
       this.$router.push({ 
-      path: '/user/notebook/profile', 
+      path: '/guest/notebook/profile', 
       query: { id: id }
       });
       console.log(id);

@@ -3,7 +3,7 @@
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
     <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
     <div v-else>
-      <h1>รายการโน๊ตบุ๊ค</h1>
+      <h1>รายการอุปกรณ์</h1>
       <div>
         <v-row>
           <v-col cols="12" md="4">
@@ -18,8 +18,8 @@
           <v-spacer></v-spacer>
           <v-col class="text-right">
             <v-btn elevation="2" rounded @click="exportToExcel"
-              >ออกรายงาน</v-btn
-            >
+              >ออกรายงาน
+            </v-btn>
           </v-col>
         </v-row>
       </div>
@@ -34,7 +34,7 @@
             <v-card elevation="6" shaped>
               <v-card-actions>
                 <v-card-title>
-                  {{ product.brand }} {{ product.model }} <br>
+                  {{ product.name }} <br>
                   {{ product.asset_number }}
                 </v-card-title>
                 <v-spacer></v-spacer>
@@ -43,9 +43,9 @@
                 </v-chip>
               </v-card-actions>
               <v-card-subtitle>
-                ผู้รับผิดชอบ: {{ mapUser(product.user_id) }} <br>
-                แผนก: {{ mapDepartment(product.user_id) }} <br>
-                สถานที่: {{ mapLocation(product.location_id) }}
+                  ผู้รับผิดชอบ: {{ mapUser(product.user_id) }} <br>
+                  แผนก: {{ mapDepartment(product.user_id) }} <br>
+                  สถานที่: {{ mapLocation(product.location_id) }}
               </v-card-subtitle>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -64,19 +64,13 @@
                 <div v-show="isExpanded(product.id)">
                   <v-divider></v-divider>
                   <v-card-text>
-                    <p>Brand: {{ product.brand }}</p>
-                    <p>Model: {{ product.model }}</p>
-                    <p>CPU: {{ product.cpu }}</p>
-                    <p>GPU: {{ product.gpu }}</p>
-                    <p>RAM: {{ product.ram }}</p>
-                    <p>Storage: {{ product.storage }}</p>
-                    <p>OS: {{ product.os }}</p>
-                    <p>หมายเลขลิขสิทธิ์: {{ product.license }}</p>
-                    <p>หมายเหตุ: {{ product.note }}</p>
-                    <p>วันที่ลงทะเบียน: {{ formatDate(product.date_in) }}</p>
-                    <p>วันที่ส่งมอบ: {{ formatDate(product.date_out) }}</p>
-                    <p>วันที่ประกันหมด: {{ Expire(product.date_in) }}</p>
+                    <p>จำนวน: {{ product.quantity }}</p>
+                    <p>ราคา: {{ product.price }}</p>
+                    <p>เลขที่เอกสาร: {{ product.document_number }}</p>
                     <p>ร้านที่ซื้อ: {{ mapStore(product.store_id) }}</p>
+                    <p>วันที่ลงทะเบียน: {{ formatDate(product.date_in) }}</p>
+                    <p>วันที่จัดส่ง: {{ formatDate(product.date_out) }}</p>
+                    <p>หมายเหตุ: {{ product.note }}</p>
                     <p>ไฟล์ที่แนบ: {{ product.file }}</p>
                       <v-btn
                         v-if="product.file"
@@ -89,7 +83,7 @@
                     <div class="text-center">
                       <qrcode-vue 
                         v-if="showQR" 
-                        :value="'http://localhost:3000/user/notebook/profile?id=' + product.id"
+                        :value="'http://localhost:3000/user/equipment/profile?id=' + product.id"
                         :size="200"
                       ></qrcode-vue>
 
@@ -121,8 +115,7 @@ import * as XLSX from 'xlsx'
 import QrcodeVue from 'qrcode.vue'
 import VueBarcode from 'vue-barcode'
 export default {
-  layout: 'user',
-  middleware: 'auth',
+  layout: 'guest',
   data() {
     return {
       search: '',
@@ -144,23 +137,14 @@ export default {
     filtered() {
       return this.products.filter((product) => {
         return (
-          product.brand.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.model.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.asset_number.toLowerCase().includes(this.search.toLowerCase())||
+          product.name.toLowerCase().includes(this.search.toLowerCase()) ||
+          product.asset_number.toLowerCase().includes(this.search.toLowerCase()) ||
           this.mapUser(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
           this.mapDepartment(product.user_id).toLowerCase().includes(this.search.toLowerCase()) ||
-          this.mapLocation(product.location_id).toLowerCase().includes(this.search.toLowerCase()) ||
           this.mapStore(product.store_id).toLowerCase().includes(this.search.toLowerCase()) ||
-          this.mapStatus(product.status_id).toLowerCase().includes(this.search.toLowerCase())||
-          product.cpu.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.gpu.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.ram.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.storage.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.os.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.license.toLowerCase().includes(this.search.toLowerCase()) ||
-          product.note.toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapLocation(product.location_id).toLowerCase().includes(this.search.toLowerCase()) ||
+          this.mapStatus(product.status_id).toLowerCase().includes(this.search.toLowerCase()) ||
           this.formatDate(product.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
-          this.Expire(product.date_in).toLowerCase().includes(this.search.toLowerCase()) ||
           this.formatDate(product.date_out).toLowerCase().includes(this.search.toLowerCase())
         )
       })
@@ -177,21 +161,25 @@ export default {
   methods: {
     async fetchProductData() {
       this.products = await this.$store.dispatch(
-        'api/product/getNotebook'
+        'api/product/getEquipment'
       )
     },
     async fetchUserData() {
       this.users = await this.$store.dispatch('api/user/getUsers')
     },
+
     async fetchDepartmentData() {
       this.departments = await this.$store.dispatch('api/department/getDepartments')
     },
+
     async fetchStoreData() {
       this.store = await this.$store.dispatch('api/store/getStores')
     },
+
     async fetchLocationData() {
       this.location = await this.$store.dispatch('api/location/getLocations')
     },
+
     async fetchStatusData() {
       this.status = await this.$store.dispatch('api/status/getStatus')
     },
@@ -252,45 +240,31 @@ export default {
       this.currentExpanded = this.currentExpanded === id ? null : id
     },
     formatDate(date) {
-      if (date) {
-        return moment(date).format('Do MMMM YYYY')
-      }
-      return 'ไม่มีข้อมูลวันที่'
-    },
-    Expire(date_in) {
-      if (date_in) {
-        return moment(date_in).add(3, 'years').format('Do MMMM YYYY')
-      }
-      return 'ไม่มีข้อมูลวันที่'
+      return moment(date).format('Do MMMM YYYY')
     },
     exportToExcel() {
       const worksheet = XLSX.utils.json_to_sheet(
         this.products.map((product) => {
           return {
-            ยี่ห้อ: product.brand,
-            รุ่น: product.model,
-            CPU: product.cpu,
-            RAM: product.ram,
-            GPU: product.gpu,
-            STORAGE: product.storage,
-            OS: product.os,
-            หมายเลขทรัพย์สิน: product.asset_number,
-            หมายเลขลิขสิทธิ์: product.license,
-            ผู้รับผิดชอบ: this.mapUser(product.user_id),
-            แผนก: this.mapDepartment(product.user_id),
-            สถานที่: this.mapLocation(product.location_id),
-            ร้านที่ซื้อ: this.mapStore(product.store_id),
-            วันที่ลงทะเบียน: this.formatDate(product.date_in),
-            วันที่ประกันหมด: this.Expire(product.date_in),
-            วันที่ส่งมอบ: this.formatDate(product.date_out),
-            สถานะ: this.mapStatus(product.status_id),
-            หมายเหตุ: product.note,
+            'ชื่ออุปกรณ์': product.name,
+            'จำนวน': product.quantity,
+            'ราคา': product.price,
+            'หมายเลขครุภัณฑ์': product.asset_number,
+            'เลขที่เอกสาร': product.document_number,
+            'ผู้รับผิดชอบ': this.mapUser(product.user_id),
+            'แผนก': this.mapDepartment(product.user_id),
+            'ร้านที่ซื้อ': this.mapStore(product.store_id),
+            'สถานที่': this.mapLocation(product.location_id),
+            'สถานะ': this.mapStatus(product.status_id),
+            'วันที่ลงทะเบียน': this.formatDate(product.date_in),
+            'วันที่จัดส่ง': this.formatDate(product.date_out),
+            'หมายเหตุ': product.note,
           }
         })
       )
       const workbook = XLSX.utils.book_new()
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'รายการโน๊ตบุ๊ค')
-      XLSX.writeFile(workbook, 'รายการโน๊ตบุ๊ค.xlsx')
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'รายการอุปกรณ์')
+      XLSX.writeFile(workbook, 'รายการอุปกรณ์.xlsx')
     },
     openFile(file) {
       window.open(`http://localhost:3001/${file}`, '_blank')
@@ -313,7 +287,7 @@ export default {
     },
     gotoProfile(id) {
       this.$router.push({ 
-      path: '/user/notebook/profile', 
+      path: '/guest/equipment/profile', 
       query: { id: id }
       });
       console.log(id);

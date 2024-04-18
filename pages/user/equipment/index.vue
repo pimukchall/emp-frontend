@@ -116,6 +116,7 @@ import QrcodeVue from 'qrcode.vue'
 import VueBarcode from 'vue-barcode'
 export default {
   layout: 'user',
+  middleware: 'auth',
   data() {
     return {
       search: '',

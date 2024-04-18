@@ -3,7 +3,6 @@
       <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
       <p v-else-if="$fetchState.error">ขออภัยเกิดข้อผิดพลาด :(</p>
       <div v-else>
-        <h1>รายการอุปกรณ์</h1>
         <div>
             <v-col
               v-for="product in products"

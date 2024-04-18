@@ -88,6 +88,9 @@
               <v-list-item @click="user">
                 ผู้ใช้
               </v-list-item>
+              <v-list-item @click="customer">
+                ลูกค้า
+              </v-list-item>
             </v-list>
           </v-menu>
       </div>
@@ -147,6 +150,9 @@ export default {
   methods: {
     user() {
       this.$router.push('/admin/user')
+    },
+    customer() {
+      this.$router.push('/admin/customer')
     },
     profile() {
       this.$router.push('/admin/user/profile')

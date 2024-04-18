@@ -64,8 +64,7 @@
   import moment from 'moment'
   moment.locale('th')
   export default {
-    layout: 'user',
-    middleware: 'auth',
+    layout: 'guest',
     data() {
       return {
         products: [],

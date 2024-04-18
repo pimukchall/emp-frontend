@@ -16,7 +16,7 @@
                 >
                 <v-card-actions>
                   <v-card-title>
-                    {{ product.brand }} {{ product.model }} <br>
+                    {{ product.name }} <br>
                     {{ product.asset_number }}
                   </v-card-title>
                   <v-spacer></v-spacer>
@@ -34,19 +34,13 @@
                 </v-card-actions>
                     <v-divider></v-divider>
                     <v-card-text>
-                      <p>Brand: {{ product.brand }}</p>
-                      <p>Model: {{ product.model }}</p>
-                      <p>CPU: {{ product.cpu }}</p>
-                      <p>GPU: {{ product.gpu }}</p>
-                      <p>RAM: {{ product.ram }}</p>
-                      <p>Storage: {{ product.storage }}</p>
-                      <p>OS: {{ product.os }}</p>
-                      <p>หมายเลขลิขสิทธิ์: {{ product.license }}</p>
-                      <p>หมายเหตุ: {{ product.note }}</p>
-                      <p>วันที่ลงทะเบียน: {{ formatDate(product.date_in) }}</p>
-                      <p>วันที่ส่งมอบ: {{ formatDate(product.date_out) }}</p>
-                      <p>วันที่ประกันหมด: {{ Expire(product.date_in) }}</p>
+                      <p>จำนวน: {{ product.quantity }}</p>
+                      <p>ราคา: {{ product.price }}</p>
+                      <p>เลขที่เอกสาร: {{ product.document_number }}</p>
                       <p>ร้านที่ซื้อ: {{ mapStore(product.store_id) }}</p>
+                      <p>วันที่ลงทะเบียน: {{ formatDate(product.date_in) }}</p>
+                      <p>วันที่จัดส่ง: {{ formatDate(product.date_out) }}</p>
+                      <p>หมายเหตุ: {{ product.note }}</p>
                       <p>ไฟล์ที่แนบ: {{ product.file }}</p>
                         <v-btn
                           v-if="product.file"
@@ -64,8 +58,7 @@
   import moment from 'moment'
   moment.locale('th')
   export default {
-    layout: 'user',
-    middleware: 'auth',
+    layout: 'guest',
     data() {
       return {
         products: [],
@@ -89,27 +82,22 @@
       async fetchProductData() {
         const productId = this.$route.query.id;
         this.products = await this.$axios.$get(`/api/products/${productId}`)
-        },
+      },
       async fetchUserData() {
         this.users = await this.$store.dispatch('api/user/getUsers')
       },
-  
       async fetchDepartmentData() {
         this.departments = await this.$store.dispatch('api/department/getDepartments')
       },
-  
       async fetchStoreData() {
         this.store = await this.$store.dispatch('api/store/getStores')
       },
-  
       async fetchLocationData() {
         this.location = await this.$store.dispatch('api/location/getLocations')
       },
-  
       async fetchStatusData() {
         this.status = await this.$store.dispatch('api/status/getStatus')
       },
-  
       mapUser(id) {
         for (let i = 0; i < this.users.length; i++) {
           if (this.users[i].id === id) {
@@ -118,7 +106,6 @@
         }
         return 'ไม่มีข้อมูลผู้ใช้'
       },
-  
       mapDepartment(userId) {
         const user = this.users.find(user => user.id === userId);
         if (user) {
@@ -153,7 +140,6 @@
         }
         return 'ไม่มีข้อมูลสถานที่'
       },
-  
       mapStatus(id) {
         for (let i = 0; i < this.status.length; i++) {
           if (this.status[i].id === id) {
@@ -168,16 +154,9 @@
         }
         return 'ไม่มีข้อมูลวันที่'
       },
-      Expire(date_in) {
-        if (date_in) {
-          return moment(date_in).add(3, 'years').format('Do MMMM YYYY')
-        }
-        return 'ไม่มีข้อมูลวันที่'
-      },
       openFile(file) {
         window.open(`http://localhost:3001/${file}`, '_blank')
       },
-  
       colorCheck(status) {
         if (status === 1) {
           return 'success'

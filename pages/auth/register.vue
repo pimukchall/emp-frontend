@@ -174,6 +174,7 @@
                 <v-checkbox
                   v-model="agree"
                   label="ยอมรับข้อตกลงและเงื่อนไข"
+                  required
                 ></v-checkbox>
                 <v-card-actions class="justify-center">
                   <v-btn
@@ -235,7 +236,9 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       departmentOptions: [],
       roleOptions: [],
-
+      valid: false,
+      agree: false,
+      
       modal: {
         confirm: {
           open: false,
@@ -254,8 +257,6 @@ export default {
           message: 'กำลังโหลด...',
         },
       },
-      valid: false,
-      agree: false,
     }
   },
 
@@ -287,7 +288,6 @@ export default {
       try {
         const req = await this.$store.dispatch('api/user/postUsers', this.form)
         this.recordLog()
-        this.modal.confirm.open = true
         this.modal.complete.open = true
       } catch (error) {
         this.modal.error.message = 'มีบัญชีนี้อยู่แล้ว กรุณาลองใหม่อีกครั้ง'
