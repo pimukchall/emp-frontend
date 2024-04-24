@@ -56,7 +56,7 @@ export default {
       this.$router.push('/auth/login');
     },
     home() {
-      this.$router.push('/');
+      this.$router.push('/guest/home')
     },
     theme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;

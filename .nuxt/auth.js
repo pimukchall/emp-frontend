@@ -18,8 +18,8 @@ export default function (ctx, inject) {
   "redirect": {
     "login": "/auth/login",
     "logout": "/",
-    "home": "/admin/home",
-    "callback": "/admin/home"
+    "home": "/home",
+    "callback": "/auth/login"
   },
   "vuex": {
     "namespace": "auth"
@@ -55,7 +55,11 @@ export default function (ctx, inject) {
     "user": {
       "url": "http://localhost:3001/api/users/me",
       "method": "get",
-      "propertyName": "user"
+      "propertyName": "role_id",
+      "superadmin": "1",
+      "admin": "2",
+      "emp": "3",
+      "user": "4"
     }
   },
   "tokenName": "Authorization",

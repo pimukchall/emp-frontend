@@ -130,6 +130,7 @@
 <script>
   import moment from 'moment';
   moment.locale('th');
+
 export default {
   name: 'DefaultLayout',
   data() {
@@ -148,38 +149,38 @@ export default {
   },
   methods: {
     user() {
-      this.$router.push('/admin/user')
+      this.$router.push('/super/user')
     },
     customer() {
-      this.$router.push('/admin/customer')
+      this.$router.push('/super/customer')
     },
     profile() {
-      this.$router.push('/admin/user/profile')
+      this.$router.push('/super/user/profile')
     },
     notebook() {
-      this.$router.push('/admin/notebook')
+      this.$router.push('/super/notebook')
     },
     equipment() {
-      this.$router.push('/admin/equipment')
+      this.$router.push('/super/equipment')
     },
     signout() {
       this.$auth.logout()
       this.recordLog()
     },
     department() {
-      this.$router.push('/admin/department')
+      this.$router.push('/super/department')
     },
     location() {
-      this.$router.push('/admin/location')
+      this.$router.push('/super/location')
     },
     store() {
-      this.$router.push('/admin/store')
+      this.$router.push('/super/store')
     },
     home() {
-      this.$router.push('/admin/home')
+      this.$router.push('/super/home')
     },
     employee() {
-      this.$router.push('/admin/employee')
+      this.$router.push('/super/employee')
     },
     buttonSignOut() {
       this.modal.confirmLogout.open = true

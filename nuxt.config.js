@@ -48,8 +48,8 @@ export default {
     redirect: {
       login: '/auth/login',
       logout: '/',
-      callback: '/admin/home',
-      home: '/admin/home',
+      callback: '/auth/login',
+      home: '/home',
     },
     strategies: {
       local: {
@@ -66,7 +66,12 @@ export default {
           user: { 
             url: 'http://localhost:3001/api/users/me',
             method: 'get',
-            propertyName: 'user'
+            propertyName: 'role_id',
+            superadmin: '1',
+            admin: '2',
+            emp: '3',
+            user: '4',
+
           }
         },
         tokenName: 'Authorization',

@@ -9,7 +9,6 @@
     <ModalComplete
       :open="modal.complete.open"
       :message="modal.complete.message"
-      :method="goBack"
       :complete.sync="modal.complete.open"
     />
     <ModalError
@@ -102,9 +101,6 @@ export default {
         this.modal.error.open = true;
         this.recordLogError();
       }
-    },
-    goBack() {
-      this.$router.push('/admin/user');
     },
     recordLog(){
       const log = {

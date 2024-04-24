@@ -21,6 +21,14 @@ const _29992785 = () => interopDefault(import('..\\pages\\guest\\home\\index.vue
 const _1fd97def = () => interopDefault(import('..\\pages\\guest\\location\\index.vue' /* webpackChunkName: "pages/guest/location/index" */))
 const _7f6dc809 = () => interopDefault(import('..\\pages\\guest\\notebook\\index.vue' /* webpackChunkName: "pages/guest/notebook/index" */))
 const _1215bbcf = () => interopDefault(import('..\\pages\\guest\\store\\index.vue' /* webpackChunkName: "pages/guest/store/index" */))
+const _a9e3673a = () => interopDefault(import('..\\pages\\super\\customer\\index.vue' /* webpackChunkName: "pages/super/customer/index" */))
+const _9fcc22a2 = () => interopDefault(import('..\\pages\\super\\department\\index.vue' /* webpackChunkName: "pages/super/department/index" */))
+const _9c96f936 = () => interopDefault(import('..\\pages\\super\\equipment\\index.vue' /* webpackChunkName: "pages/super/equipment/index" */))
+const _b945ff7c = () => interopDefault(import('..\\pages\\super\\home\\index.vue' /* webpackChunkName: "pages/super/home/index" */))
+const _234e9fa8 = () => interopDefault(import('..\\pages\\super\\location\\index.vue' /* webpackChunkName: "pages/super/location/index" */))
+const _4decfa46 = () => interopDefault(import('..\\pages\\super\\notebook\\index.vue' /* webpackChunkName: "pages/super/notebook/index" */))
+const _5e660a9c = () => interopDefault(import('..\\pages\\super\\store\\index.vue' /* webpackChunkName: "pages/super/store/index" */))
+const _aa348454 = () => interopDefault(import('..\\pages\\super\\user\\index.vue' /* webpackChunkName: "pages/super/user/index" */))
 const _7659aabb = () => interopDefault(import('..\\pages\\user\\department\\index.vue' /* webpackChunkName: "pages/user/department/index" */))
 const _6dc715d9 = () => interopDefault(import('..\\pages\\user\\equipment\\index.vue' /* webpackChunkName: "pages/user/equipment/index" */))
 const _12edb54e = () => interopDefault(import('..\\pages\\user\\home\\index.vue' /* webpackChunkName: "pages/user/home/index" */))
@@ -39,8 +47,19 @@ const _692a8c10 = () => interopDefault(import('..\\pages\\admin\\store\\create.v
 const _74763a89 = () => interopDefault(import('..\\pages\\admin\\user\\profile\\index.vue' /* webpackChunkName: "pages/admin/user/profile/index" */))
 const _2f194909 = () => interopDefault(import('..\\pages\\guest\\equipment\\profile\\index.vue' /* webpackChunkName: "pages/guest/equipment/profile/index" */))
 const _387f723c = () => interopDefault(import('..\\pages\\guest\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/guest/notebook/profile/index" */))
+const _4320ea8a = () => interopDefault(import('..\\pages\\super\\customer\\create.vue' /* webpackChunkName: "pages/super/customer/create" */))
+const _e773f070 = () => interopDefault(import('..\\pages\\super\\customer\\profile\\index.vue' /* webpackChunkName: "pages/super/customer/profile/index" */))
+const _7ad831ef = () => interopDefault(import('..\\pages\\super\\department\\create.vue' /* webpackChunkName: "pages/super/department/create" */))
+const _a6df980e = () => interopDefault(import('..\\pages\\super\\equipment\\create.vue' /* webpackChunkName: "pages/super/equipment/create" */))
+const _50409306 = () => interopDefault(import('..\\pages\\super\\equipment\\profile\\index.vue' /* webpackChunkName: "pages/super/equipment/profile/index" */))
+const _0471a012 = () => interopDefault(import('..\\pages\\super\\location\\create.vue' /* webpackChunkName: "pages/super/location/create" */))
+const _d132cd90 = () => interopDefault(import('..\\pages\\super\\notebook\\create.vue' /* webpackChunkName: "pages/super/notebook/create" */))
+const _fc8d6d76 = () => interopDefault(import('..\\pages\\super\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/super/notebook/profile/index" */))
+const _7086a64c = () => interopDefault(import('..\\pages\\super\\store\\create.vue' /* webpackChunkName: "pages/super/store/create" */))
+const _d388f096 = () => interopDefault(import('..\\pages\\super\\user\\profile\\index.vue' /* webpackChunkName: "pages/super/user/profile/index" */))
 const _c78cf9dc = () => interopDefault(import('..\\pages\\user\\equipment\\profile\\index.vue' /* webpackChunkName: "pages/user/equipment/profile/index" */))
 const _421c27b9 = () => interopDefault(import('..\\pages\\user\\notebook\\profile\\index.vue' /* webpackChunkName: "pages/user/notebook/profile/index" */))
+const _0917c029 = () => interopDefault(import('..\\pages\\user\\user\\profile\\index.vue' /* webpackChunkName: "pages/user/user/profile/index" */))
 const _01865810 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -123,6 +142,38 @@ export const routerOptions = {
     component: _1215bbcf,
     name: "guest-store"
   }, {
+    path: "/super/customer",
+    component: _a9e3673a,
+    name: "super-customer"
+  }, {
+    path: "/super/department",
+    component: _9fcc22a2,
+    name: "super-department"
+  }, {
+    path: "/super/equipment",
+    component: _9c96f936,
+    name: "super-equipment"
+  }, {
+    path: "/super/home",
+    component: _b945ff7c,
+    name: "super-home"
+  }, {
+    path: "/super/location",
+    component: _234e9fa8,
+    name: "super-location"
+  }, {
+    path: "/super/notebook",
+    component: _4decfa46,
+    name: "super-notebook"
+  }, {
+    path: "/super/store",
+    component: _5e660a9c,
+    name: "super-store"
+  }, {
+    path: "/super/user",
+    component: _aa348454,
+    name: "super-user"
+  }, {
     path: "/user/department",
     component: _7659aabb,
     name: "user-department"
@@ -195,6 +246,46 @@ export const routerOptions = {
     component: _387f723c,
     name: "guest-notebook-profile"
   }, {
+    path: "/super/customer/create",
+    component: _4320ea8a,
+    name: "super-customer-create"
+  }, {
+    path: "/super/customer/profile",
+    component: _e773f070,
+    name: "super-customer-profile"
+  }, {
+    path: "/super/department/create",
+    component: _7ad831ef,
+    name: "super-department-create"
+  }, {
+    path: "/super/equipment/create",
+    component: _a6df980e,
+    name: "super-equipment-create"
+  }, {
+    path: "/super/equipment/profile",
+    component: _50409306,
+    name: "super-equipment-profile"
+  }, {
+    path: "/super/location/create",
+    component: _0471a012,
+    name: "super-location-create"
+  }, {
+    path: "/super/notebook/create",
+    component: _d132cd90,
+    name: "super-notebook-create"
+  }, {
+    path: "/super/notebook/profile",
+    component: _fc8d6d76,
+    name: "super-notebook-profile"
+  }, {
+    path: "/super/store/create",
+    component: _7086a64c,
+    name: "super-store-create"
+  }, {
+    path: "/super/user/profile",
+    component: _d388f096,
+    name: "super-user-profile"
+  }, {
     path: "/user/equipment/profile",
     component: _c78cf9dc,
     name: "user-equipment-profile"
@@ -202,6 +293,10 @@ export const routerOptions = {
     path: "/user/notebook/profile",
     component: _421c27b9,
     name: "user-notebook-profile"
+  }, {
+    path: "/user/user/profile",
+    component: _0917c029,
+    name: "user-user-profile"
   }, {
     path: "/",
     component: _01865810,

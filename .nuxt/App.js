@@ -12,9 +12,10 @@ import _77068119 from '..\\layouts\\admin.vue'
 import _77180f1e from '..\\layouts\\blank.vue'
 import _6f6c098b from '..\\layouts\\default.vue'
 import _7762aba2 from '..\\layouts\\guest.vue'
+import _780bed45 from '..\\layouts\\super.vue'
 import _2d2a8cc1 from '..\\layouts\\user.vue'
 
-const layouts = { "_admin": sanitizeComponent(_77068119),"_blank": sanitizeComponent(_77180f1e),"_default": sanitizeComponent(_6f6c098b),"_guest": sanitizeComponent(_7762aba2),"_user": sanitizeComponent(_2d2a8cc1) }
+const layouts = { "_admin": sanitizeComponent(_77068119),"_blank": sanitizeComponent(_77180f1e),"_default": sanitizeComponent(_6f6c098b),"_guest": sanitizeComponent(_7762aba2),"_super": sanitizeComponent(_780bed45),"_user": sanitizeComponent(_2d2a8cc1) }
 
 export default {
   render (h, props) {
