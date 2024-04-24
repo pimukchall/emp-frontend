@@ -10,6 +10,7 @@ const _0e344c5b = () => interopDefault(import('..\\pages\\admin\\department\\ind
 const _757c7f8e = () => interopDefault(import('..\\pages\\admin\\equipment\\index.vue' /* webpackChunkName: "pages/admin/equipment/index" */))
 const _756be224 = () => interopDefault(import('..\\pages\\admin\\home\\index.vue' /* webpackChunkName: "pages/admin/home/index" */))
 const _208688d8 = () => interopDefault(import('..\\pages\\admin\\location\\index.vue' /* webpackChunkName: "pages/admin/location/index" */))
+const _75aca2fa = () => interopDefault(import('..\\pages\\admin\\log\\index.vue' /* webpackChunkName: "pages/admin/log/index" */))
 const _ffca5a1c = () => interopDefault(import('..\\pages\\admin\\notebook\\index.vue' /* webpackChunkName: "pages/admin/notebook/index" */))
 const _26fc7cf4 = () => interopDefault(import('..\\pages\\admin\\store\\index.vue' /* webpackChunkName: "pages/admin/store/index" */))
 const _665a66fc = () => interopDefault(import('..\\pages\\admin\\user\\index.vue' /* webpackChunkName: "pages/admin/user/index" */))
@@ -97,6 +98,10 @@ export const routerOptions = {
     path: "/admin/location",
     component: _208688d8,
     name: "admin-location"
+  }, {
+    path: "/admin/log",
+    component: _75aca2fa,
+    name: "admin-log"
   }, {
     path: "/admin/notebook",
     component: _ffca5a1c,

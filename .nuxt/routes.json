@@ -42,6 +42,13 @@
     "_name": "_208688d8"
   },
   {
+    "name": "admin-log",
+    "path": "/admin/log",
+    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\log\\\\index.vue",
+    "chunkName": "pages/admin/log/index",
+    "_name": "_75aca2fa"
+  },
+  {
     "name": "admin-notebook",
     "path": "/admin/notebook",
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\notebook\\\\index.vue",
