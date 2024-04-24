@@ -59,7 +59,7 @@
   import moment from 'moment'
   moment.locale('th')
   export default {
-    layout: 'admin',
+    layout: 'super',
     middleware: 'auth',
     head() {
       return {
@@ -119,7 +119,7 @@
         }
       },
       goBack() {
-        this.$router.push('/admin/department')
+        this.$router.push('/super/department')
       },
       recordLog(){
       const log = {

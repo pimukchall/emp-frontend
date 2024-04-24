@@ -67,7 +67,7 @@
   import moment from 'moment';
   moment.locale('th');
   export default {
-    layout: 'admin',
+    layout: 'super',
     middleware: 'auth',
     data() {
       return {

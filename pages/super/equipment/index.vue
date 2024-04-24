@@ -137,7 +137,7 @@
                     <div class="text-center">
                       <qrcode-vue 
                         v-if="showQR" 
-                        :value="'http://localhost:3000/admin/equipment/profile?id=' + product.id"
+                        :value="'http://localhost:3000/super/equipment/profile?id=' + product.id"
                         :size="200"
                       ></qrcode-vue>
 
@@ -169,7 +169,7 @@ import * as XLSX from 'xlsx'
 import QrcodeVue from 'qrcode.vue'
 import VueBarcode from 'vue-barcode'
 export default {
-  layout: 'admin',
+  layout: 'super',
   middleware: 'auth',
   data() {
     return {
@@ -327,7 +327,7 @@ export default {
       }
     },
     gotoCreate() {
-      this.$router.push('/admin/equipment/create')
+      this.$router.push('/super/equipment/create')
     },
     openEditEquipmentDialog(data) {
       this.editData = data
@@ -414,7 +414,7 @@ export default {
     },
     gotoProfile(id) {
       this.$router.push({ 
-      path: '/admin/equipment/profile', 
+      path: '/super/equipment/profile', 
       query: { id: id }
       });
       console.log(id);

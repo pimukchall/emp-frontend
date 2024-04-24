@@ -247,7 +247,7 @@
 import moment from 'moment'
 moment.locale('th')
 export default {
-  layout: 'admin',
+  layout: 'super',
   middleware: 'auth',
   head() {
     return {
@@ -344,7 +344,7 @@ export default {
       }
     },
     goBack() {
-      this.$router.push('/admin/notebook')
+      this.$router.push('/super/notebook')
     },
     async fetchUserData() {
       const user = await this.$store.dispatch('api/user/getUsers')

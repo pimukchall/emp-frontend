@@ -79,7 +79,7 @@
 import moment from 'moment'
 moment.locale('th')
 export default {
-  layout: 'admin',
+  layout: 'super',
   middleware: 'auth',
   data() {
     return {
@@ -142,7 +142,7 @@ export default {
       }
     },
     gotoCreate() {
-      this.$router.push('/admin/location/create');
+      this.$router.push('/super/location/create');
     },
     openEditDialog(data) {
       this.editData = data;

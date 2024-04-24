@@ -43,6 +43,8 @@ export default {
   methods : {
     async checkRole() {
       if (this.$auth.user.role_id === 1) {
+        this.$router.push('/super/home')
+      } else if (this.$auth.user.role_id === 2) {
         this.$router.push('/admin/home')
       } else if (this.$auth.user.role_id === 3) {
         this.$router.push('/user/home')

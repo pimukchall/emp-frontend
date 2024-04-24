@@ -147,7 +147,7 @@ import moment from 'moment'
 moment.locale('th')
 import * as XLSX from 'xlsx'
 export default {
-  layout: 'admin',
+  layout: 'super',
   middleware: 'auth',
   data() {
     return {

@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  layout: 'admin',
+  layout: 'super',
   middleware: 'auth',
   data () {
     return {

@@ -101,7 +101,7 @@
   import moment from 'moment'
   moment.locale('th')
   export default {
-    layout: 'admin',
+    layout: 'super',
     middleware: 'auth',
     head() {
       return {
@@ -166,7 +166,7 @@
         }
       },
       goBack() {
-        this.$router.push('/admin/location')
+        this.$router.push('/super/location')
       },
       recordLog(){
       const log = {

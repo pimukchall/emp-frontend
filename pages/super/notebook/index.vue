@@ -143,7 +143,7 @@
                     <div class="text-center">
                       <qrcode-vue 
                         v-if="showQR" 
-                        :value="'http://localhost:3000/admin/notebook/profile?id=' + product.id"
+                        :value="'http://localhost:3000/super/notebook/profile?id=' + product.id"
                         :size="200"
                       ></qrcode-vue>
 
@@ -175,7 +175,7 @@ import * as XLSX from 'xlsx'
 import QrcodeVue from 'qrcode.vue'
 import VueBarcode from 'vue-barcode'
 export default {
-  layout: 'admin',
+  layout: 'super',
   middleware: 'auth',
   data() {
     return {
@@ -338,7 +338,7 @@ export default {
       }
     },
     gotoCreate() {
-      this.$router.push('/admin/notebook/create')
+      this.$router.push('/super/notebook/create')
     },
     openEditNotebookDialog(data) {
       this.editData = data
@@ -439,7 +439,7 @@ export default {
     },
     gotoProfile(id) {
       this.$router.push({ 
-      path: '/admin/notebook/profile', 
+      path: '/super/notebook/profile', 
       query: { id: id }
       });
       console.log(id);
