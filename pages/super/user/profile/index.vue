@@ -1,6 +1,6 @@
 <template>
     <div>
-    <UserEditDialog :open="editDialog" :edit.sync="editDialog" :data="editData" />
+      <UserEditUser :open="editUserDialog" :edit.sync="editUserDialog" :data="editUserData" />
     <UserEditPassword :open="editPasswordDialog" :edit.sync="editPasswordDialog" :data="editPasswordData" />
     <UserEditUpload :open="editUploadDialog" :edit.sync="editUploadDialog" :data="editUploadData" />  
     <p v-if="$fetchState.pending">กำลังเชื่อมต่อ ...</p>
@@ -90,8 +90,8 @@
         departments: [],
         roles: [],
         currentExpanded: null,
-        editDialog: false,
-        editData: {},
+        editUserDialog: false,
+        editUserData: {},
         editPasswordDialog: false,
         editPasswordData: {},
         editUploadDialog: false,
@@ -139,8 +139,8 @@
         return moment(date).format('Do MMMM YYYY');
       },
       openEditUserDialog(data) {
-      this.editData = data;
-      this.editDialog = true;
+      this.editUserData = data;
+      this.editUserDialog = true;
     },
 
     openEditPasswordDialog(data) {
