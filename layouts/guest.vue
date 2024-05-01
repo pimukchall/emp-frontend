@@ -133,7 +133,7 @@ export default {
       this.$router.push('/auth/login')
     },
     home() {
-      this.$router.push('/guest/home')
+      this.$router.push('/')
     },
     theme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark

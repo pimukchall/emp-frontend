@@ -1,12 +1,5 @@
 [
   {
-    "name": "home",
-    "path": "/home",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\home\\\\index.vue",
-    "chunkName": "pages/home/index",
-    "_name": "_4a6b6fb9"
-  },
-  {
     "name": "admin-customer",
     "path": "/admin/customer",
     "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\customer\\\\index.vue",

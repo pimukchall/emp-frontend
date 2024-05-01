@@ -13,10 +13,10 @@
 <script>
 export default {
   layout: 'user',
+  middleware: 'auth',
   async mounted() {
     await this.checkRole();
   },
-  middleware: 'auth',
   data () {
     return {
       items: [
@@ -50,7 +50,7 @@ export default {
       } else if (this.$auth.user.role_id === 3) {
         this.$router.push('/user/home')
       } else {
-        this.$router.push('/auth/login')
+        this.$router.push('/')
       }
     },
   },

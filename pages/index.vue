@@ -5,7 +5,7 @@
   </template>
   
   <script>
-    import home from '~/pages/home/index.vue'
+    import home from '~/pages/guest/home/index.vue'
       export default {
         layout: 'guest',
           components: {

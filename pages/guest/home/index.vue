@@ -13,6 +13,15 @@
 <script>
 export default {
   layout: 'guest',
+  async mounted() {
+    // Check if user is already logged in
+    if (this.$auth.loggedIn) {
+      await this.checkRole();
+    } else {
+      // Redirect user to login page or homepage
+      this.$router.push('/');
+    }
+  },
   data () {
     return {
       items: [
@@ -36,6 +45,19 @@ export default {
         },
       ],
     }
+  },
+  methods : {
+    async checkRole() {
+      if (this.$auth.user.role_id === 1) {
+        this.$router.push('/super/home')
+      } else if (this.$auth.user.role_id === 2) {
+        this.$router.push('/admin/home')
+      } else if (this.$auth.user.role_id === 3) {
+        this.$router.push('/user/home')
+      } else {
+        this.$router.push('/')
+      }
+    },
   },
 }
 </script>

@@ -49,7 +49,7 @@ export default {
       login: '/auth/login',
       logout: '/',
       callback: '/auth/login',
-      home: '/home',
+      home: '/user/home',
     },
     strategies: {
       local: {
