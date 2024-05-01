@@ -91,6 +91,9 @@
               <v-list-item @click="customer">
                 ลูกค้า
               </v-list-item>
+              <v-list-item @click="logs">
+                บันทึกการใช้งาน
+              </v-list-item>
             </v-list>
           </v-menu>
       </div>
@@ -181,6 +184,9 @@ export default {
     },
     employee() {
       this.$router.push('/super/employee')
+    },
+    logs() {
+      this.$router.push('/super/log')
     },
     buttonSignOut() {
       this.modal.confirmLogout.open = true

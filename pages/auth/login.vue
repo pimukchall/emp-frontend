@@ -17,7 +17,7 @@
       :error.sync="modal.error.open"
     />
     <div class="d-flex justify-center">
-      <v-card width="400" height="300">
+      <v-card width="400" class="mt-12 pa-2 pt-10 justify-center rounded-xl">
         <v-card-title> เข้าสู่ระบบ </v-card-title>
           <v-card-text>
             <v-text-field 
@@ -34,9 +34,8 @@
 
           <v-card-actions>
             <div>
-              <span v-bind:title="message"> 
-                <v-btn @click="login" width="350" class="mr-2" color="success" >เข้าสู่ระบบ</v-btn>
-              </span>
+              <v-btn @click="login" width="350" class="mr-2" color="success" >เข้าสู่ระบบ</v-btn>
+              หากยังไม่มีบัญชีผู้ใช้ <p @click="register" class="text-primary">สมัครสมาชิก</p>
             </div>
           </v-card-actions>
           </v-card-text>
@@ -53,7 +52,6 @@ export default {
   name: 'Login',
   data() {
     return {
-      message: 'You login on ' + new Date().toLocaleString(),
       show1: false,
       show2: false,
       
@@ -102,6 +100,11 @@ export default {
         this.recordLogError();
       }
     },
+
+    register() {
+      this.$router.push('/auth/register-user')
+    },
+
     recordLog(){
       const log = {
         user_id: this.$auth.user.id,

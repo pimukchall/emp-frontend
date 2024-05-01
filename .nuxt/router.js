@@ -16,6 +16,7 @@ const _26fc7cf4 = () => interopDefault(import('..\\pages\\admin\\store\\index.vu
 const _665a66fc = () => interopDefault(import('..\\pages\\admin\\user\\index.vue' /* webpackChunkName: "pages/admin/user/index" */))
 const _f21ffb32 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
 const _db0eadd6 = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
+const _5fc9d3b3 = () => interopDefault(import('..\\pages\\auth\\register-user.vue' /* webpackChunkName: "pages/auth/register-user" */))
 const _f6c3509c = () => interopDefault(import('..\\pages\\guest\\department\\index.vue' /* webpackChunkName: "pages/guest/department/index" */))
 const _9f6523fc = () => interopDefault(import('..\\pages\\guest\\equipment\\index.vue' /* webpackChunkName: "pages/guest/equipment/index" */))
 const _29992785 = () => interopDefault(import('..\\pages\\guest\\home\\index.vue' /* webpackChunkName: "pages/guest/home/index" */))
@@ -27,6 +28,7 @@ const _9fcc22a2 = () => interopDefault(import('..\\pages\\super\\department\\ind
 const _9c96f936 = () => interopDefault(import('..\\pages\\super\\equipment\\index.vue' /* webpackChunkName: "pages/super/equipment/index" */))
 const _b945ff7c = () => interopDefault(import('..\\pages\\super\\home\\index.vue' /* webpackChunkName: "pages/super/home/index" */))
 const _234e9fa8 = () => interopDefault(import('..\\pages\\super\\location\\index.vue' /* webpackChunkName: "pages/super/location/index" */))
+const _b9ed7aa2 = () => interopDefault(import('..\\pages\\super\\log\\index.vue' /* webpackChunkName: "pages/super/log/index" */))
 const _4decfa46 = () => interopDefault(import('..\\pages\\super\\notebook\\index.vue' /* webpackChunkName: "pages/super/notebook/index" */))
 const _5e660a9c = () => interopDefault(import('..\\pages\\super\\store\\index.vue' /* webpackChunkName: "pages/super/store/index" */))
 const _aa348454 = () => interopDefault(import('..\\pages\\super\\user\\index.vue' /* webpackChunkName: "pages/super/user/index" */))
@@ -123,6 +125,10 @@ export const routerOptions = {
     component: _db0eadd6,
     name: "auth-register"
   }, {
+    path: "/auth/register-user",
+    component: _5fc9d3b3,
+    name: "auth-register-user"
+  }, {
     path: "/guest/department",
     component: _f6c3509c,
     name: "guest-department"
@@ -166,6 +172,10 @@ export const routerOptions = {
     path: "/super/location",
     component: _234e9fa8,
     name: "super-location"
+  }, {
+    path: "/super/log",
+    component: _b9ed7aa2,
+    name: "super-log"
   }, {
     path: "/super/notebook",
     component: _4decfa46,

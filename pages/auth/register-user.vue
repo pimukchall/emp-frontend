@@ -123,53 +123,6 @@
                 >
                 </v-select>
               </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="roleOptions"
-                  v-model="form.role_id"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'กรุณาเลือกตำแหน่ง']"
-                  label="ตำแหน่ง"
-                  outlined
-                  required
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-menu
-                  ref="menu"
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :return-value.sync="form.date_in"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="auto"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
-                      v-model="formattedDate"
-                      label="วันที่สมัคร"
-                      prepend-icon="mdi-calendar"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
-                      :rules="[(v) => !!v || 'กรุณากรอกวันที่สมัคร']"
-                      outlined
-                      required
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker v-model="date" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu = false"
-                      >ยกเลิก</v-btn
-                    >
-                    <v-btn text color="primary" @click="$refs.menu.save(date)"
-                      >ยืนยัน</v-btn
-                    >
-                  </v-date-picker>
-                </v-menu>
-              </v-col>
               <v-col cols="12">
                 <v-checkbox
                   v-model="agree"
@@ -205,7 +158,7 @@ import moment from 'moment';
 moment.locale('th');
 
 export default {
-  layout: 'admin',
+  layout: 'guest',
   middlewares: 'auth',
   head() {
     return {
@@ -222,7 +175,7 @@ export default {
         email: null,
         phone: null,
         department_id: null,
-        role_id: null,
+        role_id: 3,
         date_in: new Date().toISOString().substr(0, 10),
       },
       emailRules: [
@@ -233,9 +186,7 @@ export default {
       show1: false,
       show2: false,
       menu: false,
-      date: new Date().toISOString().substr(0, 10),
       departmentOptions: [],
-      roleOptions: [],
       valid: false,
       agree: false,
       
@@ -260,15 +211,8 @@ export default {
     }
   },
 
-  computed: {
-    formattedDate() {
-      return moment(this.date).format('Do MMMM YYYY');
-    },
-  },
-
   async fetch() {
     await this.fetchDepartMents();
-    await this.fetchRoles();
   },
 
   methods: {
@@ -294,24 +238,19 @@ export default {
       }
     },
     goBack() {
-      this.$router.push('/admin/user')
+      this.$router.push('/guest/home')
     },
     async fetchDepartMents() {
       const department = await this.$store.dispatch('api/department/getDepartments')
       this.departmentOptions = department
-    },
-    async fetchRoles() {
-      const role = await this.$store.dispatch('api/role/getRoles')
-      this.roleOptions = role
     },
     recordLog(){
       const account = {
         email: this.form.email
       }
       const log = {
-        user_id: this.$auth.user.id,
         action: 'สมัครสมาชิก',
-        description: this.$auth.user.email + ' ' + 'ได้เพิ่มสมาชิกใหม่ ' + account.email + ' เวลา ' + moment(new Date()).format('HH:mm:ss'),
+        description: 'ได้เพิ่มสมาชิกใหม่ ' + account.email + ' เวลา ' + moment(new Date()).format('HH:mm:ss'),
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       console.log(log);

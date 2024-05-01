@@ -84,6 +84,9 @@
   export default {
     layout: 'super',
     middleware: 'auth',
+    async mounted() {
+      await this.checkRole();
+    },
     data() {
       return {
         users: [],
@@ -112,9 +115,11 @@
         } catch (error) {
             }
       },
+
       async fetchDepartmentData() {
         this.departments = await this.$store.dispatch('api/department/getDepartments');
       },
+
       mapDataDepartment(id) {
         for (let i = 0; i < this.departments.length; i++) {
           if (this.departments[i].id === id) {
@@ -123,35 +128,50 @@
         }
         return 'ไม่มีแผนก';
       },
+
       async fetchRoleData() {
         this.roles = await this.$store.dispatch('api/role/getRoles');
       },
-      mapDataRole(id) {
-        for (let i = 0; i < this.roles.length; i++) {
-          if (this.roles[i].id === id) {
-            return this.roles[i].name;
+
+        mapDataRole(id) {
+          for (let i = 0; i < this.roles.length; i++) {
+            if (this.roles[i].id === id) {
+              return this.roles[i].name;
+            }
           }
-        }
         return 'ไม่มีสิทธิ์';
       },
   
       formatDate(date) {
         return moment(date).format('Do MMMM YYYY');
       },
-      openEditUserDialog(data) {
-      this.editUserData = data;
-      this.editUserDialog = true;
-    },
+        openEditUserDialog(data) {
+        this.editUserData = data;
+        this.editUserDialog = true;
+      },
 
-    openEditPasswordDialog(data) {
-      this.editPasswordData = data;
-      this.editPasswordDialog = true;
-    },
-    
-    openEditUploadDialog(data) {
-      this.editUploadData = data;
-      this.editUploadDialog = true;
-    },
+      openEditPasswordDialog(data) {
+        this.editPasswordData = data;
+        this.editPasswordDialog = true;
+      },
+      
+      openEditUploadDialog(data) {
+        this.editUploadData = data;
+        this.editUploadDialog = true;
+      },
+
+      async checkRole() {
+          if (this.$auth.user.role_id === 1) {
+            this.$router.push('/super/user/profile')
+          } else if (this.$auth.user.role_id === 2) {
+            this.$router.push('/admin/user/profile')
+          } else if (this.$auth.user.role_id === 3) {
+            this.$router.push('/user/user/profile')
+          } else {
+            this.$router.push('/auth/login')
+          }
+        },
+
     }
   };
   </script>
