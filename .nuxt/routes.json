@@ -2,414 +2,414 @@
   {
     "name": "admin-customer",
     "path": "/admin/customer",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\customer\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/customer/index.vue",
     "chunkName": "pages/admin/customer/index",
-    "_name": "_4587b5e2"
+    "_name": "_52596b8e"
   },
   {
     "name": "admin-department",
     "path": "/admin/department",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\department\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/department/index.vue",
     "chunkName": "pages/admin/department/index",
-    "_name": "_0e344c5b"
+    "_name": "_3631867c"
   },
   {
     "name": "admin-equipment",
     "path": "/admin/equipment",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/equipment/index.vue",
     "chunkName": "pages/admin/equipment/index",
-    "_name": "_757c7f8e"
+    "_name": "_4e1b33b4"
   },
   {
     "name": "admin-home",
     "path": "/admin/home",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/home/index.vue",
     "chunkName": "pages/admin/home/index",
-    "_name": "_756be224"
+    "_name": "_0a94b462"
   },
   {
     "name": "admin-location",
     "path": "/admin/location",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/location/index.vue",
     "chunkName": "pages/admin/location/index",
-    "_name": "_208688d8"
+    "_name": "_3bbeeaa5"
   },
   {
     "name": "admin-log",
     "path": "/admin/log",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\log\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/log/index.vue",
     "chunkName": "pages/admin/log/index",
-    "_name": "_75aca2fa"
+    "_name": "_bf346bac"
   },
   {
     "name": "admin-notebook",
     "path": "/admin/notebook",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/notebook/index.vue",
     "chunkName": "pages/admin/notebook/index",
-    "_name": "_ffca5a1c"
+    "_name": "_1dcbf54b"
   },
   {
     "name": "admin-store",
     "path": "/admin/store",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/store/index.vue",
     "chunkName": "pages/admin/store/index",
-    "_name": "_26fc7cf4"
+    "_name": "_6b070e72"
   },
   {
     "name": "admin-user",
     "path": "/admin/user",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\user\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/user/index.vue",
     "chunkName": "pages/admin/user/index",
-    "_name": "_665a66fc"
+    "_name": "_7f14e5bb"
   },
   {
     "name": "auth-login",
     "path": "/auth/login",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\auth\\\\login.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/auth/login.vue",
     "chunkName": "pages/auth/login",
-    "_name": "_f21ffb32"
+    "_name": "_23459122"
   },
   {
     "name": "auth-register",
     "path": "/auth/register",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\auth\\\\register.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/auth/register.vue",
     "chunkName": "pages/auth/register",
-    "_name": "_db0eadd6"
+    "_name": "_7006f70d"
   },
   {
     "name": "auth-register-user",
     "path": "/auth/register-user",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\auth\\\\register-user.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/auth/register-user.vue",
     "chunkName": "pages/auth/register-user",
-    "_name": "_5fc9d3b3"
+    "_name": "_5154fe8a"
   },
   {
     "name": "guest-department",
     "path": "/guest/department",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\department\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/department/index.vue",
     "chunkName": "pages/guest/department/index",
-    "_name": "_f6c3509c"
+    "_name": "_378b9c4e"
   },
   {
     "name": "guest-equipment",
     "path": "/guest/equipment",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/equipment/index.vue",
     "chunkName": "pages/guest/equipment/index",
-    "_name": "_9f6523fc"
+    "_name": "_5e99bfbd"
   },
   {
     "name": "guest-home",
     "path": "/guest/home",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/home/index.vue",
     "chunkName": "pages/guest/home/index",
-    "_name": "_29992785"
+    "_name": "_5c4ff826"
   },
   {
     "name": "guest-location",
     "path": "/guest/location",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/location/index.vue",
     "chunkName": "pages/guest/location/index",
-    "_name": "_1fd97def"
+    "_name": "_6eab8d08"
   },
   {
     "name": "guest-notebook",
     "path": "/guest/notebook",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/notebook/index.vue",
     "chunkName": "pages/guest/notebook/index",
-    "_name": "_7f6dc809"
+    "_name": "_aa9177bc"
   },
   {
     "name": "guest-store",
     "path": "/guest/store",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/store/index.vue",
     "chunkName": "pages/guest/store/index",
-    "_name": "_1215bbcf"
+    "_name": "_c7a71d60"
   },
   {
     "name": "super-customer",
     "path": "/super/customer",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\customer\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/customer/index.vue",
     "chunkName": "pages/super/customer/index",
-    "_name": "_a9e3673a"
+    "_name": "_1115503c"
   },
   {
     "name": "super-department",
     "path": "/super/department",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\department\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/department/index.vue",
     "chunkName": "pages/super/department/index",
-    "_name": "_9fcc22a2"
+    "_name": "_9a8d37d4"
   },
   {
     "name": "super-equipment",
     "path": "/super/equipment",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/equipment/index.vue",
     "chunkName": "pages/super/equipment/index",
-    "_name": "_9c96f936"
+    "_name": "_4c7cd1e0"
   },
   {
     "name": "super-home",
     "path": "/super/home",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/home/index.vue",
     "chunkName": "pages/super/home/index",
-    "_name": "_b945ff7c"
+    "_name": "_7dbcdc23"
   },
   {
     "name": "super-location",
     "path": "/super/location",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/location/index.vue",
     "chunkName": "pages/super/location/index",
-    "_name": "_234e9fa8"
+    "_name": "_3e4a520e"
   },
   {
     "name": "super-log",
     "path": "/super/log",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\log\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/log/index.vue",
     "chunkName": "pages/super/log/index",
-    "_name": "_b9ed7aa2"
+    "_name": "_11970d54"
   },
   {
     "name": "super-notebook",
     "path": "/super/notebook",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/notebook/index.vue",
     "chunkName": "pages/super/notebook/index",
-    "_name": "_4decfa46"
+    "_name": "_7a303cc2"
   },
   {
     "name": "super-store",
     "path": "/super/store",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/store/index.vue",
     "chunkName": "pages/super/store/index",
-    "_name": "_5e660a9c"
+    "_name": "_af47e61a"
   },
   {
     "name": "super-user",
     "path": "/super/user",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\user\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/user/index.vue",
     "chunkName": "pages/super/user/index",
-    "_name": "_aa348454"
+    "_name": "_021c1c0f"
   },
   {
     "name": "user-department",
     "path": "/user/department",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\department\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/department/index.vue",
     "chunkName": "pages/user/department/index",
-    "_name": "_7659aabb"
+    "_name": "_2498e208"
   },
   {
     "name": "user-equipment",
     "path": "/user/equipment",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\equipment\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/equipment/index.vue",
     "chunkName": "pages/user/equipment/index",
-    "_name": "_6dc715d9"
+    "_name": "_8c829b8c"
   },
   {
     "name": "user-home",
     "path": "/user/home",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\home\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/home/index.vue",
     "chunkName": "pages/user/home/index",
-    "_name": "_12edb54e"
+    "_name": "_5ed2ab89"
   },
   {
     "name": "user-location",
     "path": "/user/location",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\location\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/location/index.vue",
     "chunkName": "pages/user/location/index",
-    "_name": "_0d2fff38"
+    "_name": "_cbe2f942"
   },
   {
     "name": "user-notebook",
     "path": "/user/notebook",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\notebook\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/notebook/index.vue",
     "chunkName": "pages/user/notebook/index",
-    "_name": "_6cc44952"
+    "_name": "_7c1b8e05"
   },
   {
     "name": "user-store",
     "path": "/user/store",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\store\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/store/index.vue",
     "chunkName": "pages/user/store/index",
-    "_name": "_5352e726"
+    "_name": "_2bffab66"
   },
   {
     "name": "admin-customer-create",
     "path": "/admin/customer/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\customer\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/customer/create.vue",
     "chunkName": "pages/admin/customer/create",
-    "_name": "_1c0670e2"
+    "_name": "_208850f0"
   },
   {
     "name": "admin-customer-profile",
     "path": "/admin/customer/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\customer\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/customer/profile/index.vue",
     "chunkName": "pages/admin/customer/profile/index",
-    "_name": "_d4f99ec8"
+    "_name": "_8065d2b0"
   },
   {
     "name": "admin-department-create",
     "path": "/admin/department/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\department\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/department/create.vue",
     "chunkName": "pages/admin/department/create",
-    "_name": "_3fecec7a"
+    "_name": "_4096b388"
   },
   {
     "name": "admin-equipment-create",
     "path": "/admin/equipment/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\equipment\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/equipment/create.vue",
     "chunkName": "pages/admin/equipment/create",
-    "_name": "_0aaa91a5"
+    "_name": "_c600e4ec"
   },
   {
     "name": "admin-equipment-profile",
     "path": "/admin/equipment/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\equipment\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/equipment/profile/index.vue",
     "chunkName": "pages/admin/equipment/profile/index",
-    "_name": "_6ea884b2"
+    "_name": "_39214e64"
   },
   {
     "name": "admin-location-create",
     "path": "/admin/location/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\location\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/location/create.vue",
     "chunkName": "pages/admin/location/create",
-    "_name": "_17fedce6"
+    "_name": "_63d2b4b9"
   },
   {
     "name": "admin-notebook-create",
     "path": "/admin/notebook/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\notebook\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/notebook/create.vue",
     "chunkName": "pages/admin/notebook/create",
-    "_name": "_aa1853e8"
+    "_name": "_7932025a"
   },
   {
     "name": "admin-notebook-profile",
     "path": "/admin/notebook/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\notebook\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/notebook/profile/index.vue",
     "chunkName": "pages/admin/notebook/profile/index",
-    "_name": "_ea131bce"
+    "_name": "_0f2c9365"
   },
   {
     "name": "admin-store-create",
     "path": "/admin/store/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\store\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/store/create.vue",
     "chunkName": "pages/admin/store/create",
-    "_name": "_692a8c10"
+    "_name": "_a6722a52"
   },
   {
     "name": "admin-user-profile",
     "path": "/admin/user/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\admin\\\\user\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/admin/user/profile/index.vue",
     "chunkName": "pages/admin/user/profile/index",
-    "_name": "_74763a89"
+    "_name": "_a313d856"
   },
   {
     "name": "guest-equipment-profile",
     "path": "/guest/equipment/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\equipment\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/equipment/profile/index.vue",
     "chunkName": "pages/guest/equipment/profile/index",
-    "_name": "_2f194909"
+    "_name": "_3909cbd7"
   },
   {
     "name": "guest-notebook-profile",
     "path": "/guest/notebook/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\guest\\\\notebook\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/guest/notebook/profile/index.vue",
     "chunkName": "pages/guest/notebook/profile/index",
-    "_name": "_387f723c"
+    "_name": "_3f39c988"
   },
   {
     "name": "super-customer-create",
     "path": "/super/customer/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\customer\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/customer/create.vue",
     "chunkName": "pages/super/customer/create",
-    "_name": "_4320ea8a"
+    "_name": "_1ee9ef1c"
   },
   {
     "name": "super-customer-profile",
     "path": "/super/customer/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\customer\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/customer/profile/index.vue",
     "chunkName": "pages/super/customer/profile/index",
-    "_name": "_e773f070"
+    "_name": "_529d2208"
   },
   {
     "name": "super-department-create",
     "path": "/super/department/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\department\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/department/create.vue",
     "chunkName": "pages/super/department/create",
-    "_name": "_7ad831ef"
+    "_name": "_67b12d30"
   },
   {
     "name": "super-equipment-create",
     "path": "/super/equipment/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\equipment\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/equipment/create.vue",
     "chunkName": "pages/super/equipment/create",
-    "_name": "_a6df980e"
+    "_name": "_6ad1b4de"
   },
   {
     "name": "super-equipment-profile",
     "path": "/super/equipment/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\equipment\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/equipment/profile/index.vue",
     "chunkName": "pages/super/equipment/profile/index",
-    "_name": "_50409306"
+    "_name": "_add3ea0c"
   },
   {
     "name": "super-location-create",
     "path": "/super/location/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\location\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/location/create.vue",
     "chunkName": "pages/super/location/create",
-    "_name": "_0471a012"
+    "_name": "_623452e5"
   },
   {
     "name": "super-notebook-create",
     "path": "/super/notebook/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\notebook\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/notebook/create.vue",
     "chunkName": "pages/super/notebook/create",
-    "_name": "_d132cd90"
+    "_name": "_7c6ec602"
   },
   {
     "name": "super-notebook-profile",
     "path": "/super/notebook/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\notebook\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/notebook/profile/index.vue",
     "chunkName": "pages/super/notebook/profile/index",
-    "_name": "_fc8d6d76"
+    "_name": "_2610ebb9"
   },
   {
     "name": "super-store-create",
     "path": "/super/store/create",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\store\\\\create.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/store/create.vue",
     "chunkName": "pages/super/store/create",
-    "_name": "_7086a64c"
+    "_name": "_ea4c47aa"
   },
   {
     "name": "super-user-profile",
     "path": "/super/user/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\super\\\\user\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/super/user/profile/index.vue",
     "chunkName": "pages/super/user/profile/index",
-    "_name": "_d388f096"
+    "_name": "_505bb629"
   },
   {
     "name": "user-equipment-profile",
     "path": "/user/equipment/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\equipment\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/equipment/profile/index.vue",
     "chunkName": "pages/user/equipment/profile/index",
-    "_name": "_c78cf9dc"
+    "_name": "_4686f154"
   },
   {
     "name": "user-notebook-profile",
     "path": "/user/notebook/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\notebook\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/notebook/profile/index.vue",
     "chunkName": "pages/user/notebook/profile/index",
-    "_name": "_421c27b9"
+    "_name": "_0a1cd21f"
   },
   {
     "name": "user-user-profile",
     "path": "/user/user/profile",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\user\\\\user\\\\profile\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/user/user/profile/index.vue",
     "chunkName": "pages/user/user/profile/index",
-    "_name": "_0917c029"
+    "_name": "_951280e2"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "D:\\\\EMP\\\\Emperor-Warehouse\\\\pages\\\\index.vue",
+    "component": "/Users/pimuk/Workspaces/Project/EMP/Emperor-Warehouse/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_01865810"
+    "_name": "_17abf7b5"
   }
 ]
