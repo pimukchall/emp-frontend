@@ -42,6 +42,12 @@ export default function (ctx, inject) {
   // Register strategies
   // local
   $auth.registerStrategy('local', new LocalScheme($auth, {
+  "token": {
+    "property": "token",
+    "global": true,
+    "required": true,
+    "type": "Bearer"
+  },
   "endpoints": {
     "login": {
       "url": "/api/users/login",
@@ -55,14 +61,9 @@ export default function (ctx, inject) {
     "user": {
       "url": "/api/users/me",
       "method": "get",
-      "propertyName": "role_id",
-      "superadmin": "1",
-      "admin": "2",
-      "emp": "3",
-      "user": "4"
+      "propertyName": "user"
     }
   },
-  "tokenName": "Authorization",
   "name": "local"
 }))
 

@@ -8,12 +8,6 @@
   "CustomerEditDialog": {
     "description": "Auto imported from components/Customer/EditDialog.vue"
   },
-  "EquipmentEditDialog": {
-    "description": "Auto imported from components/Equipment/EditDialog.vue"
-  },
-  "EquipmentEditUpload": {
-    "description": "Auto imported from components/Equipment/EditUpload.vue"
-  },
   "DepartmentEditDialog": {
     "description": "Auto imported from components/Department/EditDialog.vue"
   },
@@ -22,6 +16,12 @@
   },
   "LocationEditDialog": {
     "description": "Auto imported from components/Location/EditDialog.vue"
+  },
+  "EquipmentEditDialog": {
+    "description": "Auto imported from components/Equipment/EditDialog.vue"
+  },
+  "EquipmentEditUpload": {
+    "description": "Auto imported from components/Equipment/EditUpload.vue"
   },
   "NotebookEditDialog": {
     "description": "Auto imported from components/Notebook/EditDialog.vue"
