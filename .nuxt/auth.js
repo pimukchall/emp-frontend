@@ -44,16 +44,16 @@ export default function (ctx, inject) {
   $auth.registerStrategy('local', new LocalScheme($auth, {
   "endpoints": {
     "login": {
-      "url": "http://localhost:3001/api/users/login",
+      "url": "/api/users/login",
       "method": "post",
       "propertyName": "token"
     },
     "logout": {
-      "url": "http://localhost:3001/api/users/logout",
+      "url": "/api/users/logout",
       "method": "delete"
     },
     "user": {
-      "url": "http://localhost:3001/api/users/me",
+      "url": "/api/users/me",
       "method": "get",
       "propertyName": "role_id",
       "superadmin": "1",
