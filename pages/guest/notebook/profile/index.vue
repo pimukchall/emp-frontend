@@ -174,9 +174,9 @@
         return 'ไม่มีข้อมูลวันที่'
       },
       openFile(file) {
-        window.open(`http://localhost:3001/${file}`, '_blank')
+        const baseUrl = this.$axios.defaults.baseURL
+        window.open(`${baseUrl}/${file}`, '_blank')
       },
-  
       colorCheck(status) {
         if (status === 1) {
           return 'success'

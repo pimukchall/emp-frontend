@@ -189,7 +189,8 @@
       },
 
       openFile(file) {
-        window.open(`/uploads/${file}`, '_blank')
+        const baseUrl = this.$axios.defaults.baseURL
+        window.open(`${baseUrl}/${file}`, '_blank')
       },
   
       colorCheck(status) {

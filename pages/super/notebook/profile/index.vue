@@ -189,7 +189,8 @@
       },
 
       openFile(file) {
-        window.open(`http://localhost:3001/${file}`, '_blank')
+        const baseUrl = this.$axios.defaults.baseURL
+        window.open(`${baseUrl}/${file}`, '_blank')
       },
   
       colorCheck(status) {
