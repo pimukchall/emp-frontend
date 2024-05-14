@@ -8,8 +8,8 @@ You can directly use them in pages and other components without the need to impo
 
 - `<NuxtLogo>` | `<nuxt-logo>` (components/NuxtLogo.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)
-- `<DepartmentEditDialog>` | `<department-edit-dialog>` (components/Department/EditDialog.vue)
 - `<CustomerEditDialog>` | `<customer-edit-dialog>` (components/Customer/EditDialog.vue)
+- `<DepartmentEditDialog>` | `<department-edit-dialog>` (components/Department/EditDialog.vue)
 - `<EquipmentEditDialog>` | `<equipment-edit-dialog>` (components/Equipment/EditDialog.vue)
 - `<EquipmentEditUpload>` | `<equipment-edit-upload>` (components/Equipment/EditUpload.vue)
 - `<LoadingLineLoading>` | `<loading-line-loading>` (components/Loading/LineLoading.vue)

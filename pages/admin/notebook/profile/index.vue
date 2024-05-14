@@ -189,7 +189,7 @@
       },
 
       openFile(file) {
-        window.open(`http://localhost:3001/${file}`, '_blank')
+        window.open(`/uploads/${file}`, '_blank')
       },
   
       colorCheck(status) {

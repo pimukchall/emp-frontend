@@ -1,7 +1,7 @@
 export { default as NuxtLogo } from '../..\\components\\NuxtLogo.vue'
 export { default as VuetifyLogo } from '../..\\components\\VuetifyLogo.vue'
-export { default as DepartmentEditDialog } from '../..\\components\\Department\\EditDialog.vue'
 export { default as CustomerEditDialog } from '../..\\components\\Customer\\EditDialog.vue'
+export { default as DepartmentEditDialog } from '../..\\components\\Department\\EditDialog.vue'
 export { default as EquipmentEditDialog } from '../..\\components\\Equipment\\EditDialog.vue'
 export { default as EquipmentEditUpload } from '../..\\components\\Equipment\\EditUpload.vue'
 export { default as LoadingLineLoading } from '../..\\components\\Loading\\LineLoading.vue'
