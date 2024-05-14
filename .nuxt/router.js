@@ -16,12 +16,9 @@ const _665a66fc = () => interopDefault(import('..\\pages\\admin\\user\\index.vue
 const _f21ffb32 = () => interopDefault(import('..\\pages\\auth\\login.vue' /* webpackChunkName: "pages/auth/login" */))
 const _db0eadd6 = () => interopDefault(import('..\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
 const _5fc9d3b3 = () => interopDefault(import('..\\pages\\auth\\register-user.vue' /* webpackChunkName: "pages/auth/register-user" */))
-const _f6c3509c = () => interopDefault(import('..\\pages\\guest\\department\\index.vue' /* webpackChunkName: "pages/guest/department/index" */))
 const _9f6523fc = () => interopDefault(import('..\\pages\\guest\\equipment\\index.vue' /* webpackChunkName: "pages/guest/equipment/index" */))
 const _29992785 = () => interopDefault(import('..\\pages\\guest\\home\\index.vue' /* webpackChunkName: "pages/guest/home/index" */))
-const _1fd97def = () => interopDefault(import('..\\pages\\guest\\location\\index.vue' /* webpackChunkName: "pages/guest/location/index" */))
 const _7f6dc809 = () => interopDefault(import('..\\pages\\guest\\notebook\\index.vue' /* webpackChunkName: "pages/guest/notebook/index" */))
-const _1215bbcf = () => interopDefault(import('..\\pages\\guest\\store\\index.vue' /* webpackChunkName: "pages/guest/store/index" */))
 const _a9e3673a = () => interopDefault(import('..\\pages\\super\\customer\\index.vue' /* webpackChunkName: "pages/super/customer/index" */))
 const _9fcc22a2 = () => interopDefault(import('..\\pages\\super\\department\\index.vue' /* webpackChunkName: "pages/super/department/index" */))
 const _9c96f936 = () => interopDefault(import('..\\pages\\super\\equipment\\index.vue' /* webpackChunkName: "pages/super/equipment/index" */))
@@ -124,10 +121,6 @@ export const routerOptions = {
     component: _5fc9d3b3,
     name: "auth-register-user"
   }, {
-    path: "/guest/department",
-    component: _f6c3509c,
-    name: "guest-department"
-  }, {
     path: "/guest/equipment",
     component: _9f6523fc,
     name: "guest-equipment"
@@ -136,17 +129,9 @@ export const routerOptions = {
     component: _29992785,
     name: "guest-home"
   }, {
-    path: "/guest/location",
-    component: _1fd97def,
-    name: "guest-location"
-  }, {
     path: "/guest/notebook",
     component: _7f6dc809,
     name: "guest-notebook"
-  }, {
-    path: "/guest/store",
-    component: _1215bbcf,
-    name: "guest-store"
   }, {
     path: "/super/customer",
     component: _a9e3673a,

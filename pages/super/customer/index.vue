@@ -115,6 +115,11 @@ moment.locale('th')
 export default {
   layout: 'super',
   middleware: 'auth',
+
+  async mounted() {
+    await this.checkRole()
+  },
+
   data() {
     return {
       search: '',
@@ -150,10 +155,6 @@ export default {
         )
       })
     },
-  },
-
-  mounted() {
-    this.$fetch()
   },
 
   async fetch() {
@@ -232,6 +233,15 @@ export default {
       query: { id: id }
       });
       console.log(id);
+    },
+    async checkRole() {
+      if (this.$auth.user.role_id === 1) {
+        this.$router.push('/super/customer')
+      } else if (this.$auth.user.role_id === 2) {
+        this.$router.push('/admin/customer')
+      } else {
+        this.$router.push('/auth/login')
+      }
     },
   },
 }

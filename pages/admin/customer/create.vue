@@ -183,6 +183,11 @@ moment.locale('th')
 export default {
   layout: 'admin',
   middleware: 'auth',
+
+  async mounted() {
+    await this.checkRole()
+  },
+  
   head() {
     return {
       title: 'ลงทะเบียนลูกค้า',
@@ -269,6 +274,15 @@ export default {
         time: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       }
       this.$store.dispatch('api/log/postLogs', log);
+    },
+    async checkRole() {
+      if (this.$auth.user.role_id === 1) {
+        this.$router.push('/super/customer/create')
+      } else if (this.$auth.user.role_id === 2) {
+        this.$router.push('/admin/customer/create')
+      } else {
+        this.$router.push('/')
+      }
     },
   },
 }

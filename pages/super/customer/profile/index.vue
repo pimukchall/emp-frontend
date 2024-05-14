@@ -69,6 +69,9 @@
   export default {
     layout: 'super',
     middleware: 'auth',
+    async mounted() {
+      await this.checkRole()
+    },
     data() {
       return {
         customers: [],
@@ -76,11 +79,9 @@
         editData: {},
       };
     },
-  
     async fetch() {
       await this.fetchCustomerData();
     },
-  
     methods: {
       async fetchCustomerData() {
         const customerId = this.$route.query.id;
@@ -92,6 +93,17 @@
       openEditCustomerDialog(data) {
       this.editData = data;
       this.editDialog = true;
+    },
+    async checkRole() {
+          if (this.$auth.user.role_id === 1) {
+            this.$router.push('/super/customer/profile')
+          } else if (this.$auth.user.role_id === 2) {
+            this.$router.push('/admin/customer/profile')
+          } else if (this.$auth.user.role_id === 3) {
+            this.$router.push('/user/customer/profile')
+          } else {
+            this.$router.push('/auth/login')
+          }
     },
     }
   };

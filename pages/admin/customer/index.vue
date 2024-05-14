@@ -115,6 +115,9 @@ moment.locale('th')
 export default {
   layout: 'admin',
   middleware: 'auth',
+  async mounted() {
+    await this.checkRole()
+  },
   data() {
     return {
       search: '',
@@ -141,7 +144,6 @@ export default {
       },
     }
   },
-
   computed: {
     filtered() {
       return this.customers.filter((customer) => {
@@ -151,20 +153,13 @@ export default {
       })
     },
   },
-
-  mounted() {
-    this.$fetch()
-  },
-
   async fetch() {
     await this.fetchCustomerData()
   },
-
   methods: {
     async fetchCustomerData() {
       this.customers = await this.$store.dispatch('api/customer/getCustomers')
     },
-
     confirmDelete(id) {
       this.modal.confirm.open = true
       this.modal.confirm.message = 'ยืนยันการลบข้อมูลหรือไม่?'
@@ -175,11 +170,8 @@ export default {
         const req = await this.$store.dispatch('api/customer/deleteCustomers', {
           params: { id: this.modal.confirm.id },
         })
-
         this.modal.complete.open = true
-
         this.recordLogDelete(this.modal.confirm.id)
-
         this.$fetch()
       } catch (error) {
         this.modal.error.open = true
@@ -190,20 +182,16 @@ export default {
     gotoCreate() {
       this.$router.push('/admin/customer/create')
     },
-
     openEditCustomerDialog(data) {
       this.editData = data
       this.editDialog = true
     },
-
     isExpanded(id) {
       return this.currentExpanded === id
     },
-
     toggleExpansion(id) {
       this.currentExpanded = this.currentExpanded === id ? null : id
     },
-
     formatDate(date) {
       return moment(date).format('Do MMMM YYYY')
     },
@@ -232,6 +220,15 @@ export default {
       query: { id: id }
       });
       console.log(id);
+    },
+    async checkRole() {
+      if (this.$auth.user.role_id === 1) {
+        this.$router.push('/super/customer')
+      } else if (this.$auth.user.role_id === 2) {
+        this.$router.push('/admin/customer')
+      } else {
+        this.$router.push('/')
+      }
     },
   },
 }
