@@ -62,16 +62,16 @@ export default {
         },
         endpoints: {
           login: { 
-            url: '/api/users/login',
+            url: '/auth/login',
             method: 'post',
             propertyName: 'token'
           },
           logout: { 
-            url: '/api/users/logout', 
+            url: '/auth/logout', 
             method: 'delete' 
           },
           user: { 
-            url: '/api/users/me',
+            url: '/auth/refresh',
             method: 'get',
             propertyName: 'user'
           }
