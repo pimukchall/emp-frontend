@@ -7,6 +7,27 @@
     "_name": "_5dde87ae"
   },
   {
+    "name": "admin-home",
+    "path": "/admin/home",
+    "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\admin\\\\home\\\\index.vue",
+    "chunkName": "pages/admin/home/index",
+    "_name": "_378f1526"
+  },
+  {
+    "name": "admin-product",
+    "path": "/admin/product",
+    "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\admin\\\\product.vue",
+    "chunkName": "pages/admin/product",
+    "_name": "_9568146e"
+  },
+  {
+    "name": "admin-product.vue",
+    "path": "/admin/product.vue",
+    "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\admin\\\\product.vue\\\\index.vue",
+    "chunkName": "pages/admin/product.vue/index",
+    "_name": "_70146cfe"
+  },
+  {
     "name": "auth-login",
     "path": "/auth/login",
     "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\auth\\\\login.vue",
@@ -26,6 +47,27 @@
     "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\auth\\\\register-user.vue",
     "chunkName": "pages/auth/register-user",
     "_name": "_1ea83d14"
+  },
+  {
+    "name": "guest-home",
+    "path": "/guest/home",
+    "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\guest\\\\home\\\\index.vue",
+    "chunkName": "pages/guest/home/index",
+    "_name": "_48878e04"
+  },
+  {
+    "name": "manager-home",
+    "path": "/manager/home",
+    "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\manager\\\\home\\\\index.vue",
+    "chunkName": "pages/manager/home/index",
+    "_name": "_4823c88f"
+  },
+  {
+    "name": "purchasing-home",
+    "path": "/purchasing/home",
+    "component": "D:\\\\EMP\\\\emp-frontend\\\\pages\\\\purchasing\\\\home\\\\index.vue",
+    "chunkName": "pages/purchasing/home/index",
+    "_name": "_4c5fa65c"
   },
   {
     "name": "user-home",

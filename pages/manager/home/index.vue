@@ -26,6 +26,7 @@
 <script>
 export default {
     layout: 'user',
+    middleware: 'auth',
     async mounted() {
         await this.checkRole();
     },

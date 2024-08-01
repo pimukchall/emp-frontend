@@ -48,7 +48,7 @@ moment.locale('th');
 export default {
   layout: 'blank',
   name: 'Login',
-  
+
   async mounted() {
         await this.checkRole();
     },
@@ -85,26 +85,19 @@ export default {
                 console.log('User Role ID:', roleId);
                 if (roleId === '1') {
                     console.log('Admin');
-                    this.$router.push('/user/home');
-                    // this.$router.push('/admin/home');
+                    this.$router.push('/admin/home');
                 } else if (roleId === '2') {
                     console.log('Executive');
                     this.$router.push('/executive/home');
                 } else if (roleId === '3') {
                     console.log('Manager Warehouse');
                     this.$router.push('/manager/home');
-                } else if (roleId === '4') {
-                    console.log('IT');
-                    this.$router.push('/it/home');
                 } else if (roleId === '5') {
                     console.log('Purchasing');
                     this.$router.push('/purchasing/home');
                 } else if (roleId === '6') {
                     console.log('User');
                     this.$router.push('/user/home');
-                } else if (roleId === '7') {
-                    console.log('Guest');
-                    this.$router.push('/guest/home');
                 } else {
                     console.log('You cannot access this page');
                     this.$router.push('/');
@@ -113,7 +106,7 @@ export default {
                 console.log('User is not logged in');
                 this.$router.push('/');
             }
-      },
+        },
 
     async login() {
       try {

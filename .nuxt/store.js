@@ -19,16 +19,9 @@ let store = {};
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('..\\store\\api\\categories.js'), 'api/categories.js')
-  resolveStoreModules(require('..\\store\\api\\customer.js'), 'api/customer.js')
-  resolveStoreModules(require('..\\store\\api\\department.js'), 'api/department.js')
-  resolveStoreModules(require('..\\store\\api\\file.js'), 'api/file.js')
-  resolveStoreModules(require('..\\store\\api\\location.js'), 'api/location.js')
   resolveStoreModules(require('..\\store\\api\\log.js'), 'api/log.js')
   resolveStoreModules(require('..\\store\\api\\product.js'), 'api/product.js')
   resolveStoreModules(require('..\\store\\api\\role.js'), 'api/role.js')
-  resolveStoreModules(require('..\\store\\api\\status.js'), 'api/status.js')
-  resolveStoreModules(require('..\\store\\api\\store.js'), 'api/store.js')
   resolveStoreModules(require('..\\store\\api\\user.js'), 'api/user.js')
 
   // If the environment supports hot reloading...
@@ -37,16 +30,9 @@ let store = {};
     // Whenever any Vuex module is updated...
     module.hot.accept([
       '..\\store\\index.js',
-      '..\\store\\api\\categories.js',
-      '..\\store\\api\\customer.js',
-      '..\\store\\api\\department.js',
-      '..\\store\\api\\file.js',
-      '..\\store\\api\\location.js',
       '..\\store\\api\\log.js',
       '..\\store\\api\\product.js',
       '..\\store\\api\\role.js',
-      '..\\store\\api\\status.js',
-      '..\\store\\api\\store.js',
       '..\\store\\api\\user.js',
     ], () => {
       // Update `root.modules` with the latest definitions.
