@@ -1,17 +1,15 @@
 <template>
     <div>
-        <home />
+        <login />
     </div>
   </template>
   
   <script>
-    import home from '~/pages/guest/home/index.vue'
+    import login from '~/pages/auth/login.vue'
       export default {
-        layout: 'guest',
+        layout: 'blank',
           components: {
-              home
+            login
           },
     }
   </script>
-  
-  <style lang="css" scoped></style>

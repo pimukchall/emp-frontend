@@ -68,12 +68,13 @@ export default {
           },
           logout: { 
             url: '/auth/logout', 
-            method: 'delete' 
+            method: 'delete',
+            propertyName: 'token' 
           },
           user: { 
             url: '/auth/refresh',
             method: 'get',
-            propertyName: 'user'
+            propertyName: 'token'
           }
         },
       }

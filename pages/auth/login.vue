@@ -25,19 +25,16 @@
               label="อีเมล"
               outlined>
             </v-text-field>
-
             <v-text-field 
               v-model="form.password"
               label="รหัสผ่าน" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'" @click:append="show1 = !show1" 
               outlined>
-          </v-text-field>
-
-          <v-card-actions>
-            <div>
-              <v-btn @click="login" width="350" class="mr-2" color="success" >เข้าสู่ระบบ</v-btn>
-              หากยังไม่มีบัญชีผู้ใช้ <p @click="register" class="text-primary">สมัครสมาชิก</p>
-            </div>
-          </v-card-actions>
+            </v-text-field>
+            <v-card-actions>
+              <div>
+                <v-btn @click="login" width="350" class="mr-2" color="success" >เข้าสู่ระบบ</v-btn>
+              </div>
+            </v-card-actions>
           </v-card-text>
       </v-card>
     </div>
@@ -49,7 +46,13 @@ import moment from 'moment';
 moment.locale('th');
 
 export default {
+  layout: 'blank',
   name: 'Login',
+  
+  async mounted() {
+        await this.checkRole();
+    },
+
   data() {
     return {
       show1: false,
@@ -76,6 +79,42 @@ export default {
     }
   },
   methods: {
+    async checkRole() {
+            if (this.$auth.loggedIn) {
+                const roleId = this.$auth.user.role_id.toString(); // Ensure role_id is a string
+                console.log('User Role ID:', roleId);
+                if (roleId === '1') {
+                    console.log('Admin');
+                    this.$router.push('/user/home');
+                    // this.$router.push('/admin/home');
+                } else if (roleId === '2') {
+                    console.log('Executive');
+                    this.$router.push('/executive/home');
+                } else if (roleId === '3') {
+                    console.log('Manager Warehouse');
+                    this.$router.push('/manager/home');
+                } else if (roleId === '4') {
+                    console.log('IT');
+                    this.$router.push('/it/home');
+                } else if (roleId === '5') {
+                    console.log('Purchasing');
+                    this.$router.push('/purchasing/home');
+                } else if (roleId === '6') {
+                    console.log('User');
+                    this.$router.push('/user/home');
+                } else if (roleId === '7') {
+                    console.log('Guest');
+                    this.$router.push('/guest/home');
+                } else {
+                    console.log('You cannot access this page');
+                    this.$router.push('/');
+                }
+            } else {
+                console.log('User is not logged in');
+                this.$router.push('/');
+            }
+      },
+
     async login() {
       try {
         if (!this.form.email || !this.form.password) {
@@ -97,11 +136,6 @@ export default {
         this.recordLogError();
       }
     },
-
-    register() {
-      this.$router.push('/auth/register-user')
-    },
-
     recordLog(){
       const log = {
         user_id: this.$auth.user.id,

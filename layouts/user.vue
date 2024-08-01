@@ -17,77 +17,6 @@
       <v-toolbar-title class="text-uppercase font-weight-bold" @click="home">
         {{ title }}
       </v-toolbar-title>
-      <div class="d-flex">
-          <v-menu offset-y open-on-hover>
-            <template v-slot:activator="{ on }">
-              <v-tab text v-on="on">อุปกรณ์ไอที</v-tab>
-            </template>
-            <v-list>
-              <v-list-item @click="">
-                คอมพิวเตอร์
-              </v-list-item>
-              <v-list-item @click="notebook">
-                โน๊ตบุ๊ค
-              </v-list-item>
-              <v-list-item @click="">
-                จอคอมพิวเตอร์
-              </v-list-item>
-              <v-list-item @click="">
-                UPS
-              </v-list-item>
-              <v-list-item @click="">
-                สมาร์ทโฟน และ แท็บเล็ต
-              </v-list-item>
-              <v-list-item @click="">
-                ปริ้นเตอร์
-              </v-list-item>
-              <v-list-item @click="">
-                เซิร์ฟเวอร์ และ ระบบเครือข่าย
-              </v-list-item>
-              <v-list-item @click="">
-                ซิมการ์ด และ อุปกรณ์เสริม
-              </v-list-item>
-              <v-list-item @click="">
-                กล้อง และ อุปกรณ์เสริม
-              </v-list-item>
-              <v-list-item @click="">
-                ไอพีโทรศัพท์
-              </v-list-item>
-            </v-list>
-          </v-menu>
-          <v-menu offset-y open-on-hover>
-            <template v-slot:activator="{ on }">
-              <v-tab text v-on="on">อุปกรณ์</v-tab>
-            </template>
-            <v-list>
-              <v-list-item @click="">
-                อุปกรณ์เครื่องใช้สำนักงาน
-              </v-list-item>
-              <v-list-item @click="equipment">
-                เครื่องมือเครื่องใช้
-              </v-list-item>
-              <v-list-item @click="">
-                ยานพาหนะ
-              </v-list-item>
-            </v-list>
-          </v-menu>
-          <v-menu offset-y open-on-hover>
-            <template v-slot:activator="{ on }">
-              <v-tab text v-on="on">อื่นๆ</v-tab>
-            </template>
-            <v-list>
-              <v-list-item @click="department">
-                แผนก
-              </v-list-item>
-              <v-list-item @click="location">
-                สถานที่
-              </v-list-item>
-              <v-list-item @click="store">
-                ร้านค้า
-              </v-list-item>
-            </v-list>
-          </v-menu>
-      </div>
       <v-spacer />
       <div class="d-flex" style="align-items: center">
         <v-btn @click="theme" rounded>
@@ -141,24 +70,6 @@ export default {
     }
   },
   methods: {
-    notebook() {
-      this.$router.push('/user/notebook')
-    },
-    equipment() {
-      this.$router.push('/user/equipment')
-    },
-    department() {
-      this.$router.push('/user/department')
-    },
-    location() {
-      this.$router.push('/user/location')
-    },
-    store() {
-      this.$router.push('/user/store')
-    },
-    login() {
-      this.$router.push('/auth/login')
-    },
     home() {
       this.$router.push('/')
     },

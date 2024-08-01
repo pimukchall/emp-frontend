@@ -1,22 +1,22 @@
 export const actions = {
     async getLogs({ getters }, data) {
         return await this.$axios
-        .get('api/logs', data)
+        .get('logs', data)
         .then((res) => res.data)
     },
     async getLogsID({ getters }, data) {
       return await this.$axios
-      .get('api/logs:id', data)
+      .get('logs/:id', data)
       .then((res) => res.data)
     },
     async postLogs({ getters }, data) {
         return await this.$axios
-        .post('api/logs/create', data)
+        .post('logs', data)
         .then((res) => res.data)
     },
     async putLogs({ getters }, data) {
         return await this.$axios
-        .put('api/logs/update', data)
+        .put('logs/:id', data)
         .then((res) => res.data)
     },
 }

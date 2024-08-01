@@ -9,7 +9,6 @@
       >
       <v-toolbar-title
         class="text-uppercase"
-        @click="home"
       >
         {{ title }}
       </v-toolbar-title>
@@ -54,9 +53,6 @@ export default {
   methods: {
     gotoLogin() {
       this.$router.push('/auth/login');
-    },
-    home() {
-      this.$router.push('/guest/home')
     },
     theme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;

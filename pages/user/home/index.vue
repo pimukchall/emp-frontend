@@ -1,58 +1,71 @@
 <template>
-    <v-carousel>
-      <v-carousel-item
-        v-for="(item,i) in items"
-        :key="i"
-        :src="item.src"
-        reverse-transition="fade-transition"
-        transition="fade-transition"
-      ></v-carousel-item>
-    </v-carousel>
-  </template>
+    <div>
+        <v-container>
+            <v-row>
+                <v-col cols="12">
+                    <v-card>
+                        <v-card-title>
+                            <h3>หน้าหลัก</h3>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-alert type="success" :value="true">
+                                        ยินดีต้อนรับ {{ $auth.user.fname }} {{ $auth.user.lname }}
+                                    </v-alert>
+                                </v-col>
+                            </v-row>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-container>
+    </div>
+</template>
 
 <script>
 export default {
-  layout: 'user',
-  middleware: 'auth',
-  async mounted() {
-    await this.checkRole();
-  },
-  data () {
-    return {
-      items: [
-        {
-          src: 'https://www.emperorhouse.com/web2/wp-content/uploads/2016/05/majesty-template-cover-4-01.jpg',
-        },
-        {
-          src: 'https://www.emperorhouse.com/web2/wp-content/uploads/2016/05/pyrenis-web-01.jpg',
-        },
-        {
-          src: 'https://www.emperorhouse.com/web2/wp-content/uploads/2020/04/POEM-org-T-02.jpg',
-        },
-        {
-          src: 'https://www.emperorhouse.com/web2/wp-content/uploads/2020/04/prelude-new-T-02.jpg',
-        },
-        {
-          src: 'https://www.emperorhouse.com/web2/wp-content/uploads/2016/09/Pinnacle-2018-org-T2-02.jpg',
-        },
-        {
-          src: 'https://www.emperorhouse.com/web2/wp-content/uploads/2016/09/pyrenis_T.jpg',
-        },
-      ],
-    }
-  },
-  methods : {
-    async checkRole() {
-      if (this.$auth.user.role_id === 1) {
-        this.$router.push('/super/home')
-      } else if (this.$auth.user.role_id === 2) {
-        this.$router.push('/admin/home')
-      } else if (this.$auth.user.role_id === 3) {
-        this.$router.push('/user/home')
-      } else {
-        this.$router.push('/')
-      }
+    layout: 'user',
+    middleware: 'auth',
+    async mounted() {
+        await this.checkRole();
     },
-  },
+    methods: {
+        async checkRole() {
+            if (this.$auth.loggedIn) {
+                const roleId = this.$auth.user.role_id.toString(); // Ensure role_id is a string
+                console.log('User Role ID:', roleId);
+                if (roleId === '1') {
+                    console.log('Admin');
+                    this.$router.push('/user/home');
+                    // this.$router.push('/admin/home');
+                } else if (roleId === '2') {
+                    console.log('Executive');
+                    this.$router.push('/executive/home');
+                } else if (roleId === '3') {
+                    console.log('Manager Warehouse');
+                    this.$router.push('/manager/home');
+                } else if (roleId === '4') {
+                    console.log('IT');
+                    this.$router.push('/it/home');
+                } else if (roleId === '5') {
+                    console.log('Purchasing');
+                    this.$router.push('/purchasing/home');
+                } else if (roleId === '6') {
+                    console.log('User');
+                    this.$router.push('/user/home');
+                } else if (roleId === '7') {
+                    console.log('Guest');
+                    this.$router.push('/guest/home');
+                } else {
+                    console.log('You cannot access this page');
+                    this.$router.push('/');
+                }
+            } else {
+                console.log('User is not logged in');
+                this.$router.push('/');
+            }
+        },
+    },
 }
 </script>
