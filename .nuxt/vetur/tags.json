@@ -5,9 +5,6 @@
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   },
-  "LoadingLineLoading": {
-    "description": "Auto imported from components/Loading/LineLoading.vue"
-  },
   "ModalComplete": {
     "description": "Auto imported from components/Modal/Complete.vue"
   },
@@ -22,5 +19,8 @@
   },
   "ModalLoading": {
     "description": "Auto imported from components/Modal/Loading.vue"
+  },
+  "LoadingLineLoading": {
+    "description": "Auto imported from components/Loading/LineLoading.vue"
   }
 }

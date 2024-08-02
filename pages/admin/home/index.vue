@@ -43,10 +43,10 @@ export default {
                 } else if (roleId === '3') {
                     console.log('Manager Warehouse');
                     this.$router.push('/manager/home');
-                } else if (roleId === '5') {
+                } else if (roleId === '4') {
                     console.log('Purchasing');
                     this.$router.push('/purchasing/home');
-                } else if (roleId === '6') {
+                } else if (roleId === '5') {
                     console.log('User');
                     this.$router.push('/user/home');
                 } else {
